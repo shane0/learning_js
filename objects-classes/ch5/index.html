@@ -1,0 +1,1179 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="../ch4/" rel="prev"/>
+<link href="../toc/" rel="next"/>
+<link href="../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.4.2, mkdocs-material-9.0.6" name="generator"/>
+<title>Chapter 5: Delegation - shane0 learning_js</title>
+<link href="../../assets/stylesheets/main.558e4712.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            
+                .gscrollbar-fixer { padding-right: 15px; }
+                .gdesc-inner { font-size: 0.75rem; }
+                body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+                body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+                body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+                </style><script src="../../assets/javascripts/glightbox.min.js"></script></head>
+<body data-md-color-accent="" data-md-color-primary="" data-md-color-scheme="default" dir="ltr">
+<script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#chapter-5-delegation">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<div data-md-component="outdated" hidden="">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="shane0 learning_js" class="md-header__button md-logo" data-md-component="logo" href="../.." title="shane0 learning_js">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            shane0 learning_js
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Chapter 5: Delegation
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="" data-md-color-media="" data-md-color-primary="" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_2" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"></path></svg>
+</label>
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="" data-md-color-media="" data-md-color-primary="" data-md-color-scheme="slate" id="__palette_2" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"></path></svg>
+</label>
+</form>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="shane0 learning_js" class="md-nav__button md-logo" data-md-component="logo" href="../.." title="shane0 learning_js">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+</a>
+    shane0 learning_js
+  </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../..">
+        Home
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../todo/">
+        todo cli integration
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../todocli/">
+        todo cli
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" id="__nav_4" type="checkbox"/>
+<label aria-expanded="false" class="md-nav__link" for="__nav_4" tabindex="0">
+          Bujo
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Bujo" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+          Bujo
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../bujo/2023/">
+        2023
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" id="__nav_5" type="checkbox"/>
+<label aria-expanded="false" class="md-nav__link" for="__nav_5" tabindex="0">
+          Es next beyond
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Es next beyond" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+          Es next beyond
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../es-next-beyond/ch1/">
+        Chapter 1: TODO
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../es-next-beyond/toc/">
+        TOC: ES.Next &amp; Beyond - 2nd Edition
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" id="__nav_6" type="checkbox"/>
+<label aria-expanded="false" class="md-nav__link" for="__nav_6" tabindex="0">
+          Get started
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Get started" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_6">
+<span class="md-nav__icon md-icon"></span>
+          Get started
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../get-started/apA/">
+        Appendix A: Exploring Further
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../get-started/apB/">
+        Appendix B: Practice, Practice, Practice!
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../get-started/ch1/">
+        Chapter 1: What *Is* JavaScript?
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../get-started/ch2/">
+        Chapter 2: Surveying JS
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../get-started/ch3/">
+        Chapter 3: Digging to the Roots of JS
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../get-started/ch4/">
+        Chapter 4: The Bigger Picture
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../get-started/toc/">
+        Table of Contents
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" id="__nav_7" type="checkbox"/>
+<label aria-expanded="true" class="md-nav__link" for="__nav_7" tabindex="0">
+          Objects classes
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Objects classes" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_7">
+<span class="md-nav__icon md-icon"></span>
+          Objects classes
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../ch1/">
+        Chapter 1: Object Foundations
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../ch2/">
+        Chapter 2: How Objects Work
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../ch3/">
+        Chapter 3: Classy Objects
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../ch4/">
+        Chapter 4: This Works
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          Chapter 5: Delegation
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+        Chapter 5: Delegation
+      </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#preamble">
+    Preamble
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#whats-a-constructor-anyway">
+    What's A Constructor, Anyway?
+  </a>
+<nav aria-label="What's A Constructor, Anyway?" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#new-factory-instance">
+    New Factory Instance
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#factory-initialization">
+    Factory Initialization
+  </a>
+<nav aria-label="Factory Initialization" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#help-me-reconstruct">
+    Help Me Reconstruct!
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#ditching-class-thinking">
+    Ditching Class Thinking
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#delegation-illustrated">
+    Delegation Illustrated
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#composing-peer-objects">
+    Composing Peer Objects
+  </a>
+<nav aria-label="Composing Peer Objects" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#flexible-context">
+    Flexible Context
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#why-this">
+    Why This?
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../toc/">
+        You Don't Know JS Yet: Objects &amp; Classes - 2nd Edition
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" id="__nav_8" type="checkbox"/>
+<label aria-expanded="false" class="md-nav__link" for="__nav_8" tabindex="0">
+          Scope closures
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Scope closures" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_8">
+<span class="md-nav__icon md-icon"></span>
+          Scope closures
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/apA/">
+        Appendix A: Exploring Further
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/apB/">
+        Appendix B: Practice
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/ch1/">
+        Chapter 1: What's the Scope?
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/ch2/">
+        Chapter 2: Illustrating Lexical Scope
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/ch3/">
+        Chapter 3: The Scope Chain
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/ch4/">
+        Chapter 4: Around the Global Scope
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/ch5/">
+        Chapter 5: The (Not So) Secret Lifecycle of Variables
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/ch6/">
+        Chapter 6: Limiting Scope Exposure
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/ch7/">
+        Chapter 7: Using Closures
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/ch8/">
+        Chapter 8: The Module Pattern
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/closures_bard/">
+        closures bard
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/scope_bard/">
+        scope: bard version
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/toc/">
+        Scope &amp; Closures - 2nd Edition
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" id="__nav_9" type="checkbox"/>
+<label aria-expanded="false" class="md-nav__link" for="__nav_9" tabindex="0">
+          Sync async
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Sync async" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_9">
+<span class="md-nav__icon md-icon"></span>
+          Sync async
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../sync-async/ch1/">
+        Chapter 1: TODO
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../sync-async/toc/">
+        TOC: Sync &amp; Async - 2nd Edition
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" id="__nav_10" type="checkbox"/>
+<label aria-expanded="false" class="md-nav__link" for="__nav_10" tabindex="0">
+          Types grammar
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Types grammar" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_10">
+<span class="md-nav__icon md-icon"></span>
+          Types grammar
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../types-grammar/ch1/">
+        Chapter 1: Primitive Values
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../types-grammar/ch2/">
+        Chapter 2: Primitive Behaviors
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../types-grammar/ch3/">
+        Chapter 3: Object Values
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../types-grammar/ch4/">
+        Chapter 4: Coercing Values
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../types-grammar/toc/">
+        TOC: Types &amp; Grammar - 2nd Edition
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#preamble">
+    Preamble
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#whats-a-constructor-anyway">
+    What's A Constructor, Anyway?
+  </a>
+<nav aria-label="What's A Constructor, Anyway?" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#new-factory-instance">
+    New Factory Instance
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#factory-initialization">
+    Factory Initialization
+  </a>
+<nav aria-label="Factory Initialization" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#help-me-reconstruct">
+    Help Me Reconstruct!
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#ditching-class-thinking">
+    Ditching Class Thinking
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#delegation-illustrated">
+    Delegation Illustrated
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#composing-peer-objects">
+    Composing Peer Objects
+  </a>
+<nav aria-label="Composing Peer Objects" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#flexible-context">
+    Flexible Context
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#why-this">
+    Why This?
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="chapter-5-delegation">Chapter 5: Delegation<a class="headerlink" href="#chapter-5-delegation" title="Permanent link">¶</a></h1>
+<table>
+<thead>
+<tr>
+<th align="left">NOTE:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Work in progress</td>
+</tr>
+</tbody>
+</table>
+<p>We've thoroughly explored objects, prototypes, classes, and now the <code>this</code> keyword. But we're now going to revisit what we've learned so far from a bit of a different perspective.</p>
+<p>What if you could leverage all the power of the objects, prototypes, and dynamic <code>this</code> mechanisms together, without ever using <code>class</code> or any of its descendants?</p>
+<p>In fact, I would argue JS is inherently less class-oriented than the <code>class</code> keyword might appear. Because JS is a dynamic, prototypal language, its strong suit is actually... <em>delegation</em>.</p>
+<h2 id="preamble">Preamble<a class="headerlink" href="#preamble" title="Permanent link">¶</a></h2>
+<p>Before we begin looking at delegation, I want to offer a word of caution. This perspective on JS's object <code>[[Prototype]]</code> and <code>this</code> function context mechanisms is <em>not</em> mainstream. It's <em>not</em> how framework authors and libraries utilize JS. You won't, to my knowledge, find any big apps out there using this pattern.</p>
+<p>So why on earth would I devote a chapter to such a pattern, if it's so unpopular?</p>
+<p>Good question. The cheeky answer is: because it's my book and I can do what I feel like!</p>
+<p>But the deeper answer is, because I think developing <em>this</em> understanding of one of the language's core pillars helps you <em>even if</em> all you ever do is use <code>class</code>-style JS patterns.</p>
+<p>To be clear, delegation is not my invention. It's been around as a design pattern for decades. And for a long time, developers argued that prototypal delegation was <em>just</em> the dynamic form of inheritance.<sup id="fnref:TreatyOfOrlando"><a class="footnote-ref" href="#fn:TreatyOfOrlando">1</a></sup> But I think that was a mistake to conflate the two.<sup id="fnref:ClassVsPrototype"><a class="footnote-ref" href="#fn:ClassVsPrototype">2</a></sup></p>
+<p>For the purposes of this chapter, I'm going to present delegation, as implemented via JS mechanics, as an alternative design pattern, positioned somewhere between class-orientation and object-closure/module patterns.</p>
+<p>The first step is to <em>de-construct</em> the <code>class</code> mechanism down to its individual parts. Then we'll cherry-pick and mix the parts a bit differently.</p>
+<h2 id="whats-a-constructor-anyway">What's A Constructor, Anyway?<a class="headerlink" href="#whats-a-constructor-anyway" title="Permanent link">¶</a></h2>
+<p>In Chapter 3, we saw <code>constructor(..)</code> as the main entry point for construction of a <code>class</code> instance. But the <code>constructor(..)</code> doesn't actually do any <em>creation</em> work, it's only <em>initialization</em> work. In other words, the instance is already created by the time the <code>constructor(..)</code> runs and initializes it -- e.g., <code>this.whatever</code> types of assignments.</p>
+<p>So where does the <em>creation</em> work actually happen? In the <code>new</code> operator. As the section "New Context Invocation" in Chapter 4 explains, there are four steps the <code>new</code> keyword performs; the first of those is the creation of a new empty object (the instance). The <code>constructor(..)</code> isn't even invoked until step 3 of <code>new</code>'s efforts.</p>
+<p>But <code>new</code> is not the only -- or perhaps even, best -- way to <em>create</em> an object "instance". Consider:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="c1">// a non-class "constructor"</span>
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="kd">function</span><span class="w"> </span><span class="nx">Point2d</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="w">    </span><span class="c1">// create an object (1)</span>
+<a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span>
+<a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>
+<a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="w">    </span><span class="c1">// initialize the instance (3)</span>
+<a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">    </span><span class="nx">instance</span><span class="p">.</span><span class="nx">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">x</span><span class="p">;</span>
+<a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">    </span><span class="nx">instance</span><span class="p">.</span><span class="nx">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">y</span><span class="p">;</span>
+<a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a>
+<a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="w">    </span><span class="c1">// return the instance (4)</span>
+<a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">instance</span><span class="p">;</span>
+<a href="#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="p">}</span>
+<a href="#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a>
+<a href="#__codelineno-0-14" id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="kd">var</span><span class="w"> </span><span class="nx">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Point2d</span><span class="p">(</span><span class="mf">3</span><span class="p">,</span><span class="mf">4</span><span class="p">);</span>
+<a href="#__codelineno-0-15" id="__codelineno-0-15" name="__codelineno-0-15"></a>
+<a href="#__codelineno-0-16" id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="nx">point</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span><span class="w">                    </span><span class="c1">// 3</span>
+<a href="#__codelineno-0-17" id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="nx">point</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span><span class="w">                    </span><span class="c1">// 4</span>
+</code></pre></div>
+<p>There's no <code>class</code>, just a regular function definition (<code>Point2d(..)</code>). There's no <code>new</code> invocation, just a regular function call (<code>Point2d(3,4)</code>). And there's no <code>this</code> references, just regular object property assignments (<code>instance.x = ..</code>).</p>
+<p>The term that's most often used to refer to this pattern of code is that <code>Point2d(..)</code> here is a <em>factory function</em>. Invoking it causes the construction (creation and initialization) of an object, and returns that back to us. That's an extremely common pattern, at least as common as class-oriented code.</p>
+<p>I comment-annotated <code>(1)</code>, <code>(3)</code>, and <code>(4)</code> in that snippet, which roughly correspond to steps 1, 3, and 4 of the <code>new</code> operation. But where's step 2?</p>
+<p>If you recall, step 2 of <code>new</code> is about linking the object (created in step 1) to another object, via its <code>[[Prototype]]</code> slot (see Chapter 2). So what object might we want to link our <code>instance</code> object to? We could link it to an object that holds functions we'd like to associate/use with our instance.</p>
+<p>Let's amend the previous snippet:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">prototypeObj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">    </span><span class="nx">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="sb">`(</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="si">}</span><span class="sb">,</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="si">}</span><span class="sb">)`</span><span class="p">;</span>
+<a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="p">}</span>
+<a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a>
+<a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="c1">// a non-class "constructor"</span>
+<a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="kd">function</span><span class="w"> </span><span class="nx">Point2d</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">    </span><span class="c1">// create an object (1)</span>
+<a href="#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-1-11" id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">        </span><span class="c1">// link the instance's [[Prototype]] (2)</span>
+<a href="#__codelineno-1-12" id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="w">        </span><span class="nx">__proto__</span><span class="o">:</span><span class="w"> </span><span class="nx">prototypeObj</span><span class="p">,</span>
+<a href="#__codelineno-1-13" id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="w">    </span><span class="p">};</span>
+<a href="#__codelineno-1-14" id="__codelineno-1-14" name="__codelineno-1-14"></a>
+<a href="#__codelineno-1-15" id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="w">    </span><span class="c1">// initialize the instance (3)</span>
+<a href="#__codelineno-1-16" id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="w">    </span><span class="nx">instance</span><span class="p">.</span><span class="nx">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">x</span><span class="p">;</span>
+<a href="#__codelineno-1-17" id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="w">    </span><span class="nx">instance</span><span class="p">.</span><span class="nx">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">y</span><span class="p">;</span>
+<a href="#__codelineno-1-18" id="__codelineno-1-18" name="__codelineno-1-18"></a>
+<a href="#__codelineno-1-19" id="__codelineno-1-19" name="__codelineno-1-19"></a><span class="w">    </span><span class="c1">// return the instance (4)</span>
+<a href="#__codelineno-1-20" id="__codelineno-1-20" name="__codelineno-1-20"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">instance</span><span class="p">;</span>
+<a href="#__codelineno-1-21" id="__codelineno-1-21" name="__codelineno-1-21"></a><span class="p">}</span>
+<a href="#__codelineno-1-22" id="__codelineno-1-22" name="__codelineno-1-22"></a>
+<a href="#__codelineno-1-23" id="__codelineno-1-23" name="__codelineno-1-23"></a><span class="kd">var</span><span class="w"> </span><span class="nx">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Point2d</span><span class="p">(</span><span class="mf">3</span><span class="p">,</span><span class="mf">4</span><span class="p">);</span>
+<a href="#__codelineno-1-24" id="__codelineno-1-24" name="__codelineno-1-24"></a>
+<a href="#__codelineno-1-25" id="__codelineno-1-25" name="__codelineno-1-25"></a><span class="nx">point</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span><span class="w">           </span><span class="c1">// (3,4)</span>
+</code></pre></div>
+<p>Now you see the <code>__proto__</code> assignment that's setting up the internal <code>[[Prototype]]</code> linkage, which was the missing step 2. I used the <code>__proto__</code> here merely for illustration purposes; using <code>setPrototypeOf(..)</code> as shown in Chapter 4 would have accomplished the same task.</p>
+<h3 id="new-factory-instance"><em>New</em> Factory Instance<a class="headerlink" href="#new-factory-instance" title="Permanent link">¶</a></h3>
+<p>What do you think would happen if we used <code>new</code> to invoke the <code>Point2d(..)</code> function as shown here?</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">anotherPoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Point2d</span><span class="p">(</span><span class="mf">5</span><span class="p">,</span><span class="mf">6</span><span class="p">);</span>
+<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>
+<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="nx">anotherPoint</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="mf">5</span><span class="p">,</span><span class="mf">6</span><span class="p">);</span><span class="w">         </span><span class="c1">// (5,6)</span>
+</code></pre></div>
+<p>Wait! What's going on here? A regular, non-<code>class</code> factory function in invoked with the <code>new</code> keyword, as if it was a <code>class</code>. Does that change anything about the outcome of the code?</p>
+<p>No... and yes. <code>anotherPoint</code> here is exactly the same object as it would have been had I not used <code>new</code>. But! The object that <code>new</code> creates, links, and assigns as <code>this</code> context? <em>That</em> object was completely ignored and thrown away, ultimately to be garbage collected by JS. Unfortunately, the JS engine cannot predict that you're not going to use the object that you asked <code>new</code> to create, so it always still gets cteated even if it goes unused.</p>
+<p>That's right! Using a <code>new</code> keyword against a factory function might <em>feel</em> more ergonomic or familiar, but it's quite wasteful, in that it creates <strong>two</strong> objects, and wastefully throws one of them away.</p>
+<h3 id="factory-initialization">Factory Initialization<a class="headerlink" href="#factory-initialization" title="Permanent link">¶</a></h3>
+<p>In the current code example, the <code>Point2d(..)</code> function still looks an awful lot like a normal <code>constructor(..)</code> of a <code>class</code> definition. But what if we moved the initialization code to a separate function, say named <code>init(..)</code>:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">prototypeObj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">    </span><span class="nx">init</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">        </span><span class="c1">// initialize the instance (3)</span>
+<a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">x</span><span class="p">;</span>
+<a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">y</span><span class="p">;</span>
+<a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">    </span><span class="nx">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-3-8" id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="sb">`(</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="si">}</span><span class="sb">,</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="si">}</span><span class="sb">)`</span><span class="p">;</span>
+<a href="#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-3-10" id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="p">}</span>
+<a href="#__codelineno-3-11" id="__codelineno-3-11" name="__codelineno-3-11"></a>
+<a href="#__codelineno-3-12" id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="c1">// a non-class "constructor"</span>
+<a href="#__codelineno-3-13" id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="kd">function</span><span class="w"> </span><span class="nx">Point2d</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-3-14" id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="w">    </span><span class="c1">// create an object (1)</span>
+<a href="#__codelineno-3-15" id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-3-16" id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="w">        </span><span class="c1">// link the instance's [[Prototype]] (2)</span>
+<a href="#__codelineno-3-17" id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="w">        </span><span class="nx">__proto__</span><span class="o">:</span><span class="w"> </span><span class="nx">prototypeObj</span><span class="p">,</span>
+<a href="#__codelineno-3-18" id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="w">    </span><span class="p">};</span>
+<a href="#__codelineno-3-19" id="__codelineno-3-19" name="__codelineno-3-19"></a>
+<a href="#__codelineno-3-20" id="__codelineno-3-20" name="__codelineno-3-20"></a><span class="w">    </span><span class="c1">// initialize the instance (3)</span>
+<a href="#__codelineno-3-21" id="__codelineno-3-21" name="__codelineno-3-21"></a><span class="w">    </span><span class="nx">instance</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">);</span>
+<a href="#__codelineno-3-22" id="__codelineno-3-22" name="__codelineno-3-22"></a>
+<a href="#__codelineno-3-23" id="__codelineno-3-23" name="__codelineno-3-23"></a><span class="w">    </span><span class="c1">// return the instance (4)</span>
+<a href="#__codelineno-3-24" id="__codelineno-3-24" name="__codelineno-3-24"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">instance</span><span class="p">;</span>
+<a href="#__codelineno-3-25" id="__codelineno-3-25" name="__codelineno-3-25"></a><span class="p">}</span>
+<a href="#__codelineno-3-26" id="__codelineno-3-26" name="__codelineno-3-26"></a>
+<a href="#__codelineno-3-27" id="__codelineno-3-27" name="__codelineno-3-27"></a><span class="kd">var</span><span class="w"> </span><span class="nx">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Point2d</span><span class="p">(</span><span class="mf">3</span><span class="p">,</span><span class="mf">4</span><span class="p">);</span>
+<a href="#__codelineno-3-28" id="__codelineno-3-28" name="__codelineno-3-28"></a>
+<a href="#__codelineno-3-29" id="__codelineno-3-29" name="__codelineno-3-29"></a><span class="nx">point</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span><span class="w">           </span><span class="c1">// (3,4)</span>
+</code></pre></div>
+<p>The <code>instance.init(..)</code> call makes use of the <code>[[Prototype]]</code> linkage set up via <code>__proto__</code> assignment. Thus, it <em>delegates</em> up the prototype chain to <code>prototypeObj.init(..)</code>, and invokes it with a <code>this</code> context of <code>instance</code> -- via <em>implicit context</em> assignment (see Chapter 4).</p>
+<p>Let's continue the deconstruction. Get ready for a switcheroo!</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">Point2d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="w">    </span><span class="nx">init</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">        </span><span class="c1">// initialize the instance (3)</span>
+<a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">x</span><span class="p">;</span>
+<a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">y</span><span class="p">;</span>
+<a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">    </span><span class="nx">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="sb">`(</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="si">}</span><span class="sb">,</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="si">}</span><span class="sb">)`</span><span class="p">;</span>
+<a href="#__codelineno-4-9" id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-4-10" id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="p">};</span>
+</code></pre></div>
+<p>Whoa, what!? I discarded the <code>Point2d(..)</code> function, and instead renamed the <code>prototypeObj</code> as <code>Point2d</code>. Weird.</p>
+<p>But let's look at the rest of the code now:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="c1">// steps 1, 2, and 4</span>
+<a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">__proto__</span><span class="o">:</span><span class="w"> </span><span class="nx">Point2d</span><span class="p">,</span><span class="w"> </span><span class="p">};</span>
+<a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a>
+<a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="c1">// step 3</span>
+<a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="nx">point</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="mf">3</span><span class="p">,</span><span class="mf">4</span><span class="p">);</span>
+<a href="#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a>
+<a href="#__codelineno-5-7" id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="nx">point</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span><span class="w">           </span><span class="c1">// (3,4)</span>
+</code></pre></div>
+<p>And one last refinement: let's use a built-in utility JS provides us, called <code>Object.create(..)</code>:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="c1">// steps 1, 2, and 4</span>
+<a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">Point2d</span><span class="p">);</span>
+<a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a>
+<a href="#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="c1">// step 3</span>
+<a href="#__codelineno-6-5" id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="nx">point</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="mf">3</span><span class="p">,</span><span class="mf">4</span><span class="p">);</span>
+<a href="#__codelineno-6-6" id="__codelineno-6-6" name="__codelineno-6-6"></a>
+<a href="#__codelineno-6-7" id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="nx">point</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span><span class="w">           </span><span class="c1">// (3,4)</span>
+</code></pre></div>
+<p>What operations does <code>Object.create(..)</code> perform?</p>
+<ol>
+<li>
+<p>create a brand new empty object, out of thin air.</p>
+</li>
+<li>
+<p>link the <code>[[Prototype]]</code> of that new empty object to the function's <code>.prototype</code> object.</p>
+</li>
+</ol>
+<p>If those look familiar, it's because those are exactly the same first two steps of the <code>new</code> keyword (see Chapter 4).</p>
+<p>Let's put this back together now:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">Point2d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="w">    </span><span class="nx">init</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">x</span><span class="p">;</span>
+<a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">y</span><span class="p">;</span>
+<a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-7-6" id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="w">    </span><span class="nx">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-7-7" id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="sb">`(</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="si">}</span><span class="sb">,</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="si">}</span><span class="sb">)`</span><span class="p">;</span>
+<a href="#__codelineno-7-8" id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-7-9" id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="p">};</span>
+<a href="#__codelineno-7-10" id="__codelineno-7-10" name="__codelineno-7-10"></a>
+<a href="#__codelineno-7-11" id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="kd">var</span><span class="w"> </span><span class="nx">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">Point2d</span><span class="p">);</span>
+<a href="#__codelineno-7-12" id="__codelineno-7-12" name="__codelineno-7-12"></a>
+<a href="#__codelineno-7-13" id="__codelineno-7-13" name="__codelineno-7-13"></a><span class="nx">point</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="mf">3</span><span class="p">,</span><span class="mf">4</span><span class="p">);</span>
+<a href="#__codelineno-7-14" id="__codelineno-7-14" name="__codelineno-7-14"></a>
+<a href="#__codelineno-7-15" id="__codelineno-7-15" name="__codelineno-7-15"></a><span class="nx">point</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span><span class="w">           </span><span class="c1">// (3,4)</span>
+</code></pre></div>
+<p>Hmmm. Take a few moments to ponder what's been derived here. How does it compare to the <code>class</code> approach?</p>
+<p>This pattern ditches the <code>class</code> and <code>new</code> keywords, but accomplishes the exact same outcome. The <em>cost</em>? The single <code>new</code> operation was broken up into two statements: <code>Object.create(Point2d)</code> and <code>point.init(3,4)</code>.</p>
+<h4 id="help-me-reconstruct">Help Me Reconstruct!<a class="headerlink" href="#help-me-reconstruct" title="Permanent link">¶</a></h4>
+<p>If having those two operations separate bothers you -- is it <em>too deconstructed</em>!? -- they can always be recombined in a little factory helper:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="kd">function</span><span class="w"> </span><span class="nx">make</span><span class="p">(</span><span class="nx">objType</span><span class="p">,...</span><span class="nx">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">objType</span><span class="p">);</span>
+<a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="w">    </span><span class="nx">instance</span><span class="p">.</span><span class="nx">init</span><span class="p">(...</span><span class="nx">args</span><span class="p">);</span>
+<a href="#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">instance</span><span class="p">;</span>
+<a href="#__codelineno-8-5" id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="p">}</span>
+<a href="#__codelineno-8-6" id="__codelineno-8-6" name="__codelineno-8-6"></a>
+<a href="#__codelineno-8-7" id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="kd">var</span><span class="w"> </span><span class="nx">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">make</span><span class="p">(</span><span class="nx">Point2d</span><span class="p">,</span><span class="mf">3</span><span class="p">,</span><span class="mf">4</span><span class="p">);</span>
+<a href="#__codelineno-8-8" id="__codelineno-8-8" name="__codelineno-8-8"></a>
+<a href="#__codelineno-8-9" id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="nx">point</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span><span class="w">           </span><span class="c1">// (3,4)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th align="left">TIP:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Such a <code>make(..)</code> factory function helper works generally for any object-type, as long as you follow the implied convention that each <code>objType</code> you link to has a function named <code>init(..)</code> on it.</td>
+</tr>
+</tbody>
+</table>
+<p>And of course, you can still create as many instances as you'd like:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">make</span><span class="p">(</span><span class="nx">Point2d</span><span class="p">,</span><span class="mf">3</span><span class="p">,</span><span class="mf">4</span><span class="p">);</span>
+<a href="#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a>
+<a href="#__codelineno-9-3" id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="kd">var</span><span class="w"> </span><span class="nx">anotherPoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">make</span><span class="p">(</span><span class="nx">Point2d</span><span class="p">,</span><span class="mf">5</span><span class="p">,</span><span class="mf">6</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="ditching-class-thinking">Ditching Class Thinking<a class="headerlink" href="#ditching-class-thinking" title="Permanent link">¶</a></h2>
+<p>Quite frankly, the <em>deconstruction</em> we just went through only ends up in slightly different, and maybe slightly better or slightly worse, code as compared to the <code>class</code> style. If that's all delegation was about, it probably wouldn't even be useful enough for more than a footnote, much less a whole chapter.</p>
+<p>But here's where we're going to really start pushing the class-oriented thinking itself, not just the syntax, aside.</p>
+<p>Class-oriented design inherently creates a hierarchy of <em>classification</em>, meaning how we divide up and group characteristics, and then stack them vertically in an inheritance chain. Moreover, defining a subclass is a specialization of the generalized base class. Instantiating is a specialization of the generalized class.</p>
+<p>Behavior in a traditional class hierarchy is a veritcal composition through the layers of the inheritance chain. Attempts have been made over the decades, and even become rather popular at times, to flatten out deep hierarchies of inheritance, and favor a more horizontal composition through <em>mixins</em> and related ideas.</p>
+<p>I'm not asserting there's anything wrong with those ways of approaching code. But I am saying that they aren't <em>naturally</em> how JS works, so adopting them in JS has been a long, winding, complicated road, and has variously accreted lots of nuanced syntax to retrofit on top of JS's core <code>[[Prototype]]</code> and <code>this</code> pillar.</p>
+<p>For the rest of this chapter, I intend to discard both the syntax of <code>class</code> <em>and</em> the thinking of <em>class</em>.</p>
+<h2 id="delegation-illustrated">Delegation Illustrated<a class="headerlink" href="#delegation-illustrated" title="Permanent link">¶</a></h2>
+<p>So what is delegation about? At its core, it's about two or more <em>things</em> sharing the effort of completing a task.</p>
+<p>Instead of defining a <code>Point2d</code> general parent <em>thing</em> that represents shared behavior that a set of one or more child <code>point</code> / <code>anotherPoint</code> <em>things</em> inherit from, delegation moves us to building our program with discrete peer <em>things</em> that cooperate with each other.</p>
+<p>I'll sketch that out in some code:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">Coordinates</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-10-2" id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="w">    </span><span class="nx">setX</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-10-3" id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">x</span><span class="p">;</span>
+<a href="#__codelineno-10-4" id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-10-5" id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="w">    </span><span class="nx">setY</span><span class="p">(</span><span class="nx">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-10-6" id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">y</span><span class="p">;</span>
+<a href="#__codelineno-10-7" id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-10-8" id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="w">    </span><span class="nx">setXY</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-10-9" id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">setX</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<a href="#__codelineno-10-10" id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">setY</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
+<a href="#__codelineno-10-11" id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-10-12" id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="p">};</span>
+<a href="#__codelineno-10-13" id="__codelineno-10-13" name="__codelineno-10-13"></a>
+<a href="#__codelineno-10-14" id="__codelineno-10-14" name="__codelineno-10-14"></a><span class="kd">var</span><span class="w"> </span><span class="nx">Inspect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-10-15" id="__codelineno-10-15" name="__codelineno-10-15"></a><span class="w">    </span><span class="nx">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-10-16" id="__codelineno-10-16" name="__codelineno-10-16"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="sb">`(</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="si">}</span><span class="sb">,</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="si">}</span><span class="sb">)`</span><span class="p">;</span>
+<a href="#__codelineno-10-17" id="__codelineno-10-17" name="__codelineno-10-17"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-10-18" id="__codelineno-10-18" name="__codelineno-10-18"></a><span class="p">};</span>
+<a href="#__codelineno-10-19" id="__codelineno-10-19" name="__codelineno-10-19"></a>
+<a href="#__codelineno-10-20" id="__codelineno-10-20" name="__codelineno-10-20"></a><span class="kd">var</span><span class="w"> </span><span class="nx">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span>
+<a href="#__codelineno-10-21" id="__codelineno-10-21" name="__codelineno-10-21"></a>
+<a href="#__codelineno-10-22" id="__codelineno-10-22" name="__codelineno-10-22"></a><span class="nx">Coordinates</span><span class="p">.</span><span class="nx">setXY</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">point</span><span class="p">,</span><span class="mf">3</span><span class="p">,</span><span class="mf">4</span><span class="p">);</span>
+<a href="#__codelineno-10-23" id="__codelineno-10-23" name="__codelineno-10-23"></a><span class="nx">Inspect</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">point</span><span class="p">);</span><span class="w">         </span><span class="c1">// (3,4)</span>
+<a href="#__codelineno-10-24" id="__codelineno-10-24" name="__codelineno-10-24"></a>
+<a href="#__codelineno-10-25" id="__codelineno-10-25" name="__codelineno-10-25"></a><span class="kd">var</span><span class="w"> </span><span class="nx">anotherPoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">Coordinates</span><span class="p">);</span>
+<a href="#__codelineno-10-26" id="__codelineno-10-26" name="__codelineno-10-26"></a>
+<a href="#__codelineno-10-27" id="__codelineno-10-27" name="__codelineno-10-27"></a><span class="nx">anotherPoint</span><span class="p">.</span><span class="nx">setXY</span><span class="p">(</span><span class="mf">5</span><span class="p">,</span><span class="mf">6</span><span class="p">);</span>
+<a href="#__codelineno-10-28" id="__codelineno-10-28" name="__codelineno-10-28"></a><span class="nx">Inspect</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">anotherPoint</span><span class="p">);</span><span class="w">  </span><span class="c1">// (5,6)</span>
+</code></pre></div>
+<p>Let's break down what's happening here.</p>
+<p>I've defined <code>Coordinates</code> as a concrete object that holds some behaviors I associate with setting point coordinates (<code>x</code> and <code>y</code>). I've also defined <code>Inspect</code> as a concrete object that holds some debug inspection logic, such as <code>toString()</code>.</p>
+<p>I then create two more concrete objects, <code>point</code> and <code>anotherPoint</code>.</p>
+<p><code>point</code> has no specific <code>[[Prototype]]</code> (default: <code>Object.prototype</code>). Using <em>explicit context</em> assignment (see Chapter 4), I invoke the <code>Coordinates.setXY(..)</code> and <code>Inspect.toString()</code> utilities in the context of <code>point</code>. That is what I call <em>explicit delegation</em>.</p>
+<p><code>anotherPoint</code> is <code>[[Prototype]]</code> linked to <code>Coordinates</code>, mostly for a bit of convenience. That lets me use <em>implicit context</em> assignment with <code>anotherPoint.setXY(..)</code>. But I can still <em>explicitly</em> share <code>anotherPoint</code> as context for the <code>Inspect.toString()</code> call. That's what I call <em>implicit delegation</em>.</p>
+<p><strong>Don't miss <em>this</em>:</strong> We still accomplished composition: we composed the behaviors from <code>Coordinates</code> and <code>Inspect</code>, during runtime function invocations with <code>this</code> context sharing. We didn't have to author-combine those behaviors into a single <code>class</code> (or base-subclass <code>class</code> hierarchy) for <code>point</code> / <code>anotherPoint</code> to inherit from. I like to call this runtime composition, <strong>virtual composition</strong>.</p>
+<p>The <em>point</em> here is: none of these four objects is a parent or child. They're all peers of each other, and they all have different purposes. We can organize our behavior in logical chunks (on each respective object), and share the context via <code>this</code> (and, optionally <code>[[Prototype]]</code> linkage), which ends up with the same composition outcomes as the other patterns we've examined thus far in the book.</p>
+<p><em>That</em> is the heart of the <strong>delegation</strong> pattern, as JS embodies it.</p>
+<table>
+<thead>
+<tr>
+<th align="left">TIP:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">In the first edition of this book series, this book ("this &amp; Object Prototypes") coined a term, "OLOO", which stands for "Objects Linked to Other Objects" -- to stand in contrast to "OO" ("Object Oriented"). In this preceding example, you can see the essence of OLOO: all we have are objects, linked to and cooperating with, other objects. I find this beautiful in its simplicity.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="composing-peer-objects">Composing Peer Objects<a class="headerlink" href="#composing-peer-objects" title="Permanent link">¶</a></h2>
+<p>Let's take <em>this delegation</em> even further.</p>
+<p>In the preceding snippet, <code>point</code> and <code>anotherPoint</code> merely held data, and the behaviors they delegated to were on other objects (<code>Coordinates</code> and <code>Inspect</code>). But we can add behaviors directly to any of the objects in a delegation chain, and those behaviors can even interact with each other, all through the magic of <em>virtual composition</em> (<code>this</code> context sharing).</p>
+<p>To illustrate, we'll evolve our current <em>point</em> example a fair bit. And as a bonus we'll actually draw our points on a <code>&lt;canvas&gt;</code> element in the DOM. Let's take a look:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">Canvas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="w">    </span><span class="nx">setOrigin</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-11-3" id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">);</span>
+<a href="#__codelineno-11-4" id="__codelineno-11-4" name="__codelineno-11-4"></a>
+<a href="#__codelineno-11-5" id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="w">        </span><span class="c1">// flip the canvas context vertically,</span>
+<a href="#__codelineno-11-6" id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">        </span><span class="c1">// so coordinates work like on a normal</span>
+<a href="#__codelineno-11-7" id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="w">        </span><span class="c1">// 2d (x,y) graph</span>
+<a href="#__codelineno-11-8" id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="o">-</span><span class="mf">1</span><span class="p">);</span>
+<a href="#__codelineno-11-9" id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-11-10" id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="w">    </span><span class="nx">pixel</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-11-11" id="__codelineno-11-11" name="__codelineno-11-11"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">fillRect</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">,</span><span class="mf">1</span><span class="p">,</span><span class="mf">1</span><span class="p">);</span>
+<a href="#__codelineno-11-12" id="__codelineno-11-12" name="__codelineno-11-12"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-11-13" id="__codelineno-11-13" name="__codelineno-11-13"></a><span class="w">    </span><span class="nx">renderScene</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-11-14" id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="w">        </span><span class="c1">// clear the canvas</span>
+<a href="#__codelineno-11-15" id="__codelineno-11-15" name="__codelineno-11-15"></a><span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">matrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">getTransform</span><span class="p">();</span>
+<a href="#__codelineno-11-16" id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">resetTransform</span><span class="p">();</span>
+<a href="#__codelineno-11-17" id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">clearRect</span><span class="p">(</span>
+<a href="#__codelineno-11-18" id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="w">            </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<a href="#__codelineno-11-19" id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
+<a href="#__codelineno-11-20" id="__codelineno-11-20" name="__codelineno-11-20"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">height</span>
+<a href="#__codelineno-11-21" id="__codelineno-11-21" name="__codelineno-11-21"></a><span class="w">        </span><span class="p">);</span>
+<a href="#__codelineno-11-22" id="__codelineno-11-22" name="__codelineno-11-22"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">setTransform</span><span class="p">(</span><span class="nx">matrix</span><span class="p">);</span>
+<a href="#__codelineno-11-23" id="__codelineno-11-23" name="__codelineno-11-23"></a>
+<a href="#__codelineno-11-24" id="__codelineno-11-24" name="__codelineno-11-24"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">draw</span><span class="p">();</span><span class="w">  </span><span class="c1">// &lt;-- where is draw()?</span>
+<a href="#__codelineno-11-25" id="__codelineno-11-25" name="__codelineno-11-25"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-11-26" id="__codelineno-11-26" name="__codelineno-11-26"></a><span class="p">};</span>
+<a href="#__codelineno-11-27" id="__codelineno-11-27" name="__codelineno-11-27"></a>
+<a href="#__codelineno-11-28" id="__codelineno-11-28" name="__codelineno-11-28"></a><span class="kd">var</span><span class="w"> </span><span class="nx">Coordinates</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-11-29" id="__codelineno-11-29" name="__codelineno-11-29"></a><span class="w">    </span><span class="nx">setX</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-11-30" id="__codelineno-11-30" name="__codelineno-11-30"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<a href="#__codelineno-11-31" id="__codelineno-11-31" name="__codelineno-11-31"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-11-32" id="__codelineno-11-32" name="__codelineno-11-32"></a><span class="w">    </span><span class="nx">setY</span><span class="p">(</span><span class="nx">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-11-33" id="__codelineno-11-33" name="__codelineno-11-33"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
+<a href="#__codelineno-11-34" id="__codelineno-11-34" name="__codelineno-11-34"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-11-35" id="__codelineno-11-35" name="__codelineno-11-35"></a><span class="w">    </span><span class="nx">setXY</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-11-36" id="__codelineno-11-36" name="__codelineno-11-36"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">setX</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<a href="#__codelineno-11-37" id="__codelineno-11-37" name="__codelineno-11-37"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">setY</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
+<a href="#__codelineno-11-38" id="__codelineno-11-38" name="__codelineno-11-38"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span><span class="w">   </span><span class="c1">// &lt;-- where is render()?</span>
+<a href="#__codelineno-11-39" id="__codelineno-11-39" name="__codelineno-11-39"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-11-40" id="__codelineno-11-40" name="__codelineno-11-40"></a><span class="p">};</span>
+<a href="#__codelineno-11-41" id="__codelineno-11-41" name="__codelineno-11-41"></a>
+<a href="#__codelineno-11-42" id="__codelineno-11-42" name="__codelineno-11-42"></a><span class="kd">var</span><span class="w"> </span><span class="nx">ControlPoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-11-43" id="__codelineno-11-43" name="__codelineno-11-43"></a><span class="w">    </span><span class="c1">// delegate to Coordinates</span>
+<a href="#__codelineno-11-44" id="__codelineno-11-44" name="__codelineno-11-44"></a><span class="w">    </span><span class="nx">__proto__</span><span class="o">:</span><span class="w"> </span><span class="nx">Coordinates</span><span class="p">,</span>
+<a href="#__codelineno-11-45" id="__codelineno-11-45" name="__codelineno-11-45"></a>
+<a href="#__codelineno-11-46" id="__codelineno-11-46" name="__codelineno-11-46"></a><span class="w">    </span><span class="c1">// NOTE: must have a &lt;canvas id="my-canvas"&gt;</span>
+<a href="#__codelineno-11-47" id="__codelineno-11-47" name="__codelineno-11-47"></a><span class="w">    </span><span class="c1">// element in the DOM</span>
+<a href="#__codelineno-11-48" id="__codelineno-11-48" name="__codelineno-11-48"></a><span class="w">    </span><span class="nx">ctx</span><span class="o">:</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"my-canvas"</span><span class="p">)</span>
+<a href="#__codelineno-11-49" id="__codelineno-11-49" name="__codelineno-11-49"></a><span class="w">        </span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s2">"2d"</span><span class="p">),</span>
+<a href="#__codelineno-11-50" id="__codelineno-11-50" name="__codelineno-11-50"></a>
+<a href="#__codelineno-11-51" id="__codelineno-11-51" name="__codelineno-11-51"></a><span class="w">    </span><span class="nx">rotate</span><span class="p">(</span><span class="nx">angleRadians</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-11-52" id="__codelineno-11-52" name="__codelineno-11-52"></a><span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">rotatedX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">cos</span><span class="p">(</span><span class="nx">angleRadians</span><span class="p">)</span><span class="w"> </span><span class="o">-</span>
+<a href="#__codelineno-11-53" id="__codelineno-11-53" name="__codelineno-11-53"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">angleRadians</span><span class="p">);</span>
+<a href="#__codelineno-11-54" id="__codelineno-11-54" name="__codelineno-11-54"></a><span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">rotatedY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">angleRadians</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<a href="#__codelineno-11-55" id="__codelineno-11-55" name="__codelineno-11-55"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">cos</span><span class="p">(</span><span class="nx">angleRadians</span><span class="p">);</span>
+<a href="#__codelineno-11-56" id="__codelineno-11-56" name="__codelineno-11-56"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">setXY</span><span class="p">(</span><span class="nx">rotatedX</span><span class="p">,</span><span class="nx">rotatedY</span><span class="p">);</span>
+<a href="#__codelineno-11-57" id="__codelineno-11-57" name="__codelineno-11-57"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-11-58" id="__codelineno-11-58" name="__codelineno-11-58"></a><span class="w">    </span><span class="nx">draw</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-11-59" id="__codelineno-11-59" name="__codelineno-11-59"></a><span class="w">        </span><span class="c1">// plot the point</span>
+<a href="#__codelineno-11-60" id="__codelineno-11-60" name="__codelineno-11-60"></a><span class="w">        </span><span class="nx">Canvas</span><span class="p">.</span><span class="nx">pixel</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+<a href="#__codelineno-11-61" id="__codelineno-11-61" name="__codelineno-11-61"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-11-62" id="__codelineno-11-62" name="__codelineno-11-62"></a><span class="w">    </span><span class="nx">render</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-11-63" id="__codelineno-11-63" name="__codelineno-11-63"></a><span class="w">        </span><span class="c1">// clear the canvas, and re-render</span>
+<a href="#__codelineno-11-64" id="__codelineno-11-64" name="__codelineno-11-64"></a><span class="w">        </span><span class="c1">// our control-point</span>
+<a href="#__codelineno-11-65" id="__codelineno-11-65" name="__codelineno-11-65"></a><span class="w">        </span><span class="nx">Canvas</span><span class="p">.</span><span class="nx">renderScene</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<a href="#__codelineno-11-66" id="__codelineno-11-66" name="__codelineno-11-66"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-11-67" id="__codelineno-11-67" name="__codelineno-11-67"></a><span class="p">};</span>
+<a href="#__codelineno-11-68" id="__codelineno-11-68" name="__codelineno-11-68"></a>
+<a href="#__codelineno-11-69" id="__codelineno-11-69" name="__codelineno-11-69"></a><span class="c1">// set the logical (0,0) origin at this</span>
+<a href="#__codelineno-11-70" id="__codelineno-11-70" name="__codelineno-11-70"></a><span class="c1">// physical location on the canvas</span>
+<a href="#__codelineno-11-71" id="__codelineno-11-71" name="__codelineno-11-71"></a><span class="nx">Canvas</span><span class="p">.</span><span class="nx">setOrigin</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">ControlPoint</span><span class="p">,</span><span class="mf">100</span><span class="p">,</span><span class="mf">100</span><span class="p">);</span>
+<a href="#__codelineno-11-72" id="__codelineno-11-72" name="__codelineno-11-72"></a>
+<a href="#__codelineno-11-73" id="__codelineno-11-73" name="__codelineno-11-73"></a><span class="nx">ControlPoint</span><span class="p">.</span><span class="nx">setXY</span><span class="p">(</span><span class="mf">30</span><span class="p">,</span><span class="mf">40</span><span class="p">);</span>
+<a href="#__codelineno-11-74" id="__codelineno-11-74" name="__codelineno-11-74"></a><span class="c1">// [renders point (30,40) on the canvas]</span>
+<a href="#__codelineno-11-75" id="__codelineno-11-75" name="__codelineno-11-75"></a>
+<a href="#__codelineno-11-76" id="__codelineno-11-76" name="__codelineno-11-76"></a><span class="c1">// ..</span>
+<a href="#__codelineno-11-77" id="__codelineno-11-77" name="__codelineno-11-77"></a><span class="c1">// later:</span>
+<a href="#__codelineno-11-78" id="__codelineno-11-78" name="__codelineno-11-78"></a>
+<a href="#__codelineno-11-79" id="__codelineno-11-79" name="__codelineno-11-79"></a><span class="c1">// rotate the point about the (0,0) origin</span>
+<a href="#__codelineno-11-80" id="__codelineno-11-80" name="__codelineno-11-80"></a><span class="c1">// 90 degrees counter-clockwise</span>
+<a href="#__codelineno-11-81" id="__codelineno-11-81" name="__codelineno-11-81"></a><span class="nx">ControlPoint</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2</span><span class="p">);</span>
+<a href="#__codelineno-11-82" id="__codelineno-11-82" name="__codelineno-11-82"></a><span class="c1">// [renders point (-40,30) on the canvas]</span>
+</code></pre></div>
+<p>OK, that's a lot of code to digest. Take your time and re-read the snippet several times. I added a couple of new concrete objects (<code>Canvas</code> and <code>ControlPoint</code>) alongside the previous <code>Coordinates</code> object.</p>
+<p>Make sure you see and understand the interactions between these three concrete objects.</p>
+<p><code>ControlPoint</code> is linked (via <code>__proto__</code>) to <em>implicitly delegate</em> (<code>[[Prototype]]</code> chain) to <code>Coordinates</code>.</p>
+<p>Here's an <em>explicit delegation</em>: <code>Canvas.setOrigin.call(ControlPoint,100,100);</code>; I'm invoking the <code>Canvas.setOrigin(..)</code> call in the context of <code>ControlPoint</code>. That has the effect of sharing <code>ctx</code> with <code>setOrigin(..)</code>, via <code>this</code>.</p>
+<p><code>ControlPoint.setXY(..)</code> delegates <em>implicitly</em> to <code>Coordinates.setXY(..)</code>, but still in the context of <code>ControlPoint</code>. Here's a key detail that's easy to miss: see the <code>this.render()</code> inside of <code>Coordinates.setXY(..)</code>? Where does that come from? Since the <code>this</code> context is <code>ControlPoint</code> (not <code>Coordinates</code>), it's invoking <code>ControlPoint.render()</code>.</p>
+<p><code>ControlPoint.render()</code> <em>explicitly delegates</em> to <code>Canvas.renderScene()</code>, again still in the <code>ControlPoint</code> context. <code>renderScene()</code> calls <code>this.draw()</code>, but where does that come from? Yep, still from <code>ControlPoint</code> (via <code>this</code> context).</p>
+<p>And <code>ControlPoint.draw()</code>? It <em>explicitly delegates</em> to <code>Canvas.pixel(..)</code>, yet again still in the <code>ControlPoint</code> context.</p>
+<p>All three objects have methods that end up invoking each other. But these calls aren't particularly hard-wired. <code>Canvas.renderScene()</code> doesn't call <code>ControlPoint.draw()</code>, it calls <code>this.draw()</code>. That's important, because it means that <code>Canvas.renderScene()</code> is more flexible to use in a different <code>this</code> context -- e.g., against another kind of <em>point</em> object besides <code>ControlPoint</code>.</p>
+<p>It's through the <code>this</code> context, and the <code>[[Prototype]]</code> chain, that these three objects basically are mixed (composed) virtually together, as needed at each step, so that they work together <strong>as if they're one object rather than three sepearate objects</strong>.</p>
+<p>That's the <em>beauty</em> of virtual composition as realized by the delegation pattern in JS.</p>
+<h3 id="flexible-context">Flexible Context<a class="headerlink" href="#flexible-context" title="Permanent link">¶</a></h3>
+<p>I mentioned above that we can pretty easily add other concrete objects into the mix. Here's an example:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">Coordinates</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* .. */</span><span class="w"> </span><span class="p">};</span>
+<a href="#__codelineno-12-2" id="__codelineno-12-2" name="__codelineno-12-2"></a>
+<a href="#__codelineno-12-3" id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="kd">var</span><span class="w"> </span><span class="nx">Canvas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-12-4" id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="w">    </span><span class="cm">/* .. */</span>
+<a href="#__codelineno-12-5" id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="w">    </span><span class="nx">line</span><span class="p">(</span><span class="nx">start</span><span class="p">,</span><span class="nx">end</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-12-6" id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">();</span>
+<a href="#__codelineno-12-7" id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">start</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span><span class="nx">start</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+<a href="#__codelineno-12-8" id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">end</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span><span class="nx">end</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+<a href="#__codelineno-12-9" id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">stroke</span><span class="p">();</span>
+<a href="#__codelineno-12-10" id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-12-11" id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="p">};</span>
+<a href="#__codelineno-12-12" id="__codelineno-12-12" name="__codelineno-12-12"></a>
+<a href="#__codelineno-12-13" id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="kd">function</span><span class="w"> </span><span class="nx">lineAnchor</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-12-14" id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">anchor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-12-15" id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="w">        </span><span class="nx">__proto__</span><span class="o">:</span><span class="w"> </span><span class="nx">Coordinates</span><span class="p">,</span>
+<a href="#__codelineno-12-16" id="__codelineno-12-16" name="__codelineno-12-16"></a><span class="w">        </span><span class="nx">render</span><span class="p">()</span><span class="w"> </span><span class="p">{},</span>
+<a href="#__codelineno-12-17" id="__codelineno-12-17" name="__codelineno-12-17"></a><span class="w">    </span><span class="p">};</span>
+<a href="#__codelineno-12-18" id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="w">    </span><span class="nx">anchor</span><span class="p">.</span><span class="nx">setXY</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">);</span>
+<a href="#__codelineno-12-19" id="__codelineno-12-19" name="__codelineno-12-19"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">anchor</span><span class="p">;</span>
+<a href="#__codelineno-12-20" id="__codelineno-12-20" name="__codelineno-12-20"></a><span class="p">}</span>
+<a href="#__codelineno-12-21" id="__codelineno-12-21" name="__codelineno-12-21"></a>
+<a href="#__codelineno-12-22" id="__codelineno-12-22" name="__codelineno-12-22"></a><span class="kd">var</span><span class="w"> </span><span class="nx">GuideLine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-12-23" id="__codelineno-12-23" name="__codelineno-12-23"></a><span class="w">    </span><span class="c1">// NOTE: must have a &lt;canvas id="my-canvas"&gt;</span>
+<a href="#__codelineno-12-24" id="__codelineno-12-24" name="__codelineno-12-24"></a><span class="w">    </span><span class="c1">// element in the DOM</span>
+<a href="#__codelineno-12-25" id="__codelineno-12-25" name="__codelineno-12-25"></a><span class="w">    </span><span class="nx">ctx</span><span class="o">:</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"my-canvas"</span><span class="p">)</span>
+<a href="#__codelineno-12-26" id="__codelineno-12-26" name="__codelineno-12-26"></a><span class="w">        </span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s2">"2d"</span><span class="p">),</span>
+<a href="#__codelineno-12-27" id="__codelineno-12-27" name="__codelineno-12-27"></a>
+<a href="#__codelineno-12-28" id="__codelineno-12-28" name="__codelineno-12-28"></a><span class="w">    </span><span class="nx">setAnchors</span><span class="p">(</span><span class="nx">sx</span><span class="p">,</span><span class="nx">sy</span><span class="p">,</span><span class="nx">ex</span><span class="p">,</span><span class="nx">ey</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-12-29" id="__codelineno-12-29" name="__codelineno-12-29"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">lineAnchor</span><span class="p">(</span><span class="nx">sx</span><span class="p">,</span><span class="nx">sy</span><span class="p">);</span>
+<a href="#__codelineno-12-30" id="__codelineno-12-30" name="__codelineno-12-30"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">lineAnchor</span><span class="p">(</span><span class="nx">ex</span><span class="p">,</span><span class="nx">ey</span><span class="p">);</span>
+<a href="#__codelineno-12-31" id="__codelineno-12-31" name="__codelineno-12-31"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+<a href="#__codelineno-12-32" id="__codelineno-12-32" name="__codelineno-12-32"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-12-33" id="__codelineno-12-33" name="__codelineno-12-33"></a><span class="w">    </span><span class="nx">draw</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-12-34" id="__codelineno-12-34" name="__codelineno-12-34"></a><span class="w">        </span><span class="c1">// plot the point</span>
+<a href="#__codelineno-12-35" id="__codelineno-12-35" name="__codelineno-12-35"></a><span class="w">        </span><span class="nx">Canvas</span><span class="p">.</span><span class="nx">line</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">start</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">end</span><span class="p">);</span>
+<a href="#__codelineno-12-36" id="__codelineno-12-36" name="__codelineno-12-36"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-12-37" id="__codelineno-12-37" name="__codelineno-12-37"></a><span class="w">    </span><span class="nx">render</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-12-38" id="__codelineno-12-38" name="__codelineno-12-38"></a><span class="w">        </span><span class="c1">// clear the canvas, and re-render</span>
+<a href="#__codelineno-12-39" id="__codelineno-12-39" name="__codelineno-12-39"></a><span class="w">        </span><span class="c1">// our line</span>
+<a href="#__codelineno-12-40" id="__codelineno-12-40" name="__codelineno-12-40"></a><span class="w">        </span><span class="nx">Canvas</span><span class="p">.</span><span class="nx">renderScene</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<a href="#__codelineno-12-41" id="__codelineno-12-41" name="__codelineno-12-41"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-12-42" id="__codelineno-12-42" name="__codelineno-12-42"></a><span class="p">};</span>
+<a href="#__codelineno-12-43" id="__codelineno-12-43" name="__codelineno-12-43"></a>
+<a href="#__codelineno-12-44" id="__codelineno-12-44" name="__codelineno-12-44"></a><span class="c1">// set the logical (0,0) origin at this</span>
+<a href="#__codelineno-12-45" id="__codelineno-12-45" name="__codelineno-12-45"></a><span class="c1">// physical location on the canvas</span>
+<a href="#__codelineno-12-46" id="__codelineno-12-46" name="__codelineno-12-46"></a><span class="nx">Canvas</span><span class="p">.</span><span class="nx">setOrigin</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">GuideLine</span><span class="p">,</span><span class="mf">100</span><span class="p">,</span><span class="mf">100</span><span class="p">);</span>
+<a href="#__codelineno-12-47" id="__codelineno-12-47" name="__codelineno-12-47"></a>
+<a href="#__codelineno-12-48" id="__codelineno-12-48" name="__codelineno-12-48"></a><span class="nx">GuideLine</span><span class="p">.</span><span class="nx">setAnchors</span><span class="p">(</span><span class="o">-</span><span class="mf">30</span><span class="p">,</span><span class="mf">65</span><span class="p">,</span><span class="mf">45</span><span class="p">,</span><span class="o">-</span><span class="mf">17</span><span class="p">);</span>
+<a href="#__codelineno-12-49" id="__codelineno-12-49" name="__codelineno-12-49"></a><span class="c1">// [renders line from (-30,65) to (45,-17)</span>
+<a href="#__codelineno-12-50" id="__codelineno-12-50" name="__codelineno-12-50"></a><span class="c1">//   on the canvas]</span>
+</code></pre></div>
+<p>That's pretty nice, I think!</p>
+<p>But I think another less-obvious benefit is that having objects linked dynamically via <code>this</code> context tends to make testing different parts of the program independently, somewhat easier.</p>
+<p>For example, <code>Object.setPrototypeOf(..)</code> can be used to dynamically change the <code>[[Prototype]]</code> linkage of an object, delegating it to a different object such as a mock object. Or you could dynamically redefine <code>GuideLine.draw()</code> and <code>GuideLine.render()</code> to <em>explicitly delegate</em> to a <code>MockCanvas</code> instead of <code>Canvas</code>.</p>
+<p>The <code>this</code> keyword, and the <code>[[Prototype]]</code> link, are a tremendously flexible mechanism when you understand and leverage them fully.</p>
+<h2 id="why-this">Why <em>This</em>?<a class="headerlink" href="#why-this" title="Permanent link">¶</a></h2>
+<p>OK, so it's hopefully clear that the delegation pattern leans heavily on implicit input, sharing context via <code>this</code> rather than through an explicit parameter.</p>
+<p>You might rightly ask, why not just always pass around that context explicitly? We can certainly do so, but... to manually pass along the necessary context, we'll have to change pretty much every single function signature, and any corresponding call-sites.</p>
+<p>Let's revisit the earlier <code>ControlPoint</code> delegation example, and implement it without any delegation-oriented <code>this</code> context sharing. Pay careful attention to the differences:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">Canvas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-13-2" id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="w">    </span><span class="nx">setOrigin</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-13-3" id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="w">        </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">);</span>
+<a href="#__codelineno-13-4" id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="w">        </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="o">-</span><span class="mf">1</span><span class="p">);</span>
+<a href="#__codelineno-13-5" id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-13-6" id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="w">    </span><span class="nx">pixel</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-13-7" id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="w">        </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">fillRect</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">,</span><span class="mf">1</span><span class="p">,</span><span class="mf">1</span><span class="p">);</span>
+<a href="#__codelineno-13-8" id="__codelineno-13-8" name="__codelineno-13-8"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-13-9" id="__codelineno-13-9" name="__codelineno-13-9"></a><span class="w">    </span><span class="nx">renderScene</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="nx">entity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-13-10" id="__codelineno-13-10" name="__codelineno-13-10"></a><span class="w">        </span><span class="c1">// clear the canvas</span>
+<a href="#__codelineno-13-11" id="__codelineno-13-11" name="__codelineno-13-11"></a><span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">matrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">getTransform</span><span class="p">();</span>
+<a href="#__codelineno-13-12" id="__codelineno-13-12" name="__codelineno-13-12"></a><span class="w">        </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">resetTransform</span><span class="p">();</span>
+<a href="#__codelineno-13-13" id="__codelineno-13-13" name="__codelineno-13-13"></a><span class="w">        </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">clearRect</span><span class="p">(</span>
+<a href="#__codelineno-13-14" id="__codelineno-13-14" name="__codelineno-13-14"></a><span class="w">            </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<a href="#__codelineno-13-15" id="__codelineno-13-15" name="__codelineno-13-15"></a><span class="w">            </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
+<a href="#__codelineno-13-16" id="__codelineno-13-16" name="__codelineno-13-16"></a><span class="w">            </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">height</span>
+<a href="#__codelineno-13-17" id="__codelineno-13-17" name="__codelineno-13-17"></a><span class="w">        </span><span class="p">);</span>
+<a href="#__codelineno-13-18" id="__codelineno-13-18" name="__codelineno-13-18"></a><span class="w">        </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">setTransform</span><span class="p">(</span><span class="nx">matrix</span><span class="p">);</span>
+<a href="#__codelineno-13-19" id="__codelineno-13-19" name="__codelineno-13-19"></a>
+<a href="#__codelineno-13-20" id="__codelineno-13-20" name="__codelineno-13-20"></a><span class="w">        </span><span class="nx">entity</span><span class="p">.</span><span class="nx">draw</span><span class="p">();</span>
+<a href="#__codelineno-13-21" id="__codelineno-13-21" name="__codelineno-13-21"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-13-22" id="__codelineno-13-22" name="__codelineno-13-22"></a><span class="p">};</span>
+<a href="#__codelineno-13-23" id="__codelineno-13-23" name="__codelineno-13-23"></a>
+<a href="#__codelineno-13-24" id="__codelineno-13-24" name="__codelineno-13-24"></a><span class="kd">var</span><span class="w"> </span><span class="nx">Coordinates</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-13-25" id="__codelineno-13-25" name="__codelineno-13-25"></a><span class="w">    </span><span class="nx">setX</span><span class="p">(</span><span class="nx">entity</span><span class="p">,</span><span class="nx">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-13-26" id="__codelineno-13-26" name="__codelineno-13-26"></a><span class="w">        </span><span class="nx">entity</span><span class="p">.</span><span class="nx">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<a href="#__codelineno-13-27" id="__codelineno-13-27" name="__codelineno-13-27"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-13-28" id="__codelineno-13-28" name="__codelineno-13-28"></a><span class="w">    </span><span class="nx">setY</span><span class="p">(</span><span class="nx">entity</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-13-29" id="__codelineno-13-29" name="__codelineno-13-29"></a><span class="w">        </span><span class="nx">entity</span><span class="p">.</span><span class="nx">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
+<a href="#__codelineno-13-30" id="__codelineno-13-30" name="__codelineno-13-30"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-13-31" id="__codelineno-13-31" name="__codelineno-13-31"></a><span class="w">    </span><span class="nx">setXY</span><span class="p">(</span><span class="nx">entity</span><span class="p">,</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-13-32" id="__codelineno-13-32" name="__codelineno-13-32"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">setX</span><span class="p">(</span><span class="nx">entity</span><span class="p">,</span><span class="nx">x</span><span class="p">);</span>
+<a href="#__codelineno-13-33" id="__codelineno-13-33" name="__codelineno-13-33"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">setY</span><span class="p">(</span><span class="nx">entity</span><span class="p">,</span><span class="nx">y</span><span class="p">);</span>
+<a href="#__codelineno-13-34" id="__codelineno-13-34" name="__codelineno-13-34"></a><span class="w">        </span><span class="nx">entity</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+<a href="#__codelineno-13-35" id="__codelineno-13-35" name="__codelineno-13-35"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-13-36" id="__codelineno-13-36" name="__codelineno-13-36"></a><span class="p">};</span>
+<a href="#__codelineno-13-37" id="__codelineno-13-37" name="__codelineno-13-37"></a>
+<a href="#__codelineno-13-38" id="__codelineno-13-38" name="__codelineno-13-38"></a><span class="kd">var</span><span class="w"> </span><span class="nx">ControlPoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-13-39" id="__codelineno-13-39" name="__codelineno-13-39"></a><span class="w">    </span><span class="c1">// NOTE: must have a &lt;canvas id="my-canvas"&gt;</span>
+<a href="#__codelineno-13-40" id="__codelineno-13-40" name="__codelineno-13-40"></a><span class="w">    </span><span class="c1">// element in the DOM</span>
+<a href="#__codelineno-13-41" id="__codelineno-13-41" name="__codelineno-13-41"></a><span class="w">    </span><span class="nx">ctx</span><span class="o">:</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"my-canvas"</span><span class="p">)</span>
+<a href="#__codelineno-13-42" id="__codelineno-13-42" name="__codelineno-13-42"></a><span class="w">        </span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s2">"2d"</span><span class="p">),</span>
+<a href="#__codelineno-13-43" id="__codelineno-13-43" name="__codelineno-13-43"></a>
+<a href="#__codelineno-13-44" id="__codelineno-13-44" name="__codelineno-13-44"></a><span class="w">    </span><span class="nx">setXY</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-13-45" id="__codelineno-13-45" name="__codelineno-13-45"></a><span class="w">        </span><span class="nx">Coordinates</span><span class="p">.</span><span class="nx">setXY</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">);</span>
+<a href="#__codelineno-13-46" id="__codelineno-13-46" name="__codelineno-13-46"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-13-47" id="__codelineno-13-47" name="__codelineno-13-47"></a><span class="w">    </span><span class="nx">rotate</span><span class="p">(</span><span class="nx">angleRadians</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-13-48" id="__codelineno-13-48" name="__codelineno-13-48"></a><span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">rotatedX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">cos</span><span class="p">(</span><span class="nx">angleRadians</span><span class="p">)</span><span class="w"> </span><span class="o">-</span>
+<a href="#__codelineno-13-49" id="__codelineno-13-49" name="__codelineno-13-49"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">angleRadians</span><span class="p">);</span>
+<a href="#__codelineno-13-50" id="__codelineno-13-50" name="__codelineno-13-50"></a><span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">rotatedY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">angleRadians</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<a href="#__codelineno-13-51" id="__codelineno-13-51" name="__codelineno-13-51"></a><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">cos</span><span class="p">(</span><span class="nx">angleRadians</span><span class="p">);</span>
+<a href="#__codelineno-13-52" id="__codelineno-13-52" name="__codelineno-13-52"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">setXY</span><span class="p">(</span><span class="nx">rotatedX</span><span class="p">,</span><span class="nx">rotatedY</span><span class="p">);</span>
+<a href="#__codelineno-13-53" id="__codelineno-13-53" name="__codelineno-13-53"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-13-54" id="__codelineno-13-54" name="__codelineno-13-54"></a><span class="w">    </span><span class="nx">draw</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-13-55" id="__codelineno-13-55" name="__codelineno-13-55"></a><span class="w">        </span><span class="c1">// plot the point</span>
+<a href="#__codelineno-13-56" id="__codelineno-13-56" name="__codelineno-13-56"></a><span class="w">        </span><span class="nx">Canvas</span><span class="p">.</span><span class="nx">pixel</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">ctx</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+<a href="#__codelineno-13-57" id="__codelineno-13-57" name="__codelineno-13-57"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-13-58" id="__codelineno-13-58" name="__codelineno-13-58"></a><span class="w">    </span><span class="nx">render</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-13-59" id="__codelineno-13-59" name="__codelineno-13-59"></a><span class="w">        </span><span class="c1">// clear the canvas, and re-render</span>
+<a href="#__codelineno-13-60" id="__codelineno-13-60" name="__codelineno-13-60"></a><span class="w">        </span><span class="c1">// our control-point</span>
+<a href="#__codelineno-13-61" id="__codelineno-13-61" name="__codelineno-13-61"></a><span class="w">        </span><span class="nx">Canvas</span><span class="p">.</span><span class="nx">renderScene</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">ctx</span><span class="p">,</span><span class="k">this</span><span class="p">);</span>
+<a href="#__codelineno-13-62" id="__codelineno-13-62" name="__codelineno-13-62"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-13-63" id="__codelineno-13-63" name="__codelineno-13-63"></a><span class="p">};</span>
+<a href="#__codelineno-13-64" id="__codelineno-13-64" name="__codelineno-13-64"></a>
+<a href="#__codelineno-13-65" id="__codelineno-13-65" name="__codelineno-13-65"></a><span class="c1">// set the logical (0,0) origin at this</span>
+<a href="#__codelineno-13-66" id="__codelineno-13-66" name="__codelineno-13-66"></a><span class="c1">// physical location on the canvas</span>
+<a href="#__codelineno-13-67" id="__codelineno-13-67" name="__codelineno-13-67"></a><span class="nx">Canvas</span><span class="p">.</span><span class="nx">setOrigin</span><span class="p">(</span><span class="nx">ControlPoint</span><span class="p">.</span><span class="nx">ctx</span><span class="p">,</span><span class="mf">100</span><span class="p">,</span><span class="mf">100</span><span class="p">);</span>
+<a href="#__codelineno-13-68" id="__codelineno-13-68" name="__codelineno-13-68"></a>
+<a href="#__codelineno-13-69" id="__codelineno-13-69" name="__codelineno-13-69"></a><span class="c1">// ..</span>
+</code></pre></div>
+<p>To be honest, some of you may prefer that style of code. And that's OK if you're in that camp. This snippet avoids <code>[[Prototype]]</code> entirely, and only relies on far fewer basic <code>this.</code>-style references to properties and methods.</p>
+<p>By contrast, the delegation style I'm advocating for in this chapter is unfamiliar and uses <code>[[Prototype]]</code> and <code>this</code> sharing in ways you're not likely familiar with. To use such a style effectively, you'll have to invest the time and practice to build a deeper familiarity.</p>
+<p>But in my opinion, the "cost" of avoiding virtual composition through delegation can be felt across all the function signatures and call-sites; I find them way more cluttered. That explicit context passing is quite a tax.</p>
+<p>In fact, I'd never advocate that style of code at all. If you want to avoid delegation, it's probably best to just stick to <code>class</code> style code, as seen in Chapter 3. As an exercise left to the reader, try to convert the earlier <code>ControlPoint</code> / <code>GuideLine</code> code snippets to use <code>class</code>.</p>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="fn:TreatyOfOrlando">
+<p>"Treaty of Orlando"; Henry Lieberman, Lynn Andrea Stein, David Ungar; Oct 6, 1987; https://web.media.mit.edu/~lieber/Publications/Treaty-of-Orlando-Treaty-Text.pdf ; PDF; Accessed July 2022 <a class="footnote-backref" href="#fnref:TreatyOfOrlando" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn:ClassVsPrototype">
+<p>"Classes vs. Prototypes, Some Philosophical and Historical Observations"; Antero Taivalsaari; Apr 22, 1996; https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.56.4713&amp;rep=rep1&amp;type=pdf ; PDF; Accessed July 2022 <a class="footnote-backref" href="#fnref:ClassVsPrototype" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+</ol>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<nav aria-label="Footer" class="md-footer__inner md-grid">
+<a aria-label="Previous: Chapter 4: This Works" class="md-footer__link md-footer__link--prev" href="../ch4/" rel="prev">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</div>
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                  Previous
+                </span>
+                Chapter 4: This Works
+              </div>
+</div>
+</a>
+<a aria-label="Next: You Don't Know JS Yet: Objects &amp; Classes - 2nd Edition" class="md-footer__link md-footer__link--next" href="../toc/" rel="next">
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                  Next
+                </span>
+                You Don't Know JS Yet: Objects &amp; Classes - 2nd Edition
+              </div>
+</div>
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"></path></svg>
+</div>
+</a>
+</nav>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+<div class="md-social">
+<a class="md-social__link" href="https://shanenull.com/" rel="noopener" target="_blank" title="shanenull.com">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M256 8C119.3 8 8 119.2 8 256c0 136.7 111.3 248 248 248s248-111.3 248-248C504 119.2 392.7 8 256 8zM33 256c0-32.3 6.9-63 19.3-90.7l106.4 291.4C84.3 420.5 33 344.2 33 256zm223 223c-21.9 0-43-3.2-63-9.1l66.9-194.4 68.5 187.8c.5 1.1 1 2.1 1.6 3.1-23.1 8.1-48 12.6-74 12.6zm30.7-327.5c13.4-.7 25.5-2.1 25.5-2.1 12-1.4 10.6-19.1-1.4-18.4 0 0-36.1 2.8-59.4 2.8-21.9 0-58.7-2.8-58.7-2.8-12-.7-13.4 17.7-1.4 18.4 0 0 11.4 1.4 23.4 2.1l34.7 95.2L200.6 393l-81.2-241.5c13.4-.7 25.5-2.1 25.5-2.1 12-1.4 10.6-19.1-1.4-18.4 0 0-36.1 2.8-59.4 2.8-4.2 0-9.1-.1-14.4-.3C109.6 73 178.1 33 256 33c58 0 110.9 22.2 150.6 58.5-1-.1-1.9-.2-2.9-.2-21.9 0-37.4 19.1-37.4 39.6 0 18.4 10.6 33.9 21.9 52.3 8.5 14.8 18.4 33.9 18.4 61.5 0 19.1-7.3 41.2-17 72.1l-22.2 74.3-80.7-239.6zm81.4 297.2 68.1-196.9c12.7-31.8 17-57.2 17-79.9 0-8.2-.5-15.8-1.5-22.9 17.4 31.8 27.3 68.2 27.3 107 0 82.3-44.6 154.1-110.9 192.7z"></path></svg>
+</a>
+<a class="md-social__link" href="https://shane0.pythonanywhere.com/" rel="noopener" target="_blank" title="shane0.pythonanywhere.com">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z"></path></svg>
+</a>
+<a class="md-social__link" href="http://www.youtube.com/c/ShaneNull" rel="noopener" target="_blank" title="www.youtube.com">
+<svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path></svg>
+</a>
+<a class="md-social__link" href="https://www.instagram.com/nullshane/" rel="noopener" target="_blank" title="www.instagram.com">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path></svg>
+</a>
+<a class="md-social__link" href="https://earmassagetherapist.bandcamp.com/releases" rel="noopener" target="_blank" title="earmassagetherapist.bandcamp.com">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8Zm48.2 326.1h-181L207.9 178h181Z"></path></svg>
+</a>
+<a class="md-social__link" href="https://github.com/shane0" rel="noopener" target="_blank" title="github.com">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+</a>
+<a class="md-social__link" href="https://gitlab.com/shane0" rel="noopener" target="_blank" title="gitlab.com">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="m503.5 204.6-.7-1.8-69.7-181.78c-1.4-3.57-3.9-6.59-7.2-8.64-2.4-1.55-5.1-2.515-8-2.81-2.9-.295-5.7.083-8.4 1.11-2.7 1.02-5.1 2.66-7.1 4.78-1.9 2.12-3.3 4.67-4.1 7.44l-47 144H160.8l-47.1-144c-.8-2.77-2.2-5.31-4.1-7.43-2-2.12-4.4-3.75-7.1-4.77a18.1 18.1 0 0 0-8.38-1.113 18.4 18.4 0 0 0-8.04 2.793 18.09 18.09 0 0 0-7.16 8.64L9.267 202.8l-.724 1.8a129.57 129.57 0 0 0-3.52 82c7.747 26.9 24.047 50.7 46.447 67.6l.27.2.59.4 105.97 79.5 52.6 39.7 32 24.2c3.7 1.9 8.3 4.3 13 4.3 4.7 0 9.3-2.4 13-4.3l32-24.2 52.6-39.7 106.7-79.9.3-.3c22.4-16.9 38.7-40.6 45.6-67.5 8.6-27 7.4-55.8-2.6-82z"></path></svg>
+</a>
+<a class="md-social__link" href="https://twitter.com/shane_null" rel="noopener" target="_blank" title="twitter.com">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
+</a>
+<a class="md-social__link" href="https://www.linkedin.com/in/shanenull" rel="noopener" target="_blank" title="www.linkedin.com">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "content.action.edit", "content.action.view", "navigation.footer"], "search": "../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": 2023, "provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.51d95adb.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js?tex"></script>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>

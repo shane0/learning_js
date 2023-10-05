@@ -1,0 +1,1122 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="../ch4/" rel="prev"/>
+<link href="../ch6/" rel="next"/>
+<link href="../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.4.2, mkdocs-material-9.0.6" name="generator"/>
+<title>Chapter 5: The (Not So) Secret Lifecycle of Variables - shane0 learning_js</title>
+<link href="../../assets/stylesheets/main.558e4712.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            
+                .gscrollbar-fixer { padding-right: 15px; }
+                .gdesc-inner { font-size: 0.75rem; }
+                body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+                body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+                body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+                </style><script src="../../assets/javascripts/glightbox.min.js"></script></head>
+<body data-md-color-accent="" data-md-color-primary="" data-md-color-scheme="default" dir="ltr">
+<script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#chapter-5-the-not-so-secret-lifecycle-of-variables">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<div data-md-component="outdated" hidden="">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="shane0 learning_js" class="md-header__button md-logo" data-md-component="logo" href="../.." title="shane0 learning_js">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            shane0 learning_js
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Chapter 5: The (Not So) Secret Lifecycle of Variables
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="" data-md-color-media="" data-md-color-primary="" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_2" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"></path></svg>
+</label>
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="" data-md-color-media="" data-md-color-primary="" data-md-color-scheme="slate" id="__palette_2" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"></path></svg>
+</label>
+</form>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="shane0 learning_js" class="md-nav__button md-logo" data-md-component="logo" href="../.." title="shane0 learning_js">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+</a>
+    shane0 learning_js
+  </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../..">
+        Home
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../todo/">
+        todo cli integration
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../todocli/">
+        todo cli
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" id="__nav_4" type="checkbox"/>
+<label aria-expanded="false" class="md-nav__link" for="__nav_4" tabindex="0">
+          Bujo
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Bujo" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+          Bujo
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../bujo/2023/">
+        2023
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" id="__nav_5" type="checkbox"/>
+<label aria-expanded="false" class="md-nav__link" for="__nav_5" tabindex="0">
+          Es next beyond
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Es next beyond" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+          Es next beyond
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../es-next-beyond/ch1/">
+        Chapter 1: TODO
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../es-next-beyond/toc/">
+        TOC: ES.Next &amp; Beyond - 2nd Edition
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" id="__nav_6" type="checkbox"/>
+<label aria-expanded="false" class="md-nav__link" for="__nav_6" tabindex="0">
+          Get started
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Get started" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_6">
+<span class="md-nav__icon md-icon"></span>
+          Get started
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../get-started/apA/">
+        Appendix A: Exploring Further
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../get-started/apB/">
+        Appendix B: Practice, Practice, Practice!
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../get-started/ch1/">
+        Chapter 1: What *Is* JavaScript?
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../get-started/ch2/">
+        Chapter 2: Surveying JS
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../get-started/ch3/">
+        Chapter 3: Digging to the Roots of JS
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../get-started/ch4/">
+        Chapter 4: The Bigger Picture
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../get-started/toc/">
+        Table of Contents
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" id="__nav_7" type="checkbox"/>
+<label aria-expanded="false" class="md-nav__link" for="__nav_7" tabindex="0">
+          Objects classes
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Objects classes" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_7">
+<span class="md-nav__icon md-icon"></span>
+          Objects classes
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../objects-classes/ch1/">
+        Chapter 1: Object Foundations
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../objects-classes/ch2/">
+        Chapter 2: How Objects Work
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../objects-classes/ch3/">
+        Chapter 3: Classy Objects
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../objects-classes/ch4/">
+        Chapter 4: This Works
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../objects-classes/ch5/">
+        Chapter 5: Delegation
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../objects-classes/toc/">
+        You Don't Know JS Yet: Objects &amp; Classes - 2nd Edition
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" id="__nav_8" type="checkbox"/>
+<label aria-expanded="true" class="md-nav__link" for="__nav_8" tabindex="0">
+          Scope closures
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Scope closures" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_8">
+<span class="md-nav__icon md-icon"></span>
+          Scope closures
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../apA/">
+        Appendix A: Exploring Further
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../apB/">
+        Appendix B: Practice
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../ch1/">
+        Chapter 1: What's the Scope?
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../ch2/">
+        Chapter 2: Illustrating Lexical Scope
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../ch3/">
+        Chapter 3: The Scope Chain
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../ch4/">
+        Chapter 4: Around the Global Scope
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          Chapter 5: The (Not So) Secret Lifecycle of Variables
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+        Chapter 5: The (Not So) Secret Lifecycle of Variables
+      </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#when-can-i-use-a-variable">
+    When Can I Use a Variable?
+  </a>
+<nav aria-label="When Can I Use a Variable?" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hoisting-declaration-vs-expression">
+    Hoisting: Declaration vs. Expression
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#variable-hoisting">
+    Variable Hoisting
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hoisting-yet-another-metaphor">
+    Hoisting: Yet Another Metaphor
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#re-declaration">
+    Re-declaration?
+  </a>
+<nav aria-label="Re-declaration?" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#constants">
+    Constants?
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#loops">
+    Loops
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#uninitialized-variables-aka-tdz">
+    Uninitialized Variables (aka, TDZ)
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#finally-initialized">
+    Finally Initialized
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../ch6/">
+        Chapter 6: Limiting Scope Exposure
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../ch7/">
+        Chapter 7: Using Closures
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../ch8/">
+        Chapter 8: The Module Pattern
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../closures_bard/">
+        closures bard
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../scope_bard/">
+        scope: bard version
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../toc/">
+        Scope &amp; Closures - 2nd Edition
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" id="__nav_9" type="checkbox"/>
+<label aria-expanded="false" class="md-nav__link" for="__nav_9" tabindex="0">
+          Sync async
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Sync async" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_9">
+<span class="md-nav__icon md-icon"></span>
+          Sync async
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../sync-async/ch1/">
+        Chapter 1: TODO
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../sync-async/toc/">
+        TOC: Sync &amp; Async - 2nd Edition
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" id="__nav_10" type="checkbox"/>
+<label aria-expanded="false" class="md-nav__link" for="__nav_10" tabindex="0">
+          Types grammar
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Types grammar" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_10">
+<span class="md-nav__icon md-icon"></span>
+          Types grammar
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../types-grammar/ch1/">
+        Chapter 1: Primitive Values
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../types-grammar/ch2/">
+        Chapter 2: Primitive Behaviors
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../types-grammar/ch3/">
+        Chapter 3: Object Values
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../types-grammar/ch4/">
+        Chapter 4: Coercing Values
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../types-grammar/toc/">
+        TOC: Types &amp; Grammar - 2nd Edition
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#when-can-i-use-a-variable">
+    When Can I Use a Variable?
+  </a>
+<nav aria-label="When Can I Use a Variable?" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hoisting-declaration-vs-expression">
+    Hoisting: Declaration vs. Expression
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#variable-hoisting">
+    Variable Hoisting
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hoisting-yet-another-metaphor">
+    Hoisting: Yet Another Metaphor
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#re-declaration">
+    Re-declaration?
+  </a>
+<nav aria-label="Re-declaration?" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#constants">
+    Constants?
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#loops">
+    Loops
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#uninitialized-variables-aka-tdz">
+    Uninitialized Variables (aka, TDZ)
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#finally-initialized">
+    Finally Initialized
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="chapter-5-the-not-so-secret-lifecycle-of-variables">Chapter 5: The (Not So) Secret Lifecycle of Variables<a class="headerlink" href="#chapter-5-the-not-so-secret-lifecycle-of-variables" title="Permanent link">¶</a></h1>
+<p>By now you should have a decent grasp of the nesting of scopes, from the global scope downward—called a program's scope chain.</p>
+<p>But just knowing which scope a variable comes from is only part of the story. If a variable declaration appears past the first statement of a scope, how will any references to that identifier <em>before</em> the declaration behave? What happens if you try to declare the same variable twice in a scope?</p>
+<p>JS's particular flavor of LEXICAL scope is rich with nuance in how and when variables come into existence and become available to the program.</p>
+<h2 id="when-can-i-use-a-variable">When Can I Use a Variable?<a class="headerlink" href="#when-can-i-use-a-variable" title="Permanent link">¶</a></h2>
+<p>At what point does a variable become available to use within its scope? There may seem to be an obvious answer: <em>after</em> the variable has been declared/created. Right? Not quite.</p>
+<p>Consider:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="nx">greeting</span><span class="p">();</span>
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="c1">// Hello!</span>
+<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>
+<a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="kd">function</span><span class="w"> </span><span class="nx">greeting</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Hello!"</span><span class="p">);</span>
+<a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="p">}</span>
+</code></pre></div>
+<p>This code works fine. You may have seen or even written code like it before. But did you ever wonder how or why it works? Specifically, why can you access the identifier <code>greeting</code> from line 1 (to retrieve and execute a function reference), even though the <code>greeting()</code> function declaration doesn't occur until line 4?</p>
+<p>Recall Chapter 1 points out that all identifiers are registered to their respective scopes during compile time. Moreover, every identifier is <em>created</em> at the beginning of the scope it belongs to, <strong>every time that scope is entered</strong>.</p>
+<p>The term most commonly used for a variable being visible from the beginning of its enclosing scope, even though its declaration may appear further down in the scope, is called <strong>hoisting</strong>.</p>
+<p>But hoisting alone doesn't fully answer the question. We can see an identifier called <code>greeting</code> from the beginning of the scope, but why can we <strong>call</strong> the <code>greeting()</code> function before it's been declared?</p>
+<p>In other words, how does the variable <code>greeting</code> have any value (the function reference) assigned to it, from the moment the scope starts running? The answer is a special characteristic of formal <code>function</code> declarations, called <em>function hoisting</em>. When a <code>function</code> declaration's name identifier is registered at the top of its scope, it's additionally auto-initialized to that function's reference. That's why the function can be called throughout the entire scope!</p>
+<p>One key detail is that both <em>function hoisting</em> and <code>var</code>-flavored <em>variable hoisting</em> attach their name identifiers to the nearest enclosing <strong>function scope</strong> (or, if none, the global scope), not a block scope.</p>
+<table>
+<thead>
+<tr>
+<th align="left">NOTE:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Declarations with <code>let</code> and <code>const</code> still hoist (see the TDZ discussion later in this chapter). But these two declaration forms attach to their enclosing block rather than just an enclosing function as with <code>var</code> and <code>function</code> declarations. See "Scoping with Blocks" in Chapter 6 for more information.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="hoisting-declaration-vs-expression">Hoisting: Declaration vs. Expression<a class="headerlink" href="#hoisting-declaration-vs-expression" title="Permanent link">¶</a></h3>
+<p><em>Function hoisting</em> only applies to formal <code>function</code> declarations (specifically those which appear outside of blocks—see "FiB" in Chapter 6), not to <code>function</code> expression assignments. Consider:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="nx">greeting</span><span class="p">();</span>
+<a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="c1">// TypeError</span>
+<a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>
+<a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="kd">var</span><span class="w"> </span><span class="nx">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">greeting</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Hello!"</span><span class="p">);</span>
+<a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="p">};</span>
+</code></pre></div>
+<p>Line 1 (<code>greeting();</code>) throws an error. But the <em>kind</em> of error thrown is very important to notice. A <code>TypeError</code> means we're trying to do something with a value that is not allowed. Depending on your JS environment, the error message would say something like, "'undefined' is not a function," or more helpfully, "'greeting' is not a function."</p>
+<p>Notice that the error is <strong>not</strong> a <code>ReferenceError</code>. JS isn't telling us that it couldn't find <code>greeting</code> as an identifier in the scope. It's telling us that <code>greeting</code> was found but doesn't hold a function reference at that moment. Only functions can be invoked, so attempting to invoke some non-function value results in an error.</p>
+<p>But what does <code>greeting</code> hold, if not the function reference?</p>
+<p>In addition to being hoisted, variables declared with <code>var</code> are also automatically initialized to <code>undefined</code> at the beginning of their scope—again, the nearest enclosing function, or the global. Once initialized, they're available to be used (assigned to, retrieved from, etc.) throughout the whole scope.</p>
+<p>So on that first line, <code>greeting</code> exists, but it holds only the default <code>undefined</code> value. It's not until line 4 that <code>greeting</code> gets assigned the function reference.</p>
+<p>Pay close attention to the distinction here. A <code>function</code> declaration is hoisted <strong>and initialized to its function value</strong> (again, called <em>function hoisting</em>). A <code>var</code> variable is also hoisted, and then auto-initialized to <code>undefined</code>. Any subsequent <code>function</code> expression assignments to that variable don't happen until that assignment is processed during runtime execution.</p>
+<p>In both cases, the name of the identifier is hoisted. But the function reference association isn't handled at initialization time (beginning of the scope) unless the identifier was created in a formal <code>function</code> declaration.</p>
+<h3 id="variable-hoisting">Variable Hoisting<a class="headerlink" href="#variable-hoisting" title="Permanent link">¶</a></h3>
+<p>Let's look at another example of <em>variable hoisting</em>:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="nx">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Hello!"</span><span class="p">;</span>
+<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">greeting</span><span class="p">);</span>
+<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="c1">// Hello!</span>
+<a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a>
+<a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="kd">var</span><span class="w"> </span><span class="nx">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Howdy!"</span><span class="p">;</span>
+</code></pre></div>
+<p>Though <code>greeting</code> isn't declared until line 5, it's available to be assigned to as early as line 1. Why?</p>
+<p>There's two necessary parts to the explanation:</p>
+<ul>
+<li>the identifier is hoisted,</li>
+<li><strong>and</strong> it's automatically initialized to the value <code>undefined</code> from the top of the scope.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">NOTE:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Using <em>variable hoisting</em> of this sort probably feels unnatural, and many readers might rightly want to avoid relying on it in their programs. But should all hoisting (including <em>function hoisting</em>) be avoided? We'll explore these different perspectives on hoisting in more detail in Appendix A.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="hoisting-yet-another-metaphor">Hoisting: Yet Another Metaphor<a class="headerlink" href="#hoisting-yet-another-metaphor" title="Permanent link">¶</a></h2>
+<p>Chapter 2 was full of metaphors (to illustrate scope), but here we are faced with yet another: hoisting itself. Rather than hoisting being a concrete execution step the JS engine performs, it's more useful to think of hoisting as a visualization of various actions JS takes in setting up the program <strong>before execution</strong>.</p>
+<p>The typical assertion of what hoisting means: <em>lifting</em>—like lifting a heavy weight upward—any identifiers all the way to the top of a scope. The explanation often asserted is that the JS engine will actually <em>rewrite</em> that program before execution, so that it looks more like this:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">greeting</span><span class="p">;</span><span class="w">           </span><span class="c1">// hoisted declaration</span>
+<a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="nx">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Hello!"</span><span class="p">;</span><span class="w">    </span><span class="c1">// the original line 1</span>
+<a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">greeting</span><span class="p">);</span><span class="w">  </span><span class="c1">// Hello!</span>
+<a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="nx">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Howdy!"</span><span class="p">;</span><span class="w">    </span><span class="c1">// `var` is gone!</span>
+</code></pre></div>
+<p>The hoisting (metaphor) proposes that JS pre-processes the original program and re-arranges it a bit, so that all the declarations have been moved to the top of their respective scopes, before execution. Moreover, the hoisting metaphor asserts that <code>function</code> declarations are, in their entirety, hoisted to the top of each scope. Consider:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="nx">studentName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Suzy"</span><span class="p">;</span>
+<a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="nx">greeting</span><span class="p">();</span>
+<a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="c1">// Hello Suzy!</span>
+<a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a>
+<a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="kd">function</span><span class="w"> </span><span class="nx">greeting</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Hello </span><span class="si">${</span><span class="w"> </span><span class="nx">studentName</span><span class="w"> </span><span class="si">}</span><span class="sb">!`</span><span class="p">);</span>
+<a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="p">}</span>
+<a href="#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="kd">var</span><span class="w"> </span><span class="nx">studentName</span><span class="p">;</span>
+</code></pre></div>
+<p>The "rule" of the hoisting metaphor is that function declarations are hoisted first, then variables are hoisted immediately after all the functions. Thus, the hoisting story suggests that program is <em>re-arranged</em> by the JS engine to look like this:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="kd">function</span><span class="w"> </span><span class="nx">greeting</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Hello </span><span class="si">${</span><span class="w"> </span><span class="nx">studentName</span><span class="w"> </span><span class="si">}</span><span class="sb">!`</span><span class="p">);</span>
+<a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="p">}</span>
+<a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="kd">var</span><span class="w"> </span><span class="nx">studentName</span><span class="p">;</span>
+<a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a>
+<a href="#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="nx">studentName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Suzy"</span><span class="p">;</span>
+<a href="#__codelineno-5-7" id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="nx">greeting</span><span class="p">();</span>
+<a href="#__codelineno-5-8" id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="c1">// Hello Suzy!</span>
+</code></pre></div>
+<p>This hoisting metaphor is convenient. Its benefit is allowing us to hand wave over the magical look-ahead pre-processing necessary to find all these declarations buried deep in scopes and somehow move (hoist) them to the top; we can just think about the program as if it's executed by the JS engine in a <strong>single pass</strong>, top-down.</p>
+<p>Single-pass definitely seems more straightforward than Chapter 1's assertion of a two-phase processing.</p>
+<p>Hoisting as a mechanism for re-ordering code may be an attractive simplification, but it's not accurate. The JS engine doesn't actually re-arrange the code. It can't magically look ahead and find declarations; the only way to accurately find them, as well as all the scope boundaries in the program, would be to fully parse the code.</p>
+<p>Guess what parsing is? The first phase of the two-phase processing! There's no magical mental gymnastics that gets around that fact.</p>
+<p>So if the hoisting metaphor is (at best) inaccurate, what should we do with the term? I think it's still useful—indeed, even members of TC39 regularly use it!—but I don't think we should claim it's an actual re-arrangement of source code.</p>
+<table>
+<thead>
+<tr>
+<th align="left">WARNING:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Incorrect or incomplete mental models often still seem sufficient because they can occasionally lead to accidental right answers. But in the long run it's harder to accurately analyze and predict outcomes if your thinking isn't particularly aligned with how the JS engine works.</td>
+</tr>
+</tbody>
+</table>
+<p>I assert that hoisting <em>should</em> be used to refer to the <strong>compile-time operation</strong> of generating runtime instructions for the automatic registration of a variable at the beginning of its scope, each time that scope is entered.</p>
+<p>That's a subtle but important shift, from hoisting as a runtime behavior to its proper place among compile-time tasks.</p>
+<h2 id="re-declaration">Re-declaration?<a class="headerlink" href="#re-declaration" title="Permanent link">¶</a></h2>
+<p>What do you think happens when a variable is declared more than once in the same scope? Consider:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">studentName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Frank"</span><span class="p">;</span>
+<a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">studentName</span><span class="p">);</span>
+<a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="c1">// Frank</span>
+<a href="#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a>
+<a href="#__codelineno-6-5" id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="kd">var</span><span class="w"> </span><span class="nx">studentName</span><span class="p">;</span>
+<a href="#__codelineno-6-6" id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">studentName</span><span class="p">);</span><span class="w">   </span><span class="c1">// ???</span>
+</code></pre></div>
+<p>What do you expect to be printed for that second message? Many believe the second <code>var studentName</code> has re-declared the variable (and thus "reset" it), so they expect <code>undefined</code> to be printed.</p>
+<p>But is there such a thing as a variable being "re-declared" in the same scope? No.</p>
+<p>If you consider this program from the perspective of the hoisting metaphor, the code would be re-arranged like this for execution purposes:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">studentName</span><span class="p">;</span>
+<a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="kd">var</span><span class="w"> </span><span class="nx">studentName</span><span class="p">;</span><span class="w">    </span><span class="c1">// clearly a pointless no-op!</span>
+<a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a>
+<a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="nx">studentName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Frank"</span><span class="p">;</span>
+<a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">studentName</span><span class="p">);</span>
+<a href="#__codelineno-7-6" id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="c1">// Frank</span>
+<a href="#__codelineno-7-7" id="__codelineno-7-7" name="__codelineno-7-7"></a>
+<a href="#__codelineno-7-8" id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">studentName</span><span class="p">);</span>
+<a href="#__codelineno-7-9" id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="c1">// Frank</span>
+</code></pre></div>
+<p>Since hoisting is actually about registering a variable at the beginning of a scope, there's nothing to be done in the middle of the scope where the original program actually had the second <code>var studentName</code> statement. It's just a no-op(eration), a pointless statement.</p>
+<table>
+<thead>
+<tr>
+<th align="left">TIP:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">In the style of the conversation narrative from Chapter 2, <em>Compiler</em> would find the second <code>var</code> declaration statement and ask the <em>Scope Manager</em> if it had already seen a <code>studentName</code> identifier; since it had, there wouldn't be anything else to do.</td>
+</tr>
+</tbody>
+</table>
+<p>It's also important to point out that <code>var studentName;</code> doesn't mean <code>var studentName = undefined;</code>, as most assume. Let's prove they're different by considering this variation of the program:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">studentName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Frank"</span><span class="p">;</span>
+<a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">studentName</span><span class="p">);</span><span class="w">   </span><span class="c1">// Frank</span>
+<a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a>
+<a href="#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="kd">var</span><span class="w"> </span><span class="nx">studentName</span><span class="p">;</span>
+<a href="#__codelineno-8-5" id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">studentName</span><span class="p">);</span><span class="w">   </span><span class="c1">// Frank &lt;--- still!</span>
+<a href="#__codelineno-8-6" id="__codelineno-8-6" name="__codelineno-8-6"></a>
+<a href="#__codelineno-8-7" id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="c1">// let's add the initialization explicitly</span>
+<a href="#__codelineno-8-8" id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="kd">var</span><span class="w"> </span><span class="nx">studentName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">undefined</span><span class="p">;</span>
+<a href="#__codelineno-8-9" id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">studentName</span><span class="p">);</span><span class="w">   </span><span class="c1">// undefined &lt;--- see!?</span>
+</code></pre></div>
+<p>See how the explicit <code>= undefined</code> initialization produces a different outcome than assuming it happens implicitly when omitted? In the next section, we'll revisit this topic of initialization of variables from their declarations.</p>
+<p>A repeated <code>var</code> declaration of the same identifier name in a scope is effectively a do-nothing operation. Here's another illustration, this time across a function of the same name:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">greeting</span><span class="p">;</span>
+<a href="#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a>
+<a href="#__codelineno-9-3" id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="kd">function</span><span class="w"> </span><span class="nx">greeting</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-9-4" id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Hello!"</span><span class="p">);</span>
+<a href="#__codelineno-9-5" id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="p">}</span>
+<a href="#__codelineno-9-6" id="__codelineno-9-6" name="__codelineno-9-6"></a>
+<a href="#__codelineno-9-7" id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="c1">// basically, a no-op</span>
+<a href="#__codelineno-9-8" id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="kd">var</span><span class="w"> </span><span class="nx">greeting</span><span class="p">;</span>
+<a href="#__codelineno-9-9" id="__codelineno-9-9" name="__codelineno-9-9"></a>
+<a href="#__codelineno-9-10" id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="ow">typeof</span><span class="w"> </span><span class="nx">greeting</span><span class="p">;</span><span class="w">        </span><span class="c1">// "function"</span>
+<a href="#__codelineno-9-11" id="__codelineno-9-11" name="__codelineno-9-11"></a>
+<a href="#__codelineno-9-12" id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="kd">var</span><span class="w"> </span><span class="nx">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Hello!"</span><span class="p">;</span>
+<a href="#__codelineno-9-13" id="__codelineno-9-13" name="__codelineno-9-13"></a>
+<a href="#__codelineno-9-14" id="__codelineno-9-14" name="__codelineno-9-14"></a><span class="ow">typeof</span><span class="w"> </span><span class="nx">greeting</span><span class="p">;</span><span class="w">        </span><span class="c1">// "string"</span>
+</code></pre></div>
+<p>The first <code>greeting</code> declaration registers the identifier to the scope, and because it's a <code>var</code> the auto-initialization will be <code>undefined</code>. The <code>function</code> declaration doesn't need to re-register the identifier, but because of <em>function hoisting</em> it overrides the auto-initialization to use the function reference. The second <code>var greeting</code> by itself doesn't do anything since <code>greeting</code> is already an identifier and <em>function hoisting</em> already took precedence for the auto-initialization.</p>
+<p>Actually assigning <code>"Hello!"</code> to <code>greeting</code> changes its value from the initial function <code>greeting()</code> to the string; <code>var</code> itself doesn't have any effect.</p>
+<p>What about repeating a declaration within a scope using <code>let</code> or <code>const</code>?</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="kd">let</span><span class="w"> </span><span class="nx">studentName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Frank"</span><span class="p">;</span>
+<a href="#__codelineno-10-2" id="__codelineno-10-2" name="__codelineno-10-2"></a>
+<a href="#__codelineno-10-3" id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">studentName</span><span class="p">);</span>
+<a href="#__codelineno-10-4" id="__codelineno-10-4" name="__codelineno-10-4"></a>
+<a href="#__codelineno-10-5" id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="kd">let</span><span class="w"> </span><span class="nx">studentName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Suzy"</span><span class="p">;</span>
+</code></pre></div>
+<p>This program will not execute, but instead immediately throw a <code>SyntaxError</code>. Depending on your JS environment, the error message will indicate something like: "studentName has already been declared." In other words, this is a case where attempted "re-declaration" is explicitly not allowed!</p>
+<p>It's not just that two declarations involving <code>let</code> will throw this error. If either declaration uses <code>let</code>, the other can be either <code>let</code> or <code>var</code>, and the error will still occur, as illustrated with these two variations:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">studentName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Frank"</span><span class="p">;</span>
+<a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a>
+<a href="#__codelineno-11-3" id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="kd">let</span><span class="w"> </span><span class="nx">studentName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Suzy"</span><span class="p">;</span>
+</code></pre></div>
+<p>and:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="kd">let</span><span class="w"> </span><span class="nx">studentName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Frank"</span><span class="p">;</span>
+<a href="#__codelineno-12-2" id="__codelineno-12-2" name="__codelineno-12-2"></a>
+<a href="#__codelineno-12-3" id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="kd">var</span><span class="w"> </span><span class="nx">studentName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Suzy"</span><span class="p">;</span>
+</code></pre></div>
+<p>In both cases, a <code>SyntaxError</code> is thrown on the <em>second</em> declaration. In other words, the only way to "re-declare" a variable is to use <code>var</code> for all (two or more) of its declarations.</p>
+<p>But why disallow it? The reason for the error is not technical per se, as <code>var</code> "re-declaration" has always been allowed; clearly, the same allowance could have been made for <code>let</code>.</p>
+<p>It's really more of a "social engineering" issue. "Re-declaration" of variables is seen by some, including many on the TC39 body, as a bad habit that can lead to program bugs. So when ES6 introduced <code>let</code>, they decided to prevent "re-declaration" with an error.</p>
+<table>
+<thead>
+<tr>
+<th align="left">NOTE:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">This is of course a stylistic opinion, not really a technical argument. Many developers agree with the position, and that's probably in part why TC39 included the error (as well as <code>let</code> conforming to <code>const</code>). But a reasonable case could have been made that staying consistent with <code>var</code>'s precedent was more prudent, and that such opinion-enforcement was best left to opt-in tooling like linters. In Appendix A, we'll explore whether <code>var</code> (and its associated behavior, like "re-declaration") can still be useful in modern JS.</td>
+</tr>
+</tbody>
+</table>
+<p>When <em>Compiler</em> asks <em>Scope Manager</em> about a declaration, if that identifier has already been declared, and if either/both declarations were made with <code>let</code>, an error is thrown. The intended signal to the developer is "Stop relying on sloppy re-declaration!"</p>
+<h3 id="constants">Constants?<a class="headerlink" href="#constants" title="Permanent link">¶</a></h3>
+<p>The <code>const</code> keyword is more constrained than <code>let</code>. Like <code>let</code>, <code>const</code> cannot be repeated with the same identifier in the same scope. But there's actually an overriding technical reason why that sort of "re-declaration" is disallowed, unlike <code>let</code> which disallows "re-declaration" mostly for stylistic reasons.</p>
+<p>The <code>const</code> keyword requires a variable to be initialized, so omitting an assignment from the declaration results in a <code>SyntaxError</code>:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">empty</span><span class="p">;</span><span class="w">   </span><span class="c1">// SyntaxError</span>
+</code></pre></div>
+<p><code>const</code> declarations create variables that cannot be re-assigned:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">studentName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Frank"</span><span class="p">;</span>
+<a href="#__codelineno-14-2" id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">studentName</span><span class="p">);</span>
+<a href="#__codelineno-14-3" id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="c1">// Frank</span>
+<a href="#__codelineno-14-4" id="__codelineno-14-4" name="__codelineno-14-4"></a>
+<a href="#__codelineno-14-5" id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="nx">studentName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Suzy"</span><span class="p">;</span><span class="w">   </span><span class="c1">// TypeError</span>
+</code></pre></div>
+<p>The <code>studentName</code> variable cannot be re-assigned because it's declared with a <code>const</code>.</p>
+<table>
+<thead>
+<tr>
+<th align="left">WARNING:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">The error thrown when re-assigning <code>studentName</code> is a <code>TypeError</code>, not a <code>SyntaxError</code>. The subtle distinction here is actually pretty important, but unfortunately far too easy to miss. Syntax errors represent faults in the program that stop it from even starting execution. Type errors represent faults that arise during program execution. In the preceding snippet, <code>"Frank"</code> is printed out before we process the re-assignment of <code>studentName</code>, which then throws the error.</td>
+</tr>
+</tbody>
+</table>
+<p>So if <code>const</code> declarations cannot be re-assigned, and <code>const</code> declarations always require assignments, then we have a clear technical reason why <code>const</code> must disallow any "re-declarations": any <code>const</code> "re-declaration" would also necessarily be a <code>const</code> re-assignment, which can't be allowed!</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-15-1" id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">studentName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Frank"</span><span class="p">;</span>
+<a href="#__codelineno-15-2" id="__codelineno-15-2" name="__codelineno-15-2"></a>
+<a href="#__codelineno-15-3" id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="c1">// obviously this must be an error</span>
+<a href="#__codelineno-15-4" id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="kd">const</span><span class="w"> </span><span class="nx">studentName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Suzy"</span><span class="p">;</span>
+</code></pre></div>
+<p>Since <code>const</code> "re-declaration" must be disallowed (on those technical grounds), TC39 essentially felt that <code>let</code> "re-declaration" should be disallowed as well, for consistency. It's debatable if this was the best choice, but at least we have the reasoning behind the decision.</p>
+<h3 id="loops">Loops<a class="headerlink" href="#loops" title="Permanent link">¶</a></h3>
+<p>So it's clear from our previous discussion that JS doesn't really want us to "re-declare" our variables within the same scope. That probably seems like a straightforward admonition, until you consider what it means for repeated execution of declaration statements in loops. Consider:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-16-1" id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">keepGoing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<a href="#__codelineno-16-2" id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">keepGoing</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-16-3" id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">();</span>
+<a href="#__codelineno-16-4" id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-16-5" id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="w">        </span><span class="nx">keepGoing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<a href="#__codelineno-16-6" id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-16-7" id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="p">}</span>
+</code></pre></div>
+<p>Is <code>value</code> being "re-declared" repeatedly in this program? Will we get errors thrown? No.</p>
+<p>All the rules of scope (including "re-declaration" of <code>let</code>-created variables) are applied <em>per scope instance</em>. In other words, each time a scope is entered during execution, everything resets.</p>
+<p>Each loop iteration is its own new scope instance, and within each scope instance, <code>value</code> is only being declared once. So there's no attempted "re-declaration," and thus no error. Before we consider other loop forms, what if the <code>value</code> declaration in the previous snippet were changed to a <code>var</code>?</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-17-1" id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">keepGoing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<a href="#__codelineno-17-2" id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">keepGoing</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-17-3" id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">();</span>
+<a href="#__codelineno-17-4" id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-17-5" id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="w">        </span><span class="nx">keepGoing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<a href="#__codelineno-17-6" id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-17-7" id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="p">}</span>
+</code></pre></div>
+<p>Is <code>value</code> being "re-declared" here, especially since we know <code>var</code> allows it? No. Because <code>var</code> is not treated as a block-scoping declaration (see Chapter 6), it attaches itself to the global scope. So there's just one <code>value</code> variable, in the same scope as <code>keepGoing</code> (global scope, in this case). No "re-declaration" here, either!</p>
+<p>One way to keep this all straight is to remember that <code>var</code>, <code>let</code>, and <code>const</code> keywords are effectively <em>removed</em> from the code by the time it starts to execute. They're handled entirely by the compiler.</p>
+<p>If you mentally erase the declarator keywords and then try to process the code, it should help you decide if and when (re-)declarations might occur.</p>
+<p>What about "re-declaration" with other loop forms, like <code>for</code>-loops?</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-18-1" id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">3</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-18-2" id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">10</span><span class="p">;</span>
+<a href="#__codelineno-18-3" id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="si">}</span><span class="sb">: </span><span class="si">${</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<a href="#__codelineno-18-4" id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="p">}</span>
+<a href="#__codelineno-18-5" id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="c1">// 0: 0</span>
+<a href="#__codelineno-18-6" id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="c1">// 1: 10</span>
+<a href="#__codelineno-18-7" id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="c1">// 2: 20</span>
+</code></pre></div>
+<p>It should be clear that there's only one <code>value</code> declared per scope instance. But what about <code>i</code>? Is it being "re-declared"?</p>
+<p>To answer that, consider what scope <code>i</code> is in. It might seem like it would be in the outer (in this case, global) scope, but it's not. It's in the scope of <code>for</code>-loop body, just like <code>value</code> is. In fact, you could sorta think about that loop in this more verbose equivalent form:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-19-1" id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="p">{</span>
+<a href="#__codelineno-19-2" id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="w">    </span><span class="c1">// a fictional variable for illustration</span>
+<a href="#__codelineno-19-3" id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">$$i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<a href="#__codelineno-19-4" id="__codelineno-19-4" name="__codelineno-19-4"></a>
+<a href="#__codelineno-19-5" id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="cm">/* nothing */</span><span class="p">;</span><span class="w"> </span><span class="nx">$$i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">3</span><span class="p">;</span><span class="w"> </span><span class="nx">$$i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-19-6" id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="w">        </span><span class="c1">// here's our actual loop `i`!</span>
+<a href="#__codelineno-19-7" id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">$$i</span><span class="p">;</span>
+<a href="#__codelineno-19-8" id="__codelineno-19-8" name="__codelineno-19-8"></a>
+<a href="#__codelineno-19-9" id="__codelineno-19-9" name="__codelineno-19-9"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">10</span><span class="p">;</span>
+<a href="#__codelineno-19-10" id="__codelineno-19-10" name="__codelineno-19-10"></a><span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="si">}</span><span class="sb">: </span><span class="si">${</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<a href="#__codelineno-19-11" id="__codelineno-19-11" name="__codelineno-19-11"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-19-12" id="__codelineno-19-12" name="__codelineno-19-12"></a><span class="w">    </span><span class="c1">// 0: 0</span>
+<a href="#__codelineno-19-13" id="__codelineno-19-13" name="__codelineno-19-13"></a><span class="w">    </span><span class="c1">// 1: 10</span>
+<a href="#__codelineno-19-14" id="__codelineno-19-14" name="__codelineno-19-14"></a><span class="w">    </span><span class="c1">// 2: 20</span>
+<a href="#__codelineno-19-15" id="__codelineno-19-15" name="__codelineno-19-15"></a><span class="p">}</span>
+</code></pre></div>
+<p>Now it should be clear: the <code>i</code> and <code>value</code> variables are both declared exactly once <strong>per scope instance</strong>. No "re-declaration" here.</p>
+<p>What about other <code>for</code>-loop forms?</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-20-1" id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">students</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-20-2" id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="w">    </span><span class="c1">// this is fine</span>
+<a href="#__codelineno-20-3" id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="p">}</span>
+<a href="#__codelineno-20-4" id="__codelineno-20-4" name="__codelineno-20-4"></a>
+<a href="#__codelineno-20-5" id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">student</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">students</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-20-6" id="__codelineno-20-6" name="__codelineno-20-6"></a><span class="w">    </span><span class="c1">// so is this</span>
+<a href="#__codelineno-20-7" id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="p">}</span>
+</code></pre></div>
+<p>Same thing with <code>for..in</code> and <code>for..of</code> loops: the declared variable is treated as <em>inside</em> the loop body, and thus is handled per iteration (aka, per scope instance). No "re-declaration."</p>
+<p>OK, I know you're thinking that I sound like a broken record at this point. But let's explore how <code>const</code> impacts these looping constructs. Consider:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-21-1" id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">keepGoing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<a href="#__codelineno-21-2" id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">keepGoing</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-21-3" id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="w">    </span><span class="c1">// ooo, a shiny constant!</span>
+<a href="#__codelineno-21-4" id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">();</span>
+<a href="#__codelineno-21-5" id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-21-6" id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="w">        </span><span class="nx">keepGoing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<a href="#__codelineno-21-7" id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-21-8" id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="p">}</span>
+</code></pre></div>
+<p>Just like the <code>let</code> variant of this program we saw earlier, <code>const</code> is being run exactly once within each loop iteration, so it's safe from "re-declaration" troubles. But things get more complicated when we talk about <code>for</code>-loops.</p>
+<p><code>for..in</code> and <code>for..of</code> are fine to use with <code>const</code>:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-22-1" id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">students</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-22-2" id="__codelineno-22-2" name="__codelineno-22-2"></a><span class="w">    </span><span class="c1">// this is fine</span>
+<a href="#__codelineno-22-3" id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="p">}</span>
+<a href="#__codelineno-22-4" id="__codelineno-22-4" name="__codelineno-22-4"></a>
+<a href="#__codelineno-22-5" id="__codelineno-22-5" name="__codelineno-22-5"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">student</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">students</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-22-6" id="__codelineno-22-6" name="__codelineno-22-6"></a><span class="w">    </span><span class="c1">// this is also fine</span>
+<a href="#__codelineno-22-7" id="__codelineno-22-7" name="__codelineno-22-7"></a><span class="p">}</span>
+</code></pre></div>
+<p>But not the general <code>for</code>-loop:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-23-1" id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">3</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-23-2" id="__codelineno-23-2" name="__codelineno-23-2"></a><span class="w">    </span><span class="c1">// oops, this is going to fail with</span>
+<a href="#__codelineno-23-3" id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="w">    </span><span class="c1">// a Type Error after the first iteration</span>
+<a href="#__codelineno-23-4" id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="p">}</span>
+</code></pre></div>
+<p>What's wrong here? We could use <code>let</code> just fine in this construct, and we asserted that it creates a new <code>i</code> for each loop iteration scope, so it doesn't even seem to be a "re-declaration."</p>
+<p>Let's mentally "expand" that loop like we did earlier:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-24-1" id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="p">{</span>
+<a href="#__codelineno-24-2" id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="w">    </span><span class="c1">// a fictional variable for illustration</span>
+<a href="#__codelineno-24-3" id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">$$i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<a href="#__codelineno-24-4" id="__codelineno-24-4" name="__codelineno-24-4"></a>
+<a href="#__codelineno-24-5" id="__codelineno-24-5" name="__codelineno-24-5"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="nx">$$i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">3</span><span class="p">;</span><span class="w"> </span><span class="nx">$$i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-24-6" id="__codelineno-24-6" name="__codelineno-24-6"></a><span class="w">        </span><span class="c1">// here's our actual loop `i`!</span>
+<a href="#__codelineno-24-7" id="__codelineno-24-7" name="__codelineno-24-7"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">$$i</span><span class="p">;</span>
+<a href="#__codelineno-24-8" id="__codelineno-24-8" name="__codelineno-24-8"></a><span class="w">        </span><span class="c1">// ..</span>
+<a href="#__codelineno-24-9" id="__codelineno-24-9" name="__codelineno-24-9"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-24-10" id="__codelineno-24-10" name="__codelineno-24-10"></a><span class="p">}</span>
+</code></pre></div>
+<p>Do you spot the problem? Our <code>i</code> is indeed just created once inside the loop. That's not the problem. The problem is the conceptual <code>$$i</code> that must be incremented each time with the <code>$$i++</code> expression. That's <strong>re-assignment</strong> (not "re-declaration"), which isn't allowed for constants.</p>
+<p>Remember, this "expanded" form is only a conceptual model to help you intuit the source of the problem. You might wonder if JS could have effectively made the <code>const $$i = 0</code> instead into <code>let $ii = 0</code>, which would then allow <code>const</code> to work with our classic <code>for</code>-loop? It's possible, but then it could have introduced potentially surprising exceptions to <code>for</code>-loop semantics.</p>
+<p>For example, it would have been a rather arbitrary (and likely confusing) nuanced exception to allow <code>i++</code> in the <code>for</code>-loop header to skirt strictness of the <code>const</code> assignment, but not allow other re-assignments of <code>i</code> inside the loop iteration, as is sometimes useful.</p>
+<p>The straightforward answer is: <code>const</code> can't be used with the classic <code>for</code>-loop form because of the required re-assignment.</p>
+<p>Interestingly, if you don't do re-assignment, then it's valid:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-25-1" id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">keepGoing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<a href="#__codelineno-25-2" id="__codelineno-25-2" name="__codelineno-25-2"></a>
+<a href="#__codelineno-25-3" id="__codelineno-25-3" name="__codelineno-25-3"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">keepGoing</span><span class="p">;</span><span class="w"> </span><span class="cm">/* nothing here */</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-25-4" id="__codelineno-25-4" name="__codelineno-25-4"></a><span class="w">    </span><span class="nx">keepGoing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.5</span><span class="p">);</span>
+<a href="#__codelineno-25-5" id="__codelineno-25-5" name="__codelineno-25-5"></a><span class="w">    </span><span class="c1">// ..</span>
+<a href="#__codelineno-25-6" id="__codelineno-25-6" name="__codelineno-25-6"></a><span class="p">}</span>
+</code></pre></div>
+<p>That works, but it's pointless. There's no reason to declare <code>i</code> in that position with a <code>const</code>, since the whole point of such a variable in that position is <strong>to be used for counting iterations</strong>. Just use a different loop form, like a <code>while</code> loop, or use a <code>let</code>!</p>
+<h2 id="uninitialized-variables-aka-tdz">Uninitialized Variables (aka, TDZ)<a class="headerlink" href="#uninitialized-variables-aka-tdz" title="Permanent link">¶</a></h2>
+<p>With <code>var</code> declarations, the variable is "hoisted" to the top of its scope. But it's also automatically initialized to the <code>undefined</code> value, so that the variable can be used throughout the entire scope.</p>
+<p>However, <code>let</code> and <code>const</code> declarations are not quite the same in this respect.</p>
+<p>Consider:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-26-1" id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">studentName</span><span class="p">);</span>
+<a href="#__codelineno-26-2" id="__codelineno-26-2" name="__codelineno-26-2"></a><span class="c1">// ReferenceError</span>
+<a href="#__codelineno-26-3" id="__codelineno-26-3" name="__codelineno-26-3"></a>
+<a href="#__codelineno-26-4" id="__codelineno-26-4" name="__codelineno-26-4"></a><span class="kd">let</span><span class="w"> </span><span class="nx">studentName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Suzy"</span><span class="p">;</span>
+</code></pre></div>
+<p>The result of this program is that a <code>ReferenceError</code> is thrown on the first line. Depending on your JS environment, the error message may say something like: "Cannot access studentName before initialization."</p>
+<table>
+<thead>
+<tr>
+<th align="left">NOTE:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">The error message as seen here used to be much more vague or misleading. Thankfully, several of us in the community were successfully able to lobby for JS engines to improve this error message so it more accurately tells you what's wrong!</td>
+</tr>
+</tbody>
+</table>
+<p>That error message is quite indicative of what's wrong: <code>studentName</code> exists on line 1, but it's not been initialized, so it cannot be used yet. Let's try this:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-27-1" id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="nx">studentName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Suzy"</span><span class="p">;</span><span class="w">   </span><span class="c1">// let's try to initialize it!</span>
+<a href="#__codelineno-27-2" id="__codelineno-27-2" name="__codelineno-27-2"></a><span class="c1">// ReferenceError</span>
+<a href="#__codelineno-27-3" id="__codelineno-27-3" name="__codelineno-27-3"></a>
+<a href="#__codelineno-27-4" id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">studentName</span><span class="p">);</span>
+<a href="#__codelineno-27-5" id="__codelineno-27-5" name="__codelineno-27-5"></a>
+<a href="#__codelineno-27-6" id="__codelineno-27-6" name="__codelineno-27-6"></a><span class="kd">let</span><span class="w"> </span><span class="nx">studentName</span><span class="p">;</span>
+</code></pre></div>
+<p>Oops. We still get the <code>ReferenceError</code>, but now on the first line where we're trying to assign to (aka, initialize!) this so-called "uninitialized" variable <code>studentName</code>. What's the deal!?</p>
+<p>The real question is, how do we initialize an uninitialized variable? For <code>let</code>/<code>const</code>, the <strong>only way</strong> to do so is with an assignment attached to a declaration statement. An assignment by itself is insufficient! Consider:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-28-1" id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="kd">let</span><span class="w"> </span><span class="nx">studentName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Suzy"</span><span class="p">;</span>
+<a href="#__codelineno-28-2" id="__codelineno-28-2" name="__codelineno-28-2"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">studentName</span><span class="p">);</span><span class="w">   </span><span class="c1">// Suzy</span>
+</code></pre></div>
+<p>Here, we are initializing the <code>studentName</code> (in this case, to <code>"Suzy"</code> instead of <code>undefined</code>) by way of the <code>let</code> declaration statement form that's coupled with an assignment.</p>
+<p>Alternatively:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-29-1" id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="c1">// ..</span>
+<a href="#__codelineno-29-2" id="__codelineno-29-2" name="__codelineno-29-2"></a>
+<a href="#__codelineno-29-3" id="__codelineno-29-3" name="__codelineno-29-3"></a><span class="kd">let</span><span class="w"> </span><span class="nx">studentName</span><span class="p">;</span>
+<a href="#__codelineno-29-4" id="__codelineno-29-4" name="__codelineno-29-4"></a><span class="c1">// or:</span>
+<a href="#__codelineno-29-5" id="__codelineno-29-5" name="__codelineno-29-5"></a><span class="c1">// let studentName = undefined;</span>
+<a href="#__codelineno-29-6" id="__codelineno-29-6" name="__codelineno-29-6"></a>
+<a href="#__codelineno-29-7" id="__codelineno-29-7" name="__codelineno-29-7"></a><span class="c1">// ..</span>
+<a href="#__codelineno-29-8" id="__codelineno-29-8" name="__codelineno-29-8"></a>
+<a href="#__codelineno-29-9" id="__codelineno-29-9" name="__codelineno-29-9"></a><span class="nx">studentName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Suzy"</span><span class="p">;</span>
+<a href="#__codelineno-29-10" id="__codelineno-29-10" name="__codelineno-29-10"></a>
+<a href="#__codelineno-29-11" id="__codelineno-29-11" name="__codelineno-29-11"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">studentName</span><span class="p">);</span>
+<a href="#__codelineno-29-12" id="__codelineno-29-12" name="__codelineno-29-12"></a><span class="c1">// Suzy</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th align="left">NOTE:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">That's interesting! Recall from earlier, we said that <code>var studentName;</code> is <em>not</em> the same as <code>var studentName = undefined;</code>, but here with <code>let</code>, they behave the same. The difference comes down to the fact that <code>var studentName</code> automatically initializes at the top of the scope, where <code>let studentName</code> does not.</td>
+</tr>
+</tbody>
+</table>
+<p>Remember that we've asserted a few times so far that <em>Compiler</em> ends up removing any <code>var</code>/<code>let</code>/<code>const</code> declarators, replacing them with the instructions at the top of each scope to register the appropriate identifiers.</p>
+<p>So if we analyze what's going on here, we see that an additional nuance is that <em>Compiler</em> is also adding an instruction in the middle of the program, at the point where the variable <code>studentName</code> was declared, to handle that declaration's auto-initialization. We cannot use the variable at any point prior to that initialization occuring. The same goes for <code>const</code> as it does for <code>let</code>.</p>
+<p>The term coined by TC39 to refer to this <em>period of time</em> from the entering of a scope to where the auto-initialization of the variable occurs is: Temporal Dead Zone (TDZ).</p>
+<p>The TDZ is the time window where a variable exists but is still uninitialized, and therefore cannot be accessed in any way. Only the execution of the instructions left by <em>Compiler</em> at the point of the original declaration can do that initialization. After that moment, the TDZ is done, and the variable is free to be used for the rest of the scope.</p>
+<p>A <code>var</code> also technically has a TDZ, but it's zero in length and thus unobservable to our programs! Only <code>let</code> and <code>const</code> have an observable TDZ.</p>
+<p>By the way, "temporal" in TDZ does indeed refer to <em>time</em> not <em>position in code</em>. Consider:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-30-1" id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="nx">askQuestion</span><span class="p">();</span>
+<a href="#__codelineno-30-2" id="__codelineno-30-2" name="__codelineno-30-2"></a><span class="c1">// ReferenceError</span>
+<a href="#__codelineno-30-3" id="__codelineno-30-3" name="__codelineno-30-3"></a>
+<a href="#__codelineno-30-4" id="__codelineno-30-4" name="__codelineno-30-4"></a><span class="kd">let</span><span class="w"> </span><span class="nx">studentName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Suzy"</span><span class="p">;</span>
+<a href="#__codelineno-30-5" id="__codelineno-30-5" name="__codelineno-30-5"></a>
+<a href="#__codelineno-30-6" id="__codelineno-30-6" name="__codelineno-30-6"></a><span class="kd">function</span><span class="w"> </span><span class="nx">askQuestion</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-30-7" id="__codelineno-30-7" name="__codelineno-30-7"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="w"> </span><span class="nx">studentName</span><span class="w"> </span><span class="si">}</span><span class="sb">, do you know?`</span><span class="p">);</span>
+<a href="#__codelineno-30-8" id="__codelineno-30-8" name="__codelineno-30-8"></a><span class="p">}</span>
+</code></pre></div>
+<p>Even though positionally the <code>console.log(..)</code> referencing <code>studentName</code> comes <em>after</em> the <code>let studentName</code> declaration, timing wise the <code>askQuestion()</code> function is invoked <em>before</em> the <code>let</code> statement is encountered, while <code>studentName</code> is still in its TDZ! Hence the error.</p>
+<p>There's a common misconception that TDZ means <code>let</code> and <code>const</code> do not hoist. This is an inaccurate, or at least slightly misleading, claim. They definitely hoist.</p>
+<p>The actual difference is that <code>let</code>/<code>const</code> declarations do not automatically initialize at the beginning of the scope, the way <code>var</code> does. The <em>debate</em> then is if the auto-initialization is <em>part of</em> hoisting, or not? I think auto-registration of a variable at the top of the scope (i.e., what I call "hoisting") and auto-initialization at the top of the scope (to <code>undefined</code>) are distinct operations and shouldn't be lumped together under the single term "hoisting."</p>
+<p>We've already seen that <code>let</code> and <code>const</code> don't auto-initialize at the top of the scope. But let's prove that <code>let</code> and <code>const</code> <em>do</em> hoist (auto-register at the top of the scope), courtesy of our friend shadowing (see "Shadowing" in Chapter 3):</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-31-1" id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="kd">var</span><span class="w"> </span><span class="nx">studentName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Kyle"</span><span class="p">;</span>
+<a href="#__codelineno-31-2" id="__codelineno-31-2" name="__codelineno-31-2"></a>
+<a href="#__codelineno-31-3" id="__codelineno-31-3" name="__codelineno-31-3"></a><span class="p">{</span>
+<a href="#__codelineno-31-4" id="__codelineno-31-4" name="__codelineno-31-4"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">studentName</span><span class="p">);</span>
+<a href="#__codelineno-31-5" id="__codelineno-31-5" name="__codelineno-31-5"></a><span class="w">    </span><span class="c1">// ???</span>
+<a href="#__codelineno-31-6" id="__codelineno-31-6" name="__codelineno-31-6"></a>
+<a href="#__codelineno-31-7" id="__codelineno-31-7" name="__codelineno-31-7"></a><span class="w">    </span><span class="c1">// ..</span>
+<a href="#__codelineno-31-8" id="__codelineno-31-8" name="__codelineno-31-8"></a>
+<a href="#__codelineno-31-9" id="__codelineno-31-9" name="__codelineno-31-9"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">studentName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Suzy"</span><span class="p">;</span>
+<a href="#__codelineno-31-10" id="__codelineno-31-10" name="__codelineno-31-10"></a>
+<a href="#__codelineno-31-11" id="__codelineno-31-11" name="__codelineno-31-11"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">studentName</span><span class="p">);</span>
+<a href="#__codelineno-31-12" id="__codelineno-31-12" name="__codelineno-31-12"></a><span class="w">    </span><span class="c1">// Suzy</span>
+<a href="#__codelineno-31-13" id="__codelineno-31-13" name="__codelineno-31-13"></a><span class="p">}</span>
+</code></pre></div>
+<p>What's going to happen with the first <code>console.log(..)</code> statement? If <code>let studentName</code> didn't hoist to the top of the scope, then the first <code>console.log(..)</code> <em>should</em> print <code>"Kyle"</code>, right? At that moment, it would seem, only the outer <code>studentName</code> exists, so that's the variable <code>console.log(..)</code> should access and print.</p>
+<p>But instead, the first <code>console.log(..)</code> throws a TDZ error, because in fact, the inner scope's <code>studentName</code> <strong>was</strong> hoisted (auto-registered at the top of the scope). What <strong>didn't</strong> happen (yet!) was the auto-initialization of that inner <code>studentName</code>; it's still uninitialized at that moment, hence the TDZ violation!</p>
+<p>So to summarize, TDZ errors occur because <code>let</code>/<code>const</code> declarations <em>do</em> hoist their declarations to the top of their scopes, but unlike <code>var</code>, they defer the auto-initialization of their variables until the moment in the code's sequencing where the original declaration appeared. This window of time (hint: temporal), whatever its length, is the TDZ.</p>
+<p>How can you avoid TDZ errors?</p>
+<p>My advice: always put your <code>let</code> and <code>const</code> declarations at the top of any scope. Shrink the TDZ window to zero (or near zero) length, and then it'll be moot.</p>
+<p>But why is TDZ even a thing? Why didn't TC39 dictate that <code>let</code>/<code>const</code> auto-initialize the way <code>var</code> does? Just be patient, we'll come back to explore the <em>why</em> of TDZ in Appendix A.</p>
+<h2 id="finally-initialized">Finally Initialized<a class="headerlink" href="#finally-initialized" title="Permanent link">¶</a></h2>
+<p>Working with variables has much more nuance than it seems at first glance. <em>Hoisting</em>, <em>(re)declaration</em>, and the <em>TDZ</em> are common sources of confusion for developers, especially those who have worked in other languages before coming to JS. Before moving on, make sure your mental model is fully grounded on these aspects of JS scope and variables.</p>
+<p>Hoisting is generally cited as an explicit mechanism of the JS engine, but it's really more a metaphor to describe the various ways JS handles variable declarations during compilation. But even as a metaphor, hoisting offers useful structure for thinking about the life-cycle of a variable—when it's created, when it's available to use, when it goes away.</p>
+<p>Declaration and re-declaration of variables tend to cause confusion when thought of as runtime operations. But if you shift to compile-time thinking for these operations, the quirks and <em>shadows</em> diminish.</p>
+<p>The TDZ (temporal dead zone) error is strange and frustrating when encountered. Fortunately, TDZ is relatively straightforward to avoid if you're always careful to place <code>let</code>/<code>const</code> declarations at the top of any scope.</p>
+<p>As you successfully navigate these twists and turns of variable scope, the next chapter will lay out the factors that guide our decisions to place our declarations in various scopes, especially nested blocks.</p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<nav aria-label="Footer" class="md-footer__inner md-grid">
+<a aria-label="Previous: Chapter 4: Around the Global Scope" class="md-footer__link md-footer__link--prev" href="../ch4/" rel="prev">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</div>
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                  Previous
+                </span>
+                Chapter 4: Around the Global Scope
+              </div>
+</div>
+</a>
+<a aria-label="Next: Chapter 6: Limiting Scope Exposure" class="md-footer__link md-footer__link--next" href="../ch6/" rel="next">
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                  Next
+                </span>
+                Chapter 6: Limiting Scope Exposure
+              </div>
+</div>
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"></path></svg>
+</div>
+</a>
+</nav>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+<div class="md-social">
+<a class="md-social__link" href="https://shanenull.com/" rel="noopener" target="_blank" title="shanenull.com">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M256 8C119.3 8 8 119.2 8 256c0 136.7 111.3 248 248 248s248-111.3 248-248C504 119.2 392.7 8 256 8zM33 256c0-32.3 6.9-63 19.3-90.7l106.4 291.4C84.3 420.5 33 344.2 33 256zm223 223c-21.9 0-43-3.2-63-9.1l66.9-194.4 68.5 187.8c.5 1.1 1 2.1 1.6 3.1-23.1 8.1-48 12.6-74 12.6zm30.7-327.5c13.4-.7 25.5-2.1 25.5-2.1 12-1.4 10.6-19.1-1.4-18.4 0 0-36.1 2.8-59.4 2.8-21.9 0-58.7-2.8-58.7-2.8-12-.7-13.4 17.7-1.4 18.4 0 0 11.4 1.4 23.4 2.1l34.7 95.2L200.6 393l-81.2-241.5c13.4-.7 25.5-2.1 25.5-2.1 12-1.4 10.6-19.1-1.4-18.4 0 0-36.1 2.8-59.4 2.8-4.2 0-9.1-.1-14.4-.3C109.6 73 178.1 33 256 33c58 0 110.9 22.2 150.6 58.5-1-.1-1.9-.2-2.9-.2-21.9 0-37.4 19.1-37.4 39.6 0 18.4 10.6 33.9 21.9 52.3 8.5 14.8 18.4 33.9 18.4 61.5 0 19.1-7.3 41.2-17 72.1l-22.2 74.3-80.7-239.6zm81.4 297.2 68.1-196.9c12.7-31.8 17-57.2 17-79.9 0-8.2-.5-15.8-1.5-22.9 17.4 31.8 27.3 68.2 27.3 107 0 82.3-44.6 154.1-110.9 192.7z"></path></svg>
+</a>
+<a class="md-social__link" href="https://shane0.pythonanywhere.com/" rel="noopener" target="_blank" title="shane0.pythonanywhere.com">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z"></path></svg>
+</a>
+<a class="md-social__link" href="http://www.youtube.com/c/ShaneNull" rel="noopener" target="_blank" title="www.youtube.com">
+<svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path></svg>
+</a>
+<a class="md-social__link" href="https://www.instagram.com/nullshane/" rel="noopener" target="_blank" title="www.instagram.com">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path></svg>
+</a>
+<a class="md-social__link" href="https://earmassagetherapist.bandcamp.com/releases" rel="noopener" target="_blank" title="earmassagetherapist.bandcamp.com">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8Zm48.2 326.1h-181L207.9 178h181Z"></path></svg>
+</a>
+<a class="md-social__link" href="https://github.com/shane0" rel="noopener" target="_blank" title="github.com">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+</a>
+<a class="md-social__link" href="https://gitlab.com/shane0" rel="noopener" target="_blank" title="gitlab.com">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="m503.5 204.6-.7-1.8-69.7-181.78c-1.4-3.57-3.9-6.59-7.2-8.64-2.4-1.55-5.1-2.515-8-2.81-2.9-.295-5.7.083-8.4 1.11-2.7 1.02-5.1 2.66-7.1 4.78-1.9 2.12-3.3 4.67-4.1 7.44l-47 144H160.8l-47.1-144c-.8-2.77-2.2-5.31-4.1-7.43-2-2.12-4.4-3.75-7.1-4.77a18.1 18.1 0 0 0-8.38-1.113 18.4 18.4 0 0 0-8.04 2.793 18.09 18.09 0 0 0-7.16 8.64L9.267 202.8l-.724 1.8a129.57 129.57 0 0 0-3.52 82c7.747 26.9 24.047 50.7 46.447 67.6l.27.2.59.4 105.97 79.5 52.6 39.7 32 24.2c3.7 1.9 8.3 4.3 13 4.3 4.7 0 9.3-2.4 13-4.3l32-24.2 52.6-39.7 106.7-79.9.3-.3c22.4-16.9 38.7-40.6 45.6-67.5 8.6-27 7.4-55.8-2.6-82z"></path></svg>
+</a>
+<a class="md-social__link" href="https://twitter.com/shane_null" rel="noopener" target="_blank" title="twitter.com">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
+</a>
+<a class="md-social__link" href="https://www.linkedin.com/in/shanenull" rel="noopener" target="_blank" title="www.linkedin.com">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "content.action.edit", "content.action.view", "navigation.footer"], "search": "../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": 2023, "provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.51d95adb.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js?tex"></script>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>

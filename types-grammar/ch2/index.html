@@ -1,0 +1,1915 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="../ch1/" rel="prev"/>
+<link href="../ch3/" rel="next"/>
+<link href="../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.4.2, mkdocs-material-9.0.6" name="generator"/>
+<title>Chapter 2: Primitive Behaviors - shane0 learning_js</title>
+<link href="../../assets/stylesheets/main.558e4712.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            
+                .gscrollbar-fixer { padding-right: 15px; }
+                .gdesc-inner { font-size: 0.75rem; }
+                body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+                body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+                body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+                </style><script src="../../assets/javascripts/glightbox.min.js"></script></head>
+<body data-md-color-accent="" data-md-color-primary="" data-md-color-scheme="default" dir="ltr">
+<script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#chapter-2-primitive-behaviors">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<div data-md-component="outdated" hidden="">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="shane0 learning_js" class="md-header__button md-logo" data-md-component="logo" href="../.." title="shane0 learning_js">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            shane0 learning_js
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Chapter 2: Primitive Behaviors
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="" data-md-color-media="" data-md-color-primary="" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_2" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"></path></svg>
+</label>
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="" data-md-color-media="" data-md-color-primary="" data-md-color-scheme="slate" id="__palette_2" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"></path></svg>
+</label>
+</form>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="shane0 learning_js" class="md-nav__button md-logo" data-md-component="logo" href="../.." title="shane0 learning_js">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+</a>
+    shane0 learning_js
+  </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../..">
+        Home
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../todo/">
+        todo cli integration
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../todocli/">
+        todo cli
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" id="__nav_4" type="checkbox"/>
+<label aria-expanded="false" class="md-nav__link" for="__nav_4" tabindex="0">
+          Bujo
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Bujo" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+          Bujo
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../bujo/2023/">
+        2023
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" id="__nav_5" type="checkbox"/>
+<label aria-expanded="false" class="md-nav__link" for="__nav_5" tabindex="0">
+          Es next beyond
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Es next beyond" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+          Es next beyond
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../es-next-beyond/ch1/">
+        Chapter 1: TODO
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../es-next-beyond/toc/">
+        TOC: ES.Next &amp; Beyond - 2nd Edition
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" id="__nav_6" type="checkbox"/>
+<label aria-expanded="false" class="md-nav__link" for="__nav_6" tabindex="0">
+          Get started
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Get started" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_6">
+<span class="md-nav__icon md-icon"></span>
+          Get started
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../get-started/apA/">
+        Appendix A: Exploring Further
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../get-started/apB/">
+        Appendix B: Practice, Practice, Practice!
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../get-started/ch1/">
+        Chapter 1: What *Is* JavaScript?
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../get-started/ch2/">
+        Chapter 2: Surveying JS
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../get-started/ch3/">
+        Chapter 3: Digging to the Roots of JS
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../get-started/ch4/">
+        Chapter 4: The Bigger Picture
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../get-started/toc/">
+        Table of Contents
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" id="__nav_7" type="checkbox"/>
+<label aria-expanded="false" class="md-nav__link" for="__nav_7" tabindex="0">
+          Objects classes
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Objects classes" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_7">
+<span class="md-nav__icon md-icon"></span>
+          Objects classes
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../objects-classes/ch1/">
+        Chapter 1: Object Foundations
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../objects-classes/ch2/">
+        Chapter 2: How Objects Work
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../objects-classes/ch3/">
+        Chapter 3: Classy Objects
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../objects-classes/ch4/">
+        Chapter 4: This Works
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../objects-classes/ch5/">
+        Chapter 5: Delegation
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../objects-classes/toc/">
+        You Don't Know JS Yet: Objects &amp; Classes - 2nd Edition
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" id="__nav_8" type="checkbox"/>
+<label aria-expanded="false" class="md-nav__link" for="__nav_8" tabindex="0">
+          Scope closures
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Scope closures" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_8">
+<span class="md-nav__icon md-icon"></span>
+          Scope closures
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/apA/">
+        Appendix A: Exploring Further
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/apB/">
+        Appendix B: Practice
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/ch1/">
+        Chapter 1: What's the Scope?
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/ch2/">
+        Chapter 2: Illustrating Lexical Scope
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/ch3/">
+        Chapter 3: The Scope Chain
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/ch4/">
+        Chapter 4: Around the Global Scope
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/ch5/">
+        Chapter 5: The (Not So) Secret Lifecycle of Variables
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/ch6/">
+        Chapter 6: Limiting Scope Exposure
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/ch7/">
+        Chapter 7: Using Closures
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/ch8/">
+        Chapter 8: The Module Pattern
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/closures_bard/">
+        closures bard
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/scope_bard/">
+        scope: bard version
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scope-closures/toc/">
+        Scope &amp; Closures - 2nd Edition
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" id="__nav_9" type="checkbox"/>
+<label aria-expanded="false" class="md-nav__link" for="__nav_9" tabindex="0">
+          Sync async
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Sync async" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_9">
+<span class="md-nav__icon md-icon"></span>
+          Sync async
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../sync-async/ch1/">
+        Chapter 1: TODO
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../sync-async/toc/">
+        TOC: Sync &amp; Async - 2nd Edition
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" id="__nav_10" type="checkbox"/>
+<label aria-expanded="true" class="md-nav__link" for="__nav_10" tabindex="0">
+          Types grammar
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Types grammar" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_10">
+<span class="md-nav__icon md-icon"></span>
+          Types grammar
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../ch1/">
+        Chapter 1: Primitive Values
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          Chapter 2: Primitive Behaviors
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+        Chapter 2: Primitive Behaviors
+      </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#primitive-immutability">
+    Primitive Immutability
+  </a>
+<nav aria-label="Primitive Immutability" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#primitives-with-properties">
+    Primitives With Properties?
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#primitive-assignments">
+    Primitive Assignments
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#string-behaviors">
+    String Behaviors
+  </a>
+<nav aria-label="String Behaviors" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#string-character-access">
+    String Character Access
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#character-iteration">
+    Character Iteration
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#length-computation">
+    Length Computation
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#internationalization-i18n-and-localization-l10n">
+    Internationalization (i18n) and Localization (l10n)
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#string-comparison">
+    String Comparison
+  </a>
+<nav aria-label="String Comparison" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#string-equality">
+    String Equality
+  </a>
+<nav aria-label="String Equality" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#coercive-equality">
+    Coercive Equality
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#really-strict-equality">
+    Really Strict Equality
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#string-relational-comparisons">
+    String Relational Comparisons
+  </a>
+<nav aria-label="String Relational Comparisons" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#locale-aware-relational-comparisons">
+    Locale-Aware Relational Comparisons
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#string-concatenation">
+    String Concatenation
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#string-value-methods">
+    String Value Methods
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#static-string-helpers">
+    Static String Helpers
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#number-behaviors">
+    Number Behaviors
+  </a>
+<nav aria-label="Number Behaviors" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#floating-point-imprecision">
+    Floating Point Imprecision
+  </a>
+<nav aria-label="Floating Point Imprecision" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#epsilon-threshold">
+    Epsilon Threshold
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#numeric-comparison">
+    Numeric Comparison
+  </a>
+<nav aria-label="Numeric Comparison" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#numeric-equality">
+    Numeric Equality
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#numeric-relational-comparisons">
+    Numeric Relational Comparisons
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mathematical-operators">
+    Mathematical Operators
+  </a>
+<nav aria-label="Mathematical Operators" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#increment-and-decrement">
+    Increment and Decrement
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#bitwise-operators">
+    Bitwise Operators
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#number-value-methods">
+    Number Value Methods
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#static-number-properties">
+    Static Number Properties
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#static-number-helpers">
+    Static Number Helpers
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#static-math-namespace">
+    Static Math Namespace
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#bigints-and-numbers-dont-mix">
+    BigInts and Numbers Don't Mix
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#primitives-are-foundational">
+    Primitives Are Foundational
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../ch3/">
+        Chapter 3: Object Values
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../ch4/">
+        Chapter 4: Coercing Values
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../toc/">
+        TOC: Types &amp; Grammar - 2nd Edition
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#primitive-immutability">
+    Primitive Immutability
+  </a>
+<nav aria-label="Primitive Immutability" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#primitives-with-properties">
+    Primitives With Properties?
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#primitive-assignments">
+    Primitive Assignments
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#string-behaviors">
+    String Behaviors
+  </a>
+<nav aria-label="String Behaviors" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#string-character-access">
+    String Character Access
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#character-iteration">
+    Character Iteration
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#length-computation">
+    Length Computation
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#internationalization-i18n-and-localization-l10n">
+    Internationalization (i18n) and Localization (l10n)
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#string-comparison">
+    String Comparison
+  </a>
+<nav aria-label="String Comparison" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#string-equality">
+    String Equality
+  </a>
+<nav aria-label="String Equality" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#coercive-equality">
+    Coercive Equality
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#really-strict-equality">
+    Really Strict Equality
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#string-relational-comparisons">
+    String Relational Comparisons
+  </a>
+<nav aria-label="String Relational Comparisons" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#locale-aware-relational-comparisons">
+    Locale-Aware Relational Comparisons
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#string-concatenation">
+    String Concatenation
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#string-value-methods">
+    String Value Methods
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#static-string-helpers">
+    Static String Helpers
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#number-behaviors">
+    Number Behaviors
+  </a>
+<nav aria-label="Number Behaviors" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#floating-point-imprecision">
+    Floating Point Imprecision
+  </a>
+<nav aria-label="Floating Point Imprecision" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#epsilon-threshold">
+    Epsilon Threshold
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#numeric-comparison">
+    Numeric Comparison
+  </a>
+<nav aria-label="Numeric Comparison" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#numeric-equality">
+    Numeric Equality
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#numeric-relational-comparisons">
+    Numeric Relational Comparisons
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mathematical-operators">
+    Mathematical Operators
+  </a>
+<nav aria-label="Mathematical Operators" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#increment-and-decrement">
+    Increment and Decrement
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#bitwise-operators">
+    Bitwise Operators
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#number-value-methods">
+    Number Value Methods
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#static-number-properties">
+    Static Number Properties
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#static-number-helpers">
+    Static Number Helpers
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#static-math-namespace">
+    Static Math Namespace
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#bigints-and-numbers-dont-mix">
+    BigInts and Numbers Don't Mix
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#primitives-are-foundational">
+    Primitives Are Foundational
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="chapter-2-primitive-behaviors">Chapter 2: Primitive Behaviors<a class="headerlink" href="#chapter-2-primitive-behaviors" title="Permanent link">¶</a></h1>
+<table>
+<thead>
+<tr>
+<th align="left">NOTE:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Work in progress</td>
+</tr>
+</tbody>
+</table>
+<p>So far, we've explored seven built-in primitive value types in JS: <code>null</code>, <code>undefined</code>, <code>boolean</code>, <code>string</code>, <code>number</code>, <code>bigint</code>, and <code>symbol</code>.</p>
+<p>Chapter 1 was quite a lot to take in, much more involved than I bet most readers expected. If you're still catching your breath after reading all that, don't worry about taking a bit of a break before continuing on here!</p>
+<p>Once you're clear headed and ready to move on, let's dig into certain behaviors implied by value types for all their respective values. We'll take a careful and  closer look at all of these various behaviors.</p>
+<h2 id="primitive-immutability">Primitive Immutability<a class="headerlink" href="#primitive-immutability" title="Permanent link">¶</a></h2>
+<p>All primitive values are immutable, meaning nothing in a JS program can reach into the contents of the value and modify it in any way.</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="nx">myAge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">42</span><span class="p">;</span>
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>
+<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="c1">// later:</span>
+<a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>
+<a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="nx">myAge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">43</span><span class="p">;</span>
+</code></pre></div>
+<p>The <code>myAge = 43</code> statement doesn't change the value. It reassigns a different value <code>43</code> to <code>myAge</code>, completely replacing the previous value of <code>42</code>.</p>
+<p>New values are also created through various operations, but again these do not modify the original value:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="mf">42</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w">             </span><span class="c1">// 43</span>
+<a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>
+<a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="s2">"Hello"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"!"</span><span class="p">;</span><span class="w">      </span><span class="c1">// "Hello!"</span>
+</code></pre></div>
+<p>The values <code>43</code> and <code>"Hello!"</code> are new, distinct values from the previous <code>42</code> and <code>"Hello"</code> values, respectively.</p>
+<p>Even a string value, which looks like merely an array of characters -- and array contents are typically mutable -- is immutable:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="nx">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Hello."</span><span class="p">;</span>
+<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>
+<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="nx">greeting</span><span class="p">[</span><span class="mf">5</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"!"</span><span class="p">;</span>
+<a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a>
+<a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">greeting</span><span class="p">);</span><span class="w">      </span><span class="c1">// Hello.</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th align="left">WARNING:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">In non-strict mode, assigning to a read-only property (like <code>greeting[5] = ..</code>) silently fails. In strict-mode, the disallowed assignment will throw an exception.</td>
+</tr>
+</tbody>
+</table>
+<p>The nature of primitive values being immutable is not affected <em>in any way</em> by how the variable or object property holding the value is declared. For example, whether <code>const</code>, <code>let</code>, or <code>var</code> are used to declare the <code>greeting</code> variable above, the string value it holds is immutable.</p>
+<p><code>const</code> doesn't create immutable values, it declares variables that cannot be reassigned (aka, immutable assignments) -- see the "Scope &amp; Closures" title of this series for more information.</p>
+<p>A property on an object may be marked as read-only -- with the <code>writable: false</code> descriptor attribute, as discussed in the "Objects &amp; Classes" title of this series. But that still has no affect on the nature of the value, only on preventing the reassignment of the property.</p>
+<h3 id="primitives-with-properties">Primitives With Properties?<a class="headerlink" href="#primitives-with-properties" title="Permanent link">¶</a></h3>
+<p>Additionally, properties <em>cannot</em> be added to any primitive values:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="nx">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Hello."</span><span class="p">;</span>
+<a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>
+<a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="nx">greeting</span><span class="p">.</span><span class="nx">isRendered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a>
+<a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="nx">greeting</span><span class="p">.</span><span class="nx">isRendered</span><span class="p">;</span><span class="w">        </span><span class="c1">// undefined</span>
+</code></pre></div>
+<p>This snippet looks like it's adding a property <code>isRendered</code> to the value in <code>greeting</code>, but this assignment silently fails (even in strict-mode).</p>
+<p>Property access is not allowed in any way on nullish primitive values <code>null</code> and <code>undefined</code>. But properties <em>can</em> be accessed on all other primitive values -- yes, that sounds counter-intuitive.</p>
+<p>For example, all string values have a read-only <code>length</code> property:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="nx">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Hello."</span><span class="p">;</span>
+<a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>
+<a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="nx">greeting</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w">            </span><span class="c1">// 6</span>
+</code></pre></div>
+<p><code>length</code> can not be set, but it can be accesses, and it exposes the number of code-units stored in the value (see "JS Character Encodings" in Chapter 1), which often means the number of characters in the string.</p>
+<table>
+<thead>
+<tr>
+<th align="left">NOTE:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Sort of. For most standard characters, that's true; one character is one code-point, which is one code-unit. However, as explained in Chapter 1, extended Unicode characters above code-point <code>65535</code> will be stored as two code-units (surrogate halves). Thus, for each such character, <code>length</code> will include <code>2</code> in its count, even though the character visually prints as one symbol.</td>
+</tr>
+</tbody>
+</table>
+<p>Non-nullish primitive values also have a couple of standard built-in methods that can be accessed:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="nx">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Hello."</span><span class="p">;</span>
+<a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a>
+<a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="nx">greeting</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span><span class="w">    </span><span class="c1">// "Hello." &lt;-- redundant</span>
+<a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="nx">greeting</span><span class="p">.</span><span class="nx">valueOf</span><span class="p">();</span><span class="w">     </span><span class="c1">// "Hello."</span>
+</code></pre></div>
+<p>Additionally, most of the primitive value-types define their own methods with specific behaviors inherent to that type. We'll cover these later in this chapter.</p>
+<table>
+<thead>
+<tr>
+<th align="left">NOTE:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">As already briefly mentioned in Chapter 1, technically, these sorts of property/method accesses on primitive values are facilitated by an implicit coercive behavior called <em>auto-boxing</em>. We'll cover this in detail in "Automatic Objects" in Chapter 3.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="primitive-assignments">Primitive Assignments<a class="headerlink" href="#primitive-assignments" title="Permanent link">¶</a></h2>
+<p>Any assignment of a primitive value from one variable/container to another is a <em>value-copy</em>:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="nx">myAge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">42</span><span class="p">;</span>
+<a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a>
+<a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="nx">yourAge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">myAge</span><span class="p">;</span><span class="w">        </span><span class="c1">// assigned by value-copy</span>
+<a href="#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a>
+<a href="#__codelineno-6-5" id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="nx">myAge</span><span class="p">;</span><span class="w">                  </span><span class="c1">// 42</span>
+<a href="#__codelineno-6-6" id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="nx">yourAge</span><span class="p">;</span><span class="w">                </span><span class="c1">// 42</span>
+</code></pre></div>
+<p>Here, the <code>myAge</code> and <code>yourAge</code> variables each have their own copy of the number value <code>42</code>.</p>
+<table>
+<thead>
+<tr>
+<th align="left">NOTE:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Inside the JS engine, it <em>may</em> be the case that only one <code>42</code> value exists in memory, and the engine points both <code>myAge</code> and <code>yourAge</code> variables at the shared value. Since primitive values are immutable, there's no danger in a JS engine doing so. But what's important to us as JS developers is, in our programs, <code>myAge</code> and <code>yourAge</code> act as if they have their own copy of that value, rather than sharing it.</td>
+</tr>
+</tbody>
+</table>
+<p>If we later reassign <code>myAge</code> to <code>43</code> (when I have a birthday), it doesn't affect the <code>42</code> that's still assigned to <code>yourAge</code>:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="nx">myAge</span><span class="o">++</span><span class="p">;</span><span class="w">            </span><span class="c1">// sort of like: myAge = myAge + 1</span>
+<a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a>
+<a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="nx">myAge</span><span class="p">;</span><span class="w">              </span><span class="c1">// 43</span>
+<a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="nx">yourAge</span><span class="p">;</span><span class="w">            </span><span class="c1">// 42 &lt;-- unchanged</span>
+</code></pre></div>
+<h2 id="string-behaviors">String Behaviors<a class="headerlink" href="#string-behaviors" title="Permanent link">¶</a></h2>
+<p>String values have a number of specific behaviors that every JS developer should be aware of.</p>
+<h3 id="string-character-access">String Character Access<a class="headerlink" href="#string-character-access" title="Permanent link">¶</a></h3>
+<p>Though strings are not actually arrays, JS allows <code>[ .. ]</code> array-style access of a character at a numeric (<code>0</code>-based) index:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="nx">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Hello!"</span><span class="p">;</span>
+<a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a>
+<a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="nx">greeting</span><span class="p">[</span><span class="mf">4</span><span class="p">];</span><span class="w">            </span><span class="c1">// "o"</span>
+</code></pre></div>
+<p>If the value/expression between the <code>[ .. ]</code> doesn't resolve to a number, the value will be implicitly coerced to its whole/integer numeric representation (if possible).</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="nx">greeting</span><span class="p">[</span><span class="s2">"4"</span><span class="p">];</span><span class="w">          </span><span class="c1">// "o"</span>
+</code></pre></div>
+<p>If the value/expression resolves to a number outside the integer range of <code>0</code> - <code>length - 1</code> (or <code>NaN</code>), or if it's not a <code>number</code> value-type, the access will instead be treated as a property access with the string equivalent property name. If the property access thus fails, the result is <code>undefined</code>.</p>
+<table>
+<thead>
+<tr>
+<th align="left">NOTE:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">We'll cover coercion in-depth later in the book.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="character-iteration">Character Iteration<a class="headerlink" href="#character-iteration" title="Permanent link">¶</a></h3>
+<p>Strings are not arrays, but they certainly mimick arrays closely in many ways. One such behavior is that, like arrays, strings are iterables. This means that the characters (code-units) of a string can be iterated individually:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="nx">myName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Kyle"</span><span class="p">;</span>
+<a href="#__codelineno-10-2" id="__codelineno-10-2" name="__codelineno-10-2"></a>
+<a href="#__codelineno-10-3" id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="kr">char</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">myName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-10-4" id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kr">char</span><span class="p">);</span>
+<a href="#__codelineno-10-5" id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="p">}</span>
+<a href="#__codelineno-10-6" id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="c1">// K</span>
+<a href="#__codelineno-10-7" id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="c1">// y</span>
+<a href="#__codelineno-10-8" id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="c1">// l</span>
+<a href="#__codelineno-10-9" id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="c1">// e</span>
+<a href="#__codelineno-10-10" id="__codelineno-10-10" name="__codelineno-10-10"></a>
+<a href="#__codelineno-10-11" id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="nx">chars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">...</span><span class="nx">myName</span><span class="w"> </span><span class="p">];</span>
+<a href="#__codelineno-10-12" id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="nx">chars</span><span class="p">;</span>
+<a href="#__codelineno-10-13" id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="c1">// [ "K", "y", "l", "e" ]</span>
+</code></pre></div>
+<p>Values, such as strings and arrays, are iterables (via <code>...</code>, <code>for..of</code>, and <code>Array.from(..)</code>), if they expose an iterator-producing method at the special symbol property location <code>Symbol.iterator</code> (see "Well-Known Symbols" in Chapter 1):</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="nx">myName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Kyle"</span><span class="p">;</span>
+<a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="nx">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">myName</span><span class="p">[</span><span class="nb">Symbol</span><span class="p">.</span><span class="nx">iterator</span><span class="p">]();</span>
+<a href="#__codelineno-11-3" id="__codelineno-11-3" name="__codelineno-11-3"></a>
+<a href="#__codelineno-11-4" id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="nx">it</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span><span class="w">      </span><span class="c1">// { value: "K", done: false }</span>
+<a href="#__codelineno-11-5" id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="nx">it</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span><span class="w">      </span><span class="c1">// { value: "y", done: false }</span>
+<a href="#__codelineno-11-6" id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="nx">it</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span><span class="w">      </span><span class="c1">// { value: "l", done: false }</span>
+<a href="#__codelineno-11-7" id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="nx">it</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span><span class="w">      </span><span class="c1">// { value: "e", done: false }</span>
+<a href="#__codelineno-11-8" id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="nx">it</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span><span class="w">      </span><span class="c1">// { value: undefined, done: true }</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th align="left">NOTE:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">The specifics of the iterator protocol, including the fact that the <code>{ value: "e" .. }</code> result still shows <code>done: false</code>, are covered in detail in the "Sync &amp; Async" title of this series.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="length-computation">Length Computation<a class="headerlink" href="#length-computation" title="Permanent link">¶</a></h3>
+<p>As mentioned in Chapter 1, string values have a <code>length</code> property that automatically exposes the length of the string; this property can only be accessed; attempts to set it are silently ignored.</p>
+<p>The reported <code>length</code> value somewhat corresponds to the number of characters in the string (actually, code-units), but as we saw in Chapter 1, it's more complex when Unicode characters are involved.</p>
+<p>Most people visually distinguish symbols as separate characters; this notion of an independent visual symbol is referred to as a <em>grapheme</em>, or a <em>grapheme cluster</em>. So when counting the "length" of a string, we typically mean that we're counting the number of graphemes.</p>
+<p>But that's not how the computer deals with characters.</p>
+<p>In JS, each <em>character</em> is a code-unit (16 bits), with a code-point value at or below <code>65535</code>. The <code>length</code> property of a string always counts the number of code-units in the string value, not code-points. A code-unit might represent a single character by itself, or it may be part of a surrogate pair, or it may be combined with an adjacent <em>combining</em> symbol, or part of a grapheme cluster. As such, <code>length</code> doesn't match the typical notion of counting visual characters/graphemes.</p>
+<p>To get closer to an expected/intuitive <em>grapheme length</em> for a string, the string value first needs to be normalized with <code>normalize("NFC")</code> (see "Normalizing Unicode" in Chapter 1) to produce any <em>composed</em> code-units (where possible), in case any characters were originally stored <em>decomposed</em> as separate code-units.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="nx">favoriteItem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"teléfono"</span><span class="p">;</span>
+<a href="#__codelineno-12-2" id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="nx">favoriteItem</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w">            </span><span class="c1">// 9 -- uh oh!</span>
+<a href="#__codelineno-12-3" id="__codelineno-12-3" name="__codelineno-12-3"></a>
+<a href="#__codelineno-12-4" id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="nx">favoriteItem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">favoriteItem</span><span class="p">.</span><span class="nx">normalize</span><span class="p">(</span><span class="s2">"NFC"</span><span class="p">);</span>
+<a href="#__codelineno-12-5" id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="nx">favoriteItem</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w">            </span><span class="c1">// 8 -- phew!</span>
+</code></pre></div>
+<p>Unfortunately, as we saw in Chapter 1, we'll still have the possibility of characters of code-point greater the <code>65535</code>, and thus needing a surrogate pair to be represented. Such characters will count double in the <code>length</code>:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="c1">// "☎" === "\u260E"</span>
+<a href="#__codelineno-13-2" id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="nx">oldTelephone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"☎"</span><span class="p">;</span>
+<a href="#__codelineno-13-3" id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="nx">oldTelephone</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w">            </span><span class="c1">// 1</span>
+<a href="#__codelineno-13-4" id="__codelineno-13-4" name="__codelineno-13-4"></a>
+<a href="#__codelineno-13-5" id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="c1">// "📱" === "\u{1F4F1}" === "\uD83D\uDCF1"</span>
+<a href="#__codelineno-13-6" id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="nx">cellphone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"📱"</span><span class="p">;</span>
+<a href="#__codelineno-13-7" id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="nx">cellphone</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w">               </span><span class="c1">// 2 -- oops!</span>
+</code></pre></div>
+<p>So what do we do?</p>
+<p>One fix is to use character iteration (via <code>...</code> operator) as we saw in the previous section, since it automatically returns each combined character from a surrogate pair:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="nx">cellphone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"📱"</span><span class="p">;</span>
+<a href="#__codelineno-14-2" id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="nx">cellphone</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w">               </span><span class="c1">// 2 -- oops!</span>
+<a href="#__codelineno-14-3" id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="p">[</span><span class="w"> </span><span class="p">...</span><span class="nx">cellphone</span><span class="w"> </span><span class="p">].</span><span class="nx">length</span><span class="p">;</span><span class="w">        </span><span class="c1">// 1 -- phew!</span>
+</code></pre></div>
+<p>But, unfortunately, grapheme clusters (as explained in Chapter 1) throw yet another wrench into a string's length computation. For example, if we take the thumbs down emoji (<code>"\u{1F44E}"</code> and add to it the skin-tone modifier for medium-dark skin (<code>"\u{1F3FE}"</code>), we get:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-15-1" id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="c1">// "👎🏾" = "\u{1F44E}\u{1F3FE}"</span>
+<a href="#__codelineno-15-2" id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="nx">thumbsDown</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"👎🏾"</span><span class="p">;</span>
+<a href="#__codelineno-15-3" id="__codelineno-15-3" name="__codelineno-15-3"></a>
+<a href="#__codelineno-15-4" id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="nx">thumbsDown</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w">              </span><span class="c1">// 4 -- oops!</span>
+<a href="#__codelineno-15-5" id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="p">[</span><span class="w"> </span><span class="p">...</span><span class="nx">thumbsDown</span><span class="w"> </span><span class="p">].</span><span class="nx">length</span><span class="p">;</span><span class="w">       </span><span class="c1">// 2 -- oops!</span>
+</code></pre></div>
+<p>As you can see, these are two distinct code-points (not a surrogate pair) that, by virtue of their ordering and adjacency, cause the computer's Unicode rendering to draw the thumbs-down symbol but with a darker skin tone than its default. The computed string length is thus <code>2</code>.</p>
+<p>It would take replicating most of a platform's complex Unicode rendering logic to be able to recognize such clusters of code-points as a single "character" for length-counting sake. There are libraries that purport to do so, but they're not necessarily perfect, and they come at a hefty cost in terms of extra code.</p>
+<table>
+<thead>
+<tr>
+<th align="left">NOTE:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">As a Twitter user, you might expect to be able to put 280 thumbs-down emojis into a single tweet, since it looks like a single character. Twitter counts the <code>"👎"</code> (default thumbs-down), the <code>"👎🏾"</code> (medium-dark-skintone thumbs-down), and even the <code>"👩‍👩‍👦‍👦"</code> (family emoji grapheme cluster) all as 2 characters each, even though their respective string lengths (from JS's perspective) are <code>2</code>, <code>4</code>, and <code>7</code>; thus, you can only fit half the number of emojis (140 instead of 280) in a tweet. In fact, Twitter implemented this change in 2018 to specifically level the counting of all Unicode characters, at 2 characters per symbol. <sup id="fnref:TwitterUnicode"><a class="footnote-ref" href="#fn:TwitterUnicode">1</a></sup> That was a welcomed change for Twitter users, especially those who want to use emoji characters that are most representative of intended gender, skintone, etc. Still, it <em>is</em> curious that Twitter chose to count all Unicode/emoji symbols as 2 characters each, instead of the more intuitive 1 character (grapheme) each.</td>
+</tr>
+</tbody>
+</table>
+<p>Counting the <em>length</em> of a string to match our human intuitions is a remarkably challenging task, perhaps more of an art than a science. We can get acceptable approximations in many cases, but there's plenty of other cases that may confound our programs.</p>
+<h3 id="internationalization-i18n-and-localization-l10n">Internationalization (i18n) and Localization (l10n)<a class="headerlink" href="#internationalization-i18n-and-localization-l10n" title="Permanent link">¶</a></h3>
+<p>To serve the growing need for JS programs to operate as expected in any international language/culture context, the ECMAScript committee also publishes the ECMAScript Internationalization API. <sup id="fnref:INTLAPI"><a class="footnote-ref" href="#fn:INTLAPI">2</a></sup></p>
+<p>A JS program defaults to a locale/language according to the environment running the program (web browser page, Node instance, etc). The in-effect locale affects sorting (and value comparisons), formatting, and several other assumed behaviors. Such altered behaviors are perhaps a bit more obvious with strings, but they can also be seen with numbers (and dates!).</p>
+<p>But string characters also can have language/locale information embedded in them, which takes precedence over the environment default. If the string character is ambiguous/shared in terms of its language/locale (such as <code>"a"</code>), the default environment setting is used.</p>
+<p>Depending on the contents of the string, it may be interpreted as being ordered from left-to-right (LTR) or right-to-left (RTL). As such, many of the string methods we'll cover later use logical descriptors in their names, like "start", "end", "begin", "end", and "last", rather than directional terms like "left" and "right".</p>
+<p>For example, Hebrew and Arabic are both common RTL languages:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-16-1" id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="nx">hebrewHello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"\u{5e9}\u{5dc}\u{5d5}\u{5dd}"</span><span class="p">;</span>
+<a href="#__codelineno-16-2" id="__codelineno-16-2" name="__codelineno-16-2"></a>
+<a href="#__codelineno-16-3" id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">hebrewHello</span><span class="p">);</span><span class="w">                       </span><span class="c1">// שלום</span>
+</code></pre></div>
+<p>Notice that the first listed character in the string literal (<code>"\u{5e9}"</code>) is actually the right-most character when the string is rendered?</p>
+<p>Even though Hebrew is an RTL language, you don't actually type the characters in the string literal in reversed (RTL) order the way they should be rendered. You enter the characters in logical order, where position <code>0</code> is the first character, position <code>1</code> is the second character, etc. The rendering layer is where RTL characters are reversed to be shown in their correct order.</p>
+<p>That also means that if you access <code>hebrewHello[0]</code> (or <code>hebrewHello.charAt(0)</code>) -- to get the character as position <code>0</code> -- you get <code>"ש"</code> because that's logically the first character of the string, not <code>"ם"</code> (logically the last character of the string). Index-positional access follows the logical position, not the rendered position.</p>
+<p>Here's the same example in another RTL language, Arabic:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-17-1" id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="nx">arabicHello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"\u{631}\u{62d}\u{628}\u{627}"</span><span class="p">;</span>
+<a href="#__codelineno-17-2" id="__codelineno-17-2" name="__codelineno-17-2"></a>
+<a href="#__codelineno-17-3" id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arabicHello</span><span class="p">);</span><span class="w">                       </span><span class="c1">// رحبا</span>
+<a href="#__codelineno-17-4" id="__codelineno-17-4" name="__codelineno-17-4"></a>
+<a href="#__codelineno-17-5" id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arabicHello</span><span class="p">[</span><span class="mf">0</span><span class="p">]);</span><span class="w">                    </span><span class="c1">// ر</span>
+</code></pre></div>
+<p>JS programs can force a specific language/locale, using various <code>Intl</code> APIs such as <code>Intl.Collator</code>: <sup id="fnref:INTLCollator"><a class="footnote-ref" href="#fn:INTLCollator">3</a></sup></p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-18-1" id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="nx">germanStringSorter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Intl</span><span class="p">.</span><span class="nx">Collator</span><span class="p">(</span><span class="s2">"de"</span><span class="p">);</span>
+<a href="#__codelineno-18-2" id="__codelineno-18-2" name="__codelineno-18-2"></a>
+<a href="#__codelineno-18-3" id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="nx">listOfGermanWords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="cm">/* .. */</span><span class="w"> </span><span class="p">];</span>
+<a href="#__codelineno-18-4" id="__codelineno-18-4" name="__codelineno-18-4"></a>
+<a href="#__codelineno-18-5" id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="nx">germanStringSorter</span><span class="p">.</span><span class="nx">compare</span><span class="p">(</span><span class="s2">"Hallo"</span><span class="p">,</span><span class="s2">"Welt"</span><span class="p">);</span>
+<a href="#__codelineno-18-6" id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="c1">// -1 (or negative number)</span>
+<a href="#__codelineno-18-7" id="__codelineno-18-7" name="__codelineno-18-7"></a>
+<a href="#__codelineno-18-8" id="__codelineno-18-8" name="__codelineno-18-8"></a><span class="c1">// examples adapted from MDN:</span>
+<a href="#__codelineno-18-9" id="__codelineno-18-9" name="__codelineno-18-9"></a><span class="c1">//</span>
+<a href="#__codelineno-18-10" id="__codelineno-18-10" name="__codelineno-18-10"></a><span class="nx">germanStringSorter</span><span class="p">.</span><span class="nx">compare</span><span class="p">(</span><span class="s2">"Z"</span><span class="p">,</span><span class="s2">"z"</span><span class="p">);</span>
+<a href="#__codelineno-18-11" id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="c1">// 1 (or positive number)</span>
+<a href="#__codelineno-18-12" id="__codelineno-18-12" name="__codelineno-18-12"></a>
+<a href="#__codelineno-18-13" id="__codelineno-18-13" name="__codelineno-18-13"></a><span class="nx">caseFirstSorter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Intl</span><span class="p">.</span><span class="nx">Collator</span><span class="p">(</span><span class="s2">"de"</span><span class="p">,{</span><span class="w"> </span><span class="nx">caseFirst</span><span class="o">:</span><span class="w"> </span><span class="s2">"upper"</span><span class="p">,</span><span class="w"> </span><span class="p">});</span>
+<a href="#__codelineno-18-14" id="__codelineno-18-14" name="__codelineno-18-14"></a><span class="nx">caseFirstSorter</span><span class="p">.</span><span class="nx">compare</span><span class="p">(</span><span class="s2">"Z"</span><span class="p">,</span><span class="s2">"z"</span><span class="p">);</span>
+<a href="#__codelineno-18-15" id="__codelineno-18-15" name="__codelineno-18-15"></a><span class="c1">// -1 (or negative number)</span>
+</code></pre></div>
+<p>Multiple-word strings can be segmented using <code>Intl.Segmenter</code>: <sup id="fnref:INTLSegmenter"><a class="footnote-ref" href="#fn:INTLSegmenter">4</a></sup></p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-19-1" id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="nx">arabicHelloWorld</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"\u{645}\u{631}\u{62d}\u{628}\u{627} \</span>
+<a href="#__codelineno-19-2" id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="s2">\u{628}\u{627}\u{644}\u{639}\u{627}\u{644}\u{645}"</span><span class="p">;</span>
+<a href="#__codelineno-19-3" id="__codelineno-19-3" name="__codelineno-19-3"></a>
+<a href="#__codelineno-19-4" id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arabicHelloWorld</span><span class="p">);</span><span class="w">      </span><span class="c1">// مرحبا بالعالم</span>
+<a href="#__codelineno-19-5" id="__codelineno-19-5" name="__codelineno-19-5"></a>
+<a href="#__codelineno-19-6" id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="nx">arabicSegmenter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Intl</span><span class="p">.</span><span class="nx">Segmenter</span><span class="p">(</span><span class="s2">"ar"</span><span class="p">,{</span><span class="w"> </span><span class="nx">granularity</span><span class="o">:</span><span class="w"> </span><span class="s2">"word"</span><span class="w"> </span><span class="p">});</span>
+<a href="#__codelineno-19-7" id="__codelineno-19-7" name="__codelineno-19-7"></a>
+<a href="#__codelineno-19-8" id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span>
+<a href="#__codelineno-19-9" id="__codelineno-19-9" name="__codelineno-19-9"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">segment</span><span class="o">:</span><span class="w"> </span><span class="nx">word</span><span class="p">,</span><span class="w"> </span><span class="nx">isWordLike</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">of</span>
+<a href="#__codelineno-19-10" id="__codelineno-19-10" name="__codelineno-19-10"></a><span class="w">    </span><span class="nx">arabicSegmenter</span><span class="p">.</span><span class="nx">segment</span><span class="p">(</span><span class="nx">arabicHelloWorld</span><span class="p">)</span>
+<a href="#__codelineno-19-11" id="__codelineno-19-11" name="__codelineno-19-11"></a><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-19-12" id="__codelineno-19-12" name="__codelineno-19-12"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">isWordLike</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-19-13" id="__codelineno-19-13" name="__codelineno-19-13"></a><span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">word</span><span class="p">);</span>
+<a href="#__codelineno-19-14" id="__codelineno-19-14" name="__codelineno-19-14"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-19-15" id="__codelineno-19-15" name="__codelineno-19-15"></a><span class="p">}</span>
+<a href="#__codelineno-19-16" id="__codelineno-19-16" name="__codelineno-19-16"></a><span class="c1">// مرحبا</span>
+<a href="#__codelineno-19-17" id="__codelineno-19-17" name="__codelineno-19-17"></a><span class="c1">//لعالم</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th align="left">NOTE:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">The <code>segment(..)</code> method (from instances of<code>Intl.Segmenter</code>) returns a standard JS iterator, which the <code>for..of</code> loop here consumes. More on iteration protocols in the "Sync &amp; Async" title of this series.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="string-comparison">String Comparison<a class="headerlink" href="#string-comparison" title="Permanent link">¶</a></h3>
+<p>String values can be compared (for both equality and relational ordering) to other string values, using various built-in operators. It's important to keep in mind that such comparisons are sensitive to the actual string contents, including especially the underlying code-points from non-BPM Unicode characters.</p>
+<p>Both equality and relational comparison are case-sensitive, for any characters where uppercase and lowercase are well-defined. To make case-insensitive comparisons, normalize the casing of both values first (with <code>toUpperCase()</code> or <code>toLowerCase()</code>).</p>
+<h4 id="string-equality">String Equality<a class="headerlink" href="#string-equality" title="Permanent link">¶</a></h4>
+<p>The <code>===</code> and <code>==</code> operators (along with their negated counterparts <code>!==</code> and <code>!=</code>, respectively) are the most common way equality comparisons are made for primitive values, including string values:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-20-1" id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="s2">"my name"</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">"my n\x61me"</span><span class="p">;</span><span class="w">               </span><span class="c1">// true</span>
+<a href="#__codelineno-20-2" id="__codelineno-20-2" name="__codelineno-20-2"></a>
+<a href="#__codelineno-20-3" id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="s2">"my name"</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nb">String</span><span class="p">.</span><span class="nx">raw</span><span class="sb">`my n\x61me`</span><span class="p">;</span><span class="w">     </span><span class="c1">// true</span>
+</code></pre></div>
+<p>The <code>===</code> operator<sup id="fnref:StrictEquality"><a class="footnote-ref" href="#fn:StrictEquality">5</a></sup> -- often referred to as "strict equality" -- first checks to see if the types match, and if not, returns <code>false</code> right away. If the types match, then it checks to see if the values are the same; for strings, this is a per-code-unit comparison, from start to end.</p>
+<p>Despite the "strict" naming, there are nuances to <code>===</code> (such as <code>-0</code> and <code>NaN</code> handling), but we'll cover those later.</p>
+<h5 id="coercive-equality">Coercive Equality<a class="headerlink" href="#coercive-equality" title="Permanent link">¶</a></h5>
+<p>By contrast, the <code>==</code> operator<sup id="fnref:LooseEquality"><a class="footnote-ref" href="#fn:LooseEquality">6</a></sup> -- often referred to as "loose equality" -- performs <em>coercive equality</em>: if the value-types of the two operands do not match, <code>==</code> first coerces one or both operands until the value-types <em>do</em> match, and then it hands off the comparison internally to <code>===</code>.</p>
+<p>Coercion is an extremely important topic -- it's an inherent part of the JS types system, one of the language's 3 pillars -- but we're only going to briefly introduce it here in this chapter, and revisit it in detail later.</p>
+<table>
+<thead>
+<tr>
+<th align="left">NOTE:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">You may have heard the oft-quoted, but nevertheless inaccurate, explanation that the difference between <code>==</code> and <code>===</code> is that <code>==</code> compares the values while <code>==</code> compares both the values and the types. Not true, and you can read the spec yourself to verify -- both <code>isStrictlyEqual(..)</code> and <code>isLooselyEqual(..)</code> specification algorithms are linked as footnotes in the preceding paragraphs. To summarize, though: both <code>==</code> and <code>===</code> are aware of and sensitive to the types of the operands. If the operand types are the same, both operators do literally the exact same thing; if the types differ, <code>==</code> forces coercion until the types match, whereas <code>===</code> returns <code>false</code> immediately.</td>
+</tr>
+</tbody>
+</table>
+<p>It's extremely common for developers to assert that the <code>==</code> operator is confusing and too hard to use without surprises (thus the near universal preference for <code>===</code>). I think that's totally bogus, and in fact, JS developers should be defaulting to <code>==</code> (and avoiding <code>===</code> if possible). But we need a lot more discussion to back such a controversial statement; hold onto your objections until we revisit it later.</p>
+<p>For now, to gain some intuition about the coercive nature of <code>==</code>, the most illuminating observation is that if the types don't match, <code>==</code> <em>prefers</em> numeric comparison. That means it will attempt to convert both operands to numbers, and then perform the equality check (the same as <code>===</code>).</p>
+<p>So, as it relates to our present discussion, actual string equality can <em>only be</em> checked if both operands are already strings:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-21-1" id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="c1">// actual string equality check (via === internally):</span>
+<a href="#__codelineno-21-2" id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="s2">"42"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"42"</span><span class="p">;</span><span class="w">           </span><span class="c1">// true</span>
+</code></pre></div>
+<p><code>==</code> does not really perform string equality checks itself. If the operand value-types are both strings, <code>==</code> just hands off the comparison to <code>===</code>. If they're not both strings, the coercive steps in <code>==</code> will reduce the comparison matching to numeric instead of string:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-22-1" id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="c1">// numeric (not string!) equality check:</span>
+<a href="#__codelineno-22-2" id="__codelineno-22-2" name="__codelineno-22-2"></a><span class="mf">42</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"42"</span><span class="p">;</span><span class="w">             </span><span class="c1">// true</span>
+</code></pre></div>
+<p>We'll cover numeric equality later in this chapter.</p>
+<h5 id="really-strict-equality"><em>Really</em> Strict Equality<a class="headerlink" href="#really-strict-equality" title="Permanent link">¶</a></h5>
+<p>In addition to <code>==</code> and <code>===</code>, JS provides the <code>Object.is(..)</code> utility, which returns <code>true</code> if both arguments are <em>exactly identical</em>, and <code>false</code> otherwise (no exceptions or nuances):</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-23-1" id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="nb">Object</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="s2">"42"</span><span class="p">,</span><span class="mf">42</span><span class="p">);</span><span class="w">             </span><span class="c1">// false</span>
+<a href="#__codelineno-23-2" id="__codelineno-23-2" name="__codelineno-23-2"></a>
+<a href="#__codelineno-23-3" id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="nb">Object</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="s2">"42"</span><span class="p">,</span><span class="s2">"\x34\x32"</span><span class="p">);</span><span class="w">     </span><span class="c1">// true</span>
+</code></pre></div>
+<p>Since <code>===</code> adds a <code>=</code> onto the end of <code>==</code> to make it more strict in behavior, I kind of half-joke that the <code>Object.is(..)</code> utility is like a <code>====</code> (a fourth <code>=</code> added) operator, for the really-truly-strict-no-exceptions kind of equality checking!</p>
+<p>That said, <code>===</code> (and <code>==</code> by virtue of its internal delegation to <code>===</code>) are <em>extremely predictable</em>, with no weird exceptions, when it comes to comparing two actually-already-string values. I strongly recommend using <code>==</code> for such checks (or <code>===</code>), and reserve <code>Object.is(..)</code> for the corner cases (which are numeric).</p>
+<h4 id="string-relational-comparisons">String Relational Comparisons<a class="headerlink" href="#string-relational-comparisons" title="Permanent link">¶</a></h4>
+<p>In addition to equality checks between strings, JS supports relational comparisons between primitive values, like strings: <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, and <code>&gt;=</code>.</p>
+<p>The <code>&lt;</code> (less-than) and <code>&gt;</code> (greater-than) operations compare two string values lexicographically -- like you would sort words in a dictionary -- and should thus be fairly self explanatory:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-24-1" id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="s2">"hello"</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="s2">"world"</span><span class="p">;</span><span class="w">          </span><span class="c1">// true</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th align="left">NOTE:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">As mentioned earlier, the running JS program has a default locale, and these operators compare according to that locale.</td>
+</tr>
+</tbody>
+</table>
+<p>Like <code>==</code>, the <code>&lt;</code> and <code>&gt;</code> operators are numerically coercive. Any non-number values are coerced to numbers. So the only way to do a relational comparison with strings is to ensure both operands are already string values.</p>
+<p>Perhaps somewhat surprisingly, the <code>&lt;</code> and <code>&gt;</code> have no strict-comparison equivalent, the way <code>===</code> avoids the coercion of <code>==</code>. These operators are always coercive (when the types don't match), and there's no way in JS to avoid that.</p>
+<p>So what happens when both values are <em>numeric-looking</em> strings?</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-25-1" id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="s2">"100"</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="s2">"11"</span><span class="p">;</span><span class="w">               </span><span class="c1">// true</span>
+</code></pre></div>
+<p>Numerically, of course, <code>100</code> should <em>not be</em> less than <code>11</code>.</p>
+<p>But relational comparisons between two strings use the lexicographic ordering. So the second <code>"0"</code> character (in <code>"100"</code>) is less than the second <code>"1"</code> (in <code>"11"</code>), and thus <code>"100"</code> would be sorted in a <em>dictionary</em> before <code>"11"</code>. The relational operators only coerce to numbers if the operand types are not already strings.</p>
+<p>The <code>&lt;=</code> (less-than-or-equal) and <code>&gt;=</code> (greater-than-or-equal) operators are effectively a shorthand for a compound check.</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-26-1" id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="s2">"hello"</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="s2">"hello"</span><span class="p">;</span><span class="w">                             </span><span class="c1">// true</span>
+<a href="#__codelineno-26-2" id="__codelineno-26-2" name="__codelineno-26-2"></a><span class="p">(</span><span class="s2">"hello"</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="s2">"hello"</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="s2">"hello"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"hello"</span><span class="p">);</span><span class="w">    </span><span class="c1">// true</span>
+<a href="#__codelineno-26-3" id="__codelineno-26-3" name="__codelineno-26-3"></a>
+<a href="#__codelineno-26-4" id="__codelineno-26-4" name="__codelineno-26-4"></a><span class="s2">"hello"</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="s2">"hello"</span><span class="p">;</span><span class="w">                             </span><span class="c1">// true</span>
+<a href="#__codelineno-26-5" id="__codelineno-26-5" name="__codelineno-26-5"></a><span class="p">(</span><span class="s2">"hello"</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="s2">"hello"</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="s2">"hello"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"hello"</span><span class="p">);</span><span class="w">    </span><span class="c1">// true</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th align="left">NOTE:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Here's an interesting bit of specification nuance: JS doesn't actually define the underlying greater-than (for <code>&gt;</code>) or greater-than-or-equal (for <code>&gt;=</code>) operations. Instead, it defines them by reversing the arguments to their <em>less-than</em> complement counterparts. So <code>x &gt; y</code> is treated by JS essentially as <code>y &lt;= x</code>, and <code>x &gt;= y</code> is treated by JS essentially as <code>y &lt; x</code>. So JS only needs to specify how <code>&lt;</code> and <code>==</code> work, and thus gets <code>&gt;</code> and <code>&gt;=</code> for free!</td>
+</tr>
+</tbody>
+</table>
+<h5 id="locale-aware-relational-comparisons">Locale-Aware Relational Comparisons<a class="headerlink" href="#locale-aware-relational-comparisons" title="Permanent link">¶</a></h5>
+<p>As I mentioned a moment ago, the relational operators assume and use the current in-effect locale. However, it can sometimes be useful to force a specific locale for comparisons (such as when sorting a list of strings).</p>
+<p>JS provides the method <code>localCompare(..)</code> on JS strings for this purpose:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-27-1" id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="s2">"hello"</span><span class="p">.</span><span class="nx">localeCompare</span><span class="p">(</span><span class="s2">"world"</span><span class="p">);</span>
+<a href="#__codelineno-27-2" id="__codelineno-27-2" name="__codelineno-27-2"></a><span class="c1">// -1 (or negative number)</span>
+<a href="#__codelineno-27-3" id="__codelineno-27-3" name="__codelineno-27-3"></a>
+<a href="#__codelineno-27-4" id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="s2">"world"</span><span class="p">.</span><span class="nx">localeCompare</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">,</span><span class="s2">"en"</span><span class="p">);</span>
+<a href="#__codelineno-27-5" id="__codelineno-27-5" name="__codelineno-27-5"></a><span class="c1">// 1 (or positive number)</span>
+<a href="#__codelineno-27-6" id="__codelineno-27-6" name="__codelineno-27-6"></a>
+<a href="#__codelineno-27-7" id="__codelineno-27-7" name="__codelineno-27-7"></a><span class="s2">"hello"</span><span class="p">.</span><span class="nx">localeCompare</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">,</span><span class="s2">"en"</span><span class="p">,{</span><span class="w"> </span><span class="nx">ignorePunctuation</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">});</span>
+<a href="#__codelineno-27-8" id="__codelineno-27-8" name="__codelineno-27-8"></a><span class="c1">// 0</span>
+<a href="#__codelineno-27-9" id="__codelineno-27-9" name="__codelineno-27-9"></a>
+<a href="#__codelineno-27-10" id="__codelineno-27-10" name="__codelineno-27-10"></a><span class="c1">// examples from MDN:</span>
+<a href="#__codelineno-27-11" id="__codelineno-27-11" name="__codelineno-27-11"></a><span class="c1">//</span>
+<a href="#__codelineno-27-12" id="__codelineno-27-12" name="__codelineno-27-12"></a><span class="c1">// in German, ä sorts before z</span>
+<a href="#__codelineno-27-13" id="__codelineno-27-13" name="__codelineno-27-13"></a><span class="s2">"ä"</span><span class="p">.</span><span class="nx">localeCompare</span><span class="p">(</span><span class="s2">"z"</span><span class="p">,</span><span class="s2">"de"</span><span class="p">);</span>
+<a href="#__codelineno-27-14" id="__codelineno-27-14" name="__codelineno-27-14"></a><span class="c1">// -1 (or negative number) // a negative value</span>
+<a href="#__codelineno-27-15" id="__codelineno-27-15" name="__codelineno-27-15"></a>
+<a href="#__codelineno-27-16" id="__codelineno-27-16" name="__codelineno-27-16"></a><span class="c1">// in Swedish, ä sorts after z</span>
+<a href="#__codelineno-27-17" id="__codelineno-27-17" name="__codelineno-27-17"></a><span class="s2">"ä"</span><span class="p">.</span><span class="nx">localeCompare</span><span class="p">(</span><span class="s2">"z"</span><span class="p">,</span><span class="s2">"sv"</span><span class="p">);</span>
+<a href="#__codelineno-27-18" id="__codelineno-27-18" name="__codelineno-27-18"></a><span class="c1">// 1 (or positive number)</span>
+</code></pre></div>
+<p>The optional second and third arguments to <code>localeCompare(..)</code> control which locale to use, via the <code>Intl.Collator</code> API[^INTLCollatorApi], as covered earlier.</p>
+<p>You might use <code>localeCompare(..)</code> when sorting an array of strings:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-28-1" id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="nx">studentNames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<a href="#__codelineno-28-2" id="__codelineno-28-2" name="__codelineno-28-2"></a><span class="w">    </span><span class="s2">"Lisa"</span><span class="p">,</span>
+<a href="#__codelineno-28-3" id="__codelineno-28-3" name="__codelineno-28-3"></a><span class="w">    </span><span class="s2">"Kyle"</span><span class="p">,</span>
+<a href="#__codelineno-28-4" id="__codelineno-28-4" name="__codelineno-28-4"></a><span class="w">    </span><span class="s2">"Jason"</span>
+<a href="#__codelineno-28-5" id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="p">];</span>
+<a href="#__codelineno-28-6" id="__codelineno-28-6" name="__codelineno-28-6"></a>
+<a href="#__codelineno-28-7" id="__codelineno-28-7" name="__codelineno-28-7"></a><span class="c1">// Array::sort() mutates the array in place</span>
+<a href="#__codelineno-28-8" id="__codelineno-28-8" name="__codelineno-28-8"></a><span class="nx">studentNames</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="nx">alphabetizeNames</span><span class="p">(</span><span class="nx">name1</span><span class="p">,</span><span class="nx">name2</span><span class="p">){</span>
+<a href="#__codelineno-28-9" id="__codelineno-28-9" name="__codelineno-28-9"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">name1</span><span class="p">.</span><span class="nx">localeCompare</span><span class="p">(</span><span class="nx">name2</span><span class="p">);</span>
+<a href="#__codelineno-28-10" id="__codelineno-28-10" name="__codelineno-28-10"></a><span class="p">});</span>
+<a href="#__codelineno-28-11" id="__codelineno-28-11" name="__codelineno-28-11"></a>
+<a href="#__codelineno-28-12" id="__codelineno-28-12" name="__codelineno-28-12"></a><span class="nx">studentNames</span><span class="p">;</span>
+<a href="#__codelineno-28-13" id="__codelineno-28-13" name="__codelineno-28-13"></a><span class="c1">// [ "Jason", "Kyle", "Lisa" ]</span>
+</code></pre></div>
+<p>But as discussed earlier, a more straightforward way (and slightly more performant when sorting many strings) is using <code>Intl.Collator</code> directly:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-29-1" id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="nx">studentNames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<a href="#__codelineno-29-2" id="__codelineno-29-2" name="__codelineno-29-2"></a><span class="w">    </span><span class="s2">"Lisa"</span><span class="p">,</span>
+<a href="#__codelineno-29-3" id="__codelineno-29-3" name="__codelineno-29-3"></a><span class="w">    </span><span class="s2">"Kyle"</span><span class="p">,</span>
+<a href="#__codelineno-29-4" id="__codelineno-29-4" name="__codelineno-29-4"></a><span class="w">    </span><span class="s2">"Jason"</span>
+<a href="#__codelineno-29-5" id="__codelineno-29-5" name="__codelineno-29-5"></a><span class="p">];</span>
+<a href="#__codelineno-29-6" id="__codelineno-29-6" name="__codelineno-29-6"></a>
+<a href="#__codelineno-29-7" id="__codelineno-29-7" name="__codelineno-29-7"></a><span class="nx">nameSorter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Intl</span><span class="p">.</span><span class="nx">Collator</span><span class="p">(</span><span class="s2">"en"</span><span class="p">);</span>
+<a href="#__codelineno-29-8" id="__codelineno-29-8" name="__codelineno-29-8"></a>
+<a href="#__codelineno-29-9" id="__codelineno-29-9" name="__codelineno-29-9"></a><span class="c1">// Array::sort() mutates the array in place</span>
+<a href="#__codelineno-29-10" id="__codelineno-29-10" name="__codelineno-29-10"></a><span class="nx">studentNames</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="nx">nameSorter</span><span class="p">.</span><span class="nx">compare</span><span class="p">);</span>
+<a href="#__codelineno-29-11" id="__codelineno-29-11" name="__codelineno-29-11"></a>
+<a href="#__codelineno-29-12" id="__codelineno-29-12" name="__codelineno-29-12"></a><span class="nx">studentNames</span><span class="p">;</span>
+<a href="#__codelineno-29-13" id="__codelineno-29-13" name="__codelineno-29-13"></a><span class="c1">// [ "Jason", "Kyle", "Lisa" ]</span>
+</code></pre></div>
+<h3 id="string-concatenation">String Concatenation<a class="headerlink" href="#string-concatenation" title="Permanent link">¶</a></h3>
+<p>Two or more string values can be concatenated (combined) into a new string value, using the <code>+</code> operator:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-30-1" id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="nx">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Hello, "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"Kyle!"</span><span class="p">;</span>
+<a href="#__codelineno-30-2" id="__codelineno-30-2" name="__codelineno-30-2"></a>
+<a href="#__codelineno-30-3" id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="nx">greeting</span><span class="p">;</span><span class="w">               </span><span class="c1">// Hello, Kyle!</span>
+</code></pre></div>
+<p>The <code>+</code> operator will act as a string concatenation if either of the two operands (values on left or right sides of the operator) are already a string (even an empty string <code>""</code>).</p>
+<p>If one operand is a string and the other is not, the one that's not a string will be coerced to its string representation for the purposes of the concatenation:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-31-1" id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="nx">userCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">7</span><span class="p">;</span>
+<a href="#__codelineno-31-2" id="__codelineno-31-2" name="__codelineno-31-2"></a>
+<a href="#__codelineno-31-3" id="__codelineno-31-3" name="__codelineno-31-3"></a><span class="nx">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"There are "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">userCount</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" users online"</span><span class="p">;</span>
+<a href="#__codelineno-31-4" id="__codelineno-31-4" name="__codelineno-31-4"></a>
+<a href="#__codelineno-31-5" id="__codelineno-31-5" name="__codelineno-31-5"></a><span class="nx">status</span><span class="p">;</span><span class="w">         </span><span class="c1">// There are 7 users online</span>
+</code></pre></div>
+<p>String concatenation of this sort is essentially interpolation of data into the string, which is the main purpose of template literals (see Chapter 1). So the following code will have the same outcome but is generally considered to be the more preferred approach:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-32-1" id="__codelineno-32-1" name="__codelineno-32-1"></a><span class="nx">userCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">7</span><span class="p">;</span>
+<a href="#__codelineno-32-2" id="__codelineno-32-2" name="__codelineno-32-2"></a>
+<a href="#__codelineno-32-3" id="__codelineno-32-3" name="__codelineno-32-3"></a><span class="nx">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`There are </span><span class="si">${</span><span class="nx">userCount</span><span class="si">}</span><span class="sb"> users online`</span><span class="p">;</span>
+<a href="#__codelineno-32-4" id="__codelineno-32-4" name="__codelineno-32-4"></a>
+<a href="#__codelineno-32-5" id="__codelineno-32-5" name="__codelineno-32-5"></a><span class="nx">status</span><span class="p">;</span><span class="w">         </span><span class="c1">// There are 7 users online</span>
+</code></pre></div>
+<p>Other options for string concatenation include <code>"one".concat("two","three")</code> and <code>[ "one", "two", "three" ].join("")</code>, but these kinds of approaches are only preferable when the number of strings to concatenate is dependent on runtime conditions/computation. If the string has a fixed/known set of content, as above, template literals are the better option.</p>
+<h3 id="string-value-methods">String Value Methods<a class="headerlink" href="#string-value-methods" title="Permanent link">¶</a></h3>
+<p>String values provide a whole slew of additional string-specific methods (as properties):</p>
+<ul>
+<li>
+<p><code>charAt(..)</code>: produces a new string value at the numeric index, similar to <code>[ .. ]</code>; unlike <code>[ .. ]</code>, the result is always a string, either the character at position <code>0</code> (if a valid number outside the indices range), or the empty string <code>""</code> (if missing/invalid index)</p>
+</li>
+<li>
+<p><code>at(..)</code> is similar to <code>charAt(..)</code>, but negative indices count backwards from the end of the string</p>
+</li>
+<li>
+<p><code>charCodeAt(..)</code>: returns the numeric code-unit (see "JS Character Encodings" in Chapter 1) at the specified index</p>
+</li>
+<li>
+<p><code>codePointAt(..)</code>: returns the whole code-point starting at the specified index; if a surrogate pair is found there, the whole character (code-point) s returned</p>
+</li>
+<li>
+<p><code>substr(..)</code> / <code>substring(..)</code> / <code>slice(..)</code>: produces a new string value that represents a range of characters from the original string; these differ in how the range's start/end indices are specified or determined</p>
+</li>
+<li>
+<p><code>toUpperCase()</code>: produces a new string value that's all uppercase characters</p>
+</li>
+<li>
+<p><code>toLowerCase()</code>: produces a new string value that's all lowercase characters</p>
+</li>
+<li>
+<p><code>toLocaleUpperCase()</code> / <code>toLocaleLowerCase()</code>: uses locale mappings for uppercase or lowercase operations</p>
+</li>
+<li>
+<p><code>concat(..)</code>: produces a new string value that's the concatenation of the original string and all of the string value arguments passed in</p>
+</li>
+<li>
+<p><code>indexOf(..)</code>: searches for a string value argument in the original string, optionally starting from the position specified in the second argument; returns the <code>0</code>-based index position if found, or <code>-1</code> if not found</p>
+</li>
+<li>
+<p><code>lastIndexOf(..)</code>: like <code>indexOf(..)</code> but, from the end of the string (right in LTR locales, left in RTL locales)</p>
+</li>
+<li>
+<p><code>includes(..)</code>: similar to <code>indexOf(..)</code> but returns a boolean result</p>
+</li>
+<li>
+<p><code>search(..)</code>: similar to <code>indexOf(..)</code> but with a regular-expression matching as specified</p>
+</li>
+<li>
+<p><code>trimStart()</code> / <code>trimEnd()</code> / <code>trim()</code>: produces a new string value with whitespace trimmed from the start of the string (left in LTR locales, right in RTL locales), or the end of the string (right in LTR locales, left in RTL locales), or both</p>
+</li>
+<li>
+<p><code>repeat(..)</code>: produces a new string with the original string value repeated the specified number of times</p>
+</li>
+<li>
+<p><code>split(..)</code>: produces an array of string values as split at the specified string or regular-expression boundaries</p>
+</li>
+<li>
+<p><code>padStart(..)</code> / <code>padEnd(..)</code>: produces a new string value with padding (default " " whitespace, but can be overriden) applied to either the start (left in LTR locales, right in RTL locales) or the end (right in LTR locales), left in RTL locales), so that the final string result is at least of a specified length</p>
+</li>
+<li>
+<p><code>startsWith(..)</code> / <code>endsWith(..)</code>: checks either the start (left in LTR locales, right in RTL locales) or the end (right in LTR locales) of the original string for the string value argument; returns a boolean result</p>
+</li>
+<li>
+<p><code>match(..)</code> / <code>matchAll(..)</code>: returns an array-like regular-expression matching result against the original string</p>
+</li>
+<li>
+<p><code>replace(..)</code>: returns a new string with a replacement from the original string, of one or more matching occurrences of the specified regular-expression match</p>
+</li>
+<li>
+<p><code>normalize(..)</code>: produces a new string with Unicode normalization (see "Unicode Normalization" in Chapter 1) having been performed on the contents</p>
+</li>
+<li>
+<p><code>localCompare(..)</code>: function that compares two strings according to the current locale (useful for sorting); returns a negative number (usually <code>-1</code> but not guaranteed) if the original string value is comes before the argument string value lexicographically, a positive number (usually <code>1</code> but not guaranteed) if the original string value comes after the argument string value lexicographically, and <code>0</code> if the two strings are identical</p>
+</li>
+<li>
+<p><code>anchor()</code>, <code>big()</code>, <code>blink()</code>, <code>bold()</code>, <code>fixed()</code>, <code>fontcolor()</code>, <code>fontsize()</code>, <code>italics()</code>, <code>link()</code>, <code>small()</code>, <code>strike()</code>, <code>sub()</code>, and <code>sup()</code>: historically, these were useful in generating HTML string snippets; they're now deprecated and should be avoided</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">WARNING:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Many of the methods described above rely on position indices. As mentioned earlier in the "Length Computation" section, these positions are dependent on the internal contents of the string value, which means that if an extended Unicode character is present and takes up two code-unit slots, that will count as two index positions instead of one. Failing to account for <em>decomposed</em> code-units, surrogate pairs, and grapheme cluseters is a common source of bugs in JS string handling.</td>
+</tr>
+</tbody>
+</table>
+<p>These string methods can all be called directly on a literal value, or on a variable/property that's holding a string value. When applicable, they produce a new string value rather than modifying the existing string value (since strings are immutable):</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-33-1" id="__codelineno-33-1" name="__codelineno-33-1"></a><span class="s2">"all these letters"</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span><span class="w">      </span><span class="c1">// ALL THESE LETTERS</span>
+<a href="#__codelineno-33-2" id="__codelineno-33-2" name="__codelineno-33-2"></a>
+<a href="#__codelineno-33-3" id="__codelineno-33-3" name="__codelineno-33-3"></a><span class="nx">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Hello!"</span><span class="p">;</span>
+<a href="#__codelineno-33-4" id="__codelineno-33-4" name="__codelineno-33-4"></a><span class="nx">greeting</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="mf">2</span><span class="p">);</span><span class="w">                     </span><span class="c1">// Hello!Hello!</span>
+<a href="#__codelineno-33-5" id="__codelineno-33-5" name="__codelineno-33-5"></a><span class="nx">greeting</span><span class="p">;</span><span class="w">                               </span><span class="c1">// Hello!</span>
+</code></pre></div>
+<h3 id="static-string-helpers">Static <code>String</code> Helpers<a class="headerlink" href="#static-string-helpers" title="Permanent link">¶</a></h3>
+<p>The following string utility functions are proviced directly on the <code>String</code> object, rather than as methods on individual string values:</p>
+<ul>
+<li>
+<p><code>String.fromCharCode(..)</code> / <code>String.fromCodePoint(..)</code>: produce a string from one or more arguments representing the code-units (<code>fromCharCode(..)</code>) or whole code-points (<code>fromCodePoint(..)</code>)</p>
+</li>
+<li>
+<p><code>String.raw(..)</code>: a default template-tag function that allows interpolation on a template literal but prevents character escape sequences from being parsed, so they remain in their <em>raw</em> individual input characters from the literal</p>
+</li>
+</ul>
+<p>Moreover, most values (especially primitives) can be explicitly coerced to their string equivalent by passing them to the <code>String(..)</code> function (no <code>new</code> keyword). For example:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-34-1" id="__codelineno-34-1" name="__codelineno-34-1"></a><span class="nb">String</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">           </span><span class="c1">// "true"</span>
+<a href="#__codelineno-34-2" id="__codelineno-34-2" name="__codelineno-34-2"></a><span class="nb">String</span><span class="p">(</span><span class="mf">42</span><span class="p">);</span><span class="w">             </span><span class="c1">// "42"</span>
+<a href="#__codelineno-34-3" id="__codelineno-34-3" name="__codelineno-34-3"></a><span class="nb">String</span><span class="p">(</span><span class="kc">Infinity</span><span class="p">);</span><span class="w">       </span><span class="c1">// "Infinity"</span>
+<a href="#__codelineno-34-4" id="__codelineno-34-4" name="__codelineno-34-4"></a><span class="nb">String</span><span class="p">(</span><span class="kc">undefined</span><span class="p">);</span><span class="w">      </span><span class="c1">// "undefined"</span>
+</code></pre></div>
+<p>We'll cover much more detail about such type coercions in a later chapter.</p>
+<h2 id="number-behaviors">Number Behaviors<a class="headerlink" href="#number-behaviors" title="Permanent link">¶</a></h2>
+<p>Numbers are used for a variety of tasks in our programs, but mostly for mathematical computations. Pay close attention to how JS numbers behave, to ensure the outcomes are as expected.</p>
+<h3 id="floating-point-imprecision">Floating Point Imprecision<a class="headerlink" href="#floating-point-imprecision" title="Permanent link">¶</a></h3>
+<p>We need to revisit our discussion of IEEE-754 from Chapter 1.</p>
+<p>One of the classic gotchas of any IEEE-754 number system in any programming language -- NOT UNIQUELY JS! -- is that not all operations and values can fit neatly into the IEEE-754 representations.</p>
+<p>The most common illustration is:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-35-1" id="__codelineno-35-1" name="__codelineno-35-1"></a><span class="nx">point3a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.2</span><span class="p">;</span>
+<a href="#__codelineno-35-2" id="__codelineno-35-2" name="__codelineno-35-2"></a><span class="nx">point3b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.3</span><span class="p">;</span>
+<a href="#__codelineno-35-3" id="__codelineno-35-3" name="__codelineno-35-3"></a>
+<a href="#__codelineno-35-4" id="__codelineno-35-4" name="__codelineno-35-4"></a><span class="nx">point3a</span><span class="p">;</span><span class="w">                        </span><span class="c1">// 0.30000000000000004</span>
+<a href="#__codelineno-35-5" id="__codelineno-35-5" name="__codelineno-35-5"></a><span class="nx">point3b</span><span class="p">;</span><span class="w">                        </span><span class="c1">// 0.3</span>
+<a href="#__codelineno-35-6" id="__codelineno-35-6" name="__codelineno-35-6"></a>
+<a href="#__codelineno-35-7" id="__codelineno-35-7" name="__codelineno-35-7"></a><span class="nx">point3a</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">point3b</span><span class="p">;</span><span class="w">            </span><span class="c1">// false &lt;-- oops!</span>
+</code></pre></div>
+<p>The operation <code>0.1 + 0.2</code> ends up creating floating-point error (drift), where the value stored is actually <code>0.30000000000000004</code>.</p>
+<p>The respective bit representations are:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-36-1" id="__codelineno-36-1" name="__codelineno-36-1"></a>// 0.30000000000000004
+<a href="#__codelineno-36-2" id="__codelineno-36-2" name="__codelineno-36-2"></a>00111111110100110011001100110011
+<a href="#__codelineno-36-3" id="__codelineno-36-3" name="__codelineno-36-3"></a>00110011001100110011001100110100
+<a href="#__codelineno-36-4" id="__codelineno-36-4" name="__codelineno-36-4"></a>
+<a href="#__codelineno-36-5" id="__codelineno-36-5" name="__codelineno-36-5"></a>// 0.3
+<a href="#__codelineno-36-6" id="__codelineno-36-6" name="__codelineno-36-6"></a>00111111110100110011001100110011
+<a href="#__codelineno-36-7" id="__codelineno-36-7" name="__codelineno-36-7"></a>00110011001100110011001100110011
+</code></pre></div>
+<p>If you look closely at those bit patterns, only the last 2 bits differ, from <code>00</code> to <code>11</code>. But that's enough for those two numbers to be unequal!</p>
+<p>Again, just to reinforce: this behavior is <strong>NOT IN ANY WAY</strong> unique to JS. This is exactly how any IEEE-754 conforming programming language will work in the same scenario. As I asserted above, the majority of all programming languages use IEEE-754, and thus they will all suffer this same fate.</p>
+<p>The temptation to make fun of JS for <code>0.1 + 0.2 !== 0.3</code> is strong, I know. But here it's completely bogus.</p>
+<table>
+<thead>
+<tr>
+<th align="left">NOTE:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Pretty much all programmers need to be aware of IEEE-754 and make sure they are careful about these kinds of gotchas. It's somewhat amazing, in a disappointing way, how few of them have any idea how IEEE-754 works. If you've taken your time reading and understanding these concepts so far, you're now in that rare tiny percentage who actually put in the effort to understand the numbers in their programs!</td>
+</tr>
+</tbody>
+</table>
+<h4 id="epsilon-threshold">Epsilon Threshold<a class="headerlink" href="#epsilon-threshold" title="Permanent link">¶</a></h4>
+<p>A common piece of advice to work around such floating-point imprecision uses this <em>very small</em> <code>number</code> value defined by JS:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-37-1" id="__codelineno-37-1" name="__codelineno-37-1"></a><span class="nb">Number</span><span class="p">.</span><span class="nx">EPSILON</span><span class="p">;</span><span class="w">                 </span><span class="c1">// 2.220446049250313e-16</span>
+</code></pre></div>
+<p><em>Epsilon</em> is the smallest difference JS can represent between <code>1</code> and the next value greater than <code>1</code>. While this value is technically implementation/platform dependent, it's generally about <code>2.2E-16</code>, or <code>2^-52</code>.</p>
+<p>To those not paying close enough attention to the details here -- including my past self! -- it's generally assumed that any skew in floating point precision from a single operation should never be greater than <code>Number.EPSILON</code>. Thus, in theory, we can use <code>Number.EPSILON</code> as a <em>very small</em> tolerance value to ensure number equality comparisons are <em>safe</em>:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-38-1" id="__codelineno-38-1" name="__codelineno-38-1"></a><span class="kd">function</span><span class="w"> </span><span class="nx">safeNumberEquals</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-38-2" id="__codelineno-38-2" name="__codelineno-38-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nb">Number</span><span class="p">.</span><span class="nx">EPSILON</span><span class="p">;</span>
+<a href="#__codelineno-38-3" id="__codelineno-38-3" name="__codelineno-38-3"></a><span class="p">}</span>
+<a href="#__codelineno-38-4" id="__codelineno-38-4" name="__codelineno-38-4"></a>
+<a href="#__codelineno-38-5" id="__codelineno-38-5" name="__codelineno-38-5"></a><span class="nx">point3a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.2</span><span class="p">;</span>
+<a href="#__codelineno-38-6" id="__codelineno-38-6" name="__codelineno-38-6"></a><span class="nx">point3b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.3</span><span class="p">;</span>
+<a href="#__codelineno-38-7" id="__codelineno-38-7" name="__codelineno-38-7"></a>
+<a href="#__codelineno-38-8" id="__codelineno-38-8" name="__codelineno-38-8"></a><span class="c1">// are these safely "equal"?</span>
+<a href="#__codelineno-38-9" id="__codelineno-38-9" name="__codelineno-38-9"></a><span class="nx">safeNumberEquals</span><span class="p">(</span><span class="nx">point3a</span><span class="p">,</span><span class="nx">point3b</span><span class="p">);</span><span class="w">      </span><span class="c1">// true</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th align="left">WARNING:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">In the first edition "Types &amp; Grammar" book, I indeed recommended exactly this approach. I was wrong. I should have researched the topic more closely.</td>
+</tr>
+</tbody>
+</table>
+<p>But, it turns out, this approach isn't safe at all:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-39-1" id="__codelineno-39-1" name="__codelineno-39-1"></a><span class="nx">point3a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10.1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.2</span><span class="p">;</span>
+<a href="#__codelineno-39-2" id="__codelineno-39-2" name="__codelineno-39-2"></a><span class="nx">point3b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10.3</span><span class="p">;</span>
+<a href="#__codelineno-39-3" id="__codelineno-39-3" name="__codelineno-39-3"></a>
+<a href="#__codelineno-39-4" id="__codelineno-39-4" name="__codelineno-39-4"></a><span class="nx">safeNumberEquals</span><span class="p">(</span><span class="nx">point3a</span><span class="p">,</span><span class="nx">point3b</span><span class="p">);</span><span class="w">      </span><span class="c1">// false :(</span>
+</code></pre></div>
+<p>Well... that's a bummer!</p>
+<p>Unfortunately, <code>Number.EPSILON</code> only works as a "safely equal" error threshold for certain small numbers/operations, and in other cases, it's far too small, and yields false negatives.</p>
+<p>You could scale <code>Number.EPSILON</code> by some factor to produce a larger threshold that avoids false negatives but still filters out all the floating point skew in your program. But what factor to use is entirely a manual judgement call based on what magnitude of values, and operations on them, your program will entail. There's no automatic way to compute a reliable, universal threshold.</p>
+<p>Unless you really know what you're doing, you should just <em>not</em> use this <code>Number.EPSILON</code> threshold approach at all.</p>
+<table>
+<thead>
+<tr>
+<th align="left">TIP:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">If you'd like to read more details and solid advice on this topic, I highly recommend reading this post. <sup id="fnref:EpsilonBad"><a class="footnote-ref" href="#fn:EpsilonBad">7</a></sup> But if we can't use <code>Number.EPSILON</code> to avoid the perils of floating-point skew, what do we do? If you can avoid floating-point altogether by scaling all your numbers up so they're all whole number integers (or bigints) while performing math, do so. Only deal with decimal values when you have to output/represent a final value after all the math is done. If that's not possible/practical, use an arbitrary precision decimal emulation library and avoid <code>number</code> values entirely. Or do your math in another external programming environment that's not based on IEEE-754.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="numeric-comparison">Numeric Comparison<a class="headerlink" href="#numeric-comparison" title="Permanent link">¶</a></h3>
+<p>Like strings, number values can be compared (for both equality and relational ordering) using the same operators.</p>
+<p>Remember that no matter what form the number value takes when being specified as a literal (base-10, octal, hexadecimal, exponential, etc), the underlying value stored is what will be compared. Also keep in mind the floating point imprecision issues discussed in the previous section, as the comparisons will be sensitive to the exact binary contents.</p>
+<h4 id="numeric-equality">Numeric Equality<a class="headerlink" href="#numeric-equality" title="Permanent link">¶</a></h4>
+<p>Just like strings, equality comparisons for numbers use either the <code>==</code> / <code>===</code> operators or <code>Object.is(..)</code>. Also recall that if the types of both operands are the same, <code>==</code> performs identically to <code>===</code>.</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-40-1" id="__codelineno-40-1" name="__codelineno-40-1"></a><span class="mf">42</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">42</span><span class="p">;</span><span class="w">                   </span><span class="c1">// true</span>
+<a href="#__codelineno-40-2" id="__codelineno-40-2" name="__codelineno-40-2"></a><span class="mf">42</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">42</span><span class="p">;</span><span class="w">                  </span><span class="c1">// true</span>
+<a href="#__codelineno-40-3" id="__codelineno-40-3" name="__codelineno-40-3"></a>
+<a href="#__codelineno-40-4" id="__codelineno-40-4" name="__codelineno-40-4"></a><span class="mf">42</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">43</span><span class="p">;</span><span class="w">                   </span><span class="c1">// false</span>
+<a href="#__codelineno-40-5" id="__codelineno-40-5" name="__codelineno-40-5"></a><span class="mf">42</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">43</span><span class="p">;</span><span class="w">                  </span><span class="c1">// false</span>
+<a href="#__codelineno-40-6" id="__codelineno-40-6" name="__codelineno-40-6"></a>
+<a href="#__codelineno-40-7" id="__codelineno-40-7" name="__codelineno-40-7"></a><span class="nb">Object</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="mf">42</span><span class="p">,</span><span class="mf">42</span><span class="p">);</span><span class="w">           </span><span class="c1">// true</span>
+<a href="#__codelineno-40-8" id="__codelineno-40-8" name="__codelineno-40-8"></a><span class="nb">Object</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="mf">42</span><span class="p">,</span><span class="mf">43</span><span class="p">);</span><span class="w">           </span><span class="c1">// false</span>
+</code></pre></div>
+<p>For <code>==</code> coercive equality (when the operand types don't match), if either operand is not a string value, <code>==</code> prefers a numeric equality check (meaning both operands are coerced to numbers).</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-41-1" id="__codelineno-41-1" name="__codelineno-41-1"></a><span class="c1">// numeric (not string!) comparison</span>
+<a href="#__codelineno-41-2" id="__codelineno-41-2" name="__codelineno-41-2"></a><span class="mf">42</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"42"</span><span class="p">;</span><span class="w">                 </span><span class="c1">// true</span>
+</code></pre></div>
+<p>In this snippet, the coercive equality coerces <code>"42"</code> to <code>42</code>, not vice versa (<code>42</code> to <code>"42"</code>). Once both types are <code>number</code>, then their values are compared for exact equality, the same as <code>===</code> would.</p>
+<p>Recall that JS doesn't distinguish between values like <code>42</code>, <code>42.0</code>, and <code>42.000000</code>; under the covers, they're all the same. Unsurpisingly, the <code>==</code> and <code>===</code> equality checks verify that:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-42-1" id="__codelineno-42-1" name="__codelineno-42-1"></a><span class="mf">42</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">42.0</span><span class="p">;</span><span class="w">                 </span><span class="c1">// true</span>
+<a href="#__codelineno-42-2" id="__codelineno-42-2" name="__codelineno-42-2"></a><span class="mf">42.0</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">42.00000</span><span class="p">;</span><span class="w">           </span><span class="c1">// true</span>
+<a href="#__codelineno-42-3" id="__codelineno-42-3" name="__codelineno-42-3"></a><span class="mf">42.00</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">42.000</span><span class="p">;</span><span class="w">           </span><span class="c1">// true</span>
+</code></pre></div>
+<p>The intuition you likely have is, if two numbers are literally the same, they're equal. And that's how JS interprets it. But <code>0.3</code> is not literally the same as the result of <code>0.1 + 0.2</code>, because (as we saw earlier), the latter produces an underlying value that's <em>very close</em> to <code>0.3</code>, but is not exactly identical.</p>
+<p>What's interesting is, the two values are <em>so close</em> that their difference is less than the <code>Number.EPSILON</code> threshold, so JS can't actually represent that difference <em>accurately</em>.</p>
+<p>You might then think, at least informally, that such JS numbers should be "equal", since the difference between them is too small to represent. But notice: JS <em>can</em> represent that there <em>is</em> a difference, which is why you see that <code>4</code> at the very end of the decimal when JS evaluates <code>0.1 + 0.2</code>. And you <em>could</em> type out the number literal <code>0.00000000000000004</code> (aka, <code>4e-17</code>), being that difference between <code>0.3</code> and <code>0.1 + 0.2</code>.</p>
+<p>What JS cannot do, with its IEEE-754 floating point numbers, is represent a number that small in an <em>accurate</em> enough way that operations on it produce expected results. It's too small to be fully and properly represented in the <code>number</code> type JS provides.</p>
+<p>So <code>0.1 + 0.2 == 0.3</code> resolves to <code>false</code>, because there's a difference between the two values, even though JS can't accurately represent or do anything with a value as small as that difference.</p>
+<p>Also like we saw with strings, the <code>!=</code> (coercive not-equal) and <code>!==</code> (strict-not-equal) operators work with numbers. <code>x != y</code> is basically <code>!(x == y)</code>, and <code>x !== y</code> is basically <code>!(x === y)</code>.</p>
+<p>There are two frustrating exceptions in numeric equality (whether you use <code>==</code> or <code>===</code>):</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-43-1" id="__codelineno-43-1" name="__codelineno-43-1"></a><span class="kc">NaN</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="kc">NaN</span><span class="p">;</span><span class="w">                </span><span class="c1">// false -- ugh!</span>
+<a href="#__codelineno-43-2" id="__codelineno-43-2" name="__codelineno-43-2"></a><span class="o">-</span><span class="mf">0</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w">                   </span><span class="c1">// true -- ugh!</span>
+</code></pre></div>
+<p><code>NaN</code> is never equal to itself (even with <code>===</code>), and <code>-0</code> is always equal to <code>0</code> (even with <code>===</code>). It sometimes surprises folks that even <code>===</code> has these two exceptions in it.</p>
+<p>However, the <code>Object.is(..)</code> equality check has neither of these exceptions, so for equality comparisons with <code>NaN</code> and <code>-0</code>, avoid the <code>==</code> / <code>===</code> operators and use <code>Object.is(..)</code> -- or for <code>NaN</code> specifically, <code>Number.isNaN(..)</code>.</p>
+<h4 id="numeric-relational-comparisons">Numeric Relational Comparisons<a class="headerlink" href="#numeric-relational-comparisons" title="Permanent link">¶</a></h4>
+<p>Just like with string values, the JS relational operators (<code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, and <code>&gt;=</code>) operate with numbers. The <code>&lt;</code> (less-than) and <code>&gt;</code> (greater-than) operations should be fairly self explanatory:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-44-1" id="__codelineno-44-1" name="__codelineno-44-1"></a><span class="mf">41</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">42</span><span class="p">;</span><span class="w">                    </span><span class="c1">// true</span>
+<a href="#__codelineno-44-2" id="__codelineno-44-2" name="__codelineno-44-2"></a>
+<a href="#__codelineno-44-3" id="__codelineno-44-3" name="__codelineno-44-3"></a><span class="mf">0.1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.2</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.3</span><span class="p">;</span><span class="w">            </span><span class="c1">// true (ugh, IEEE-754)</span>
+</code></pre></div>
+<p>Remember: just like <code>==</code>, the <code>&lt;</code> and <code>&gt;</code> operators are also coercive, meaning that any non-number values are coerced to numbers -- unless both operands are already strings, as we saw earlier. There are no strict relational comparison operators.</p>
+<p>If you're doing relational comparisons between numbers, the only way to avoid coercion is to ensure that the comparisons always have two numbers. Otherwise, these operators will do <em>coercive relational</em> comparisons similar to how <code>==</code> performs <em>coercive equality</em> comparisons.</p>
+<h3 id="mathematical-operators">Mathematical Operators<a class="headerlink" href="#mathematical-operators" title="Permanent link">¶</a></h3>
+<p>As I asserted earlier, the main reason to have numbers in a programming language is to perform mathematical operations with them. So let's talk about how we do so.</p>
+<p>The basic arithmetic operators are <code>+</code> (addition), <code>-</code> (subtraction), <code>*</code> (multiplication), and <code>/</code> (division). Also available are the operators <code>**</code> (exponentiation) and <code>%</code> (modulo, aka <em>division remainder</em>). There are also <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>**=</code>, and <code>%=</code> forms of the operators, which additionally assign the result back to the left operand -- must be a valid assignment target like a variable or property.</p>
+<table>
+<thead>
+<tr>
+<th align="left">NOTE:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">As we've already seen, the <code>+</code> operator is overloaded to work with both numbers and strings. When one or both operands is a string, the result is a string concatenation (including coercing either operand to a string if necessary). But if neither operand is a string, the result is a numeric addition, as expected.</td>
+</tr>
+</tbody>
+</table>
+<p>All these mathematical operators are <em>binary</em>, meaning they expect two value operands, one on either side of the operator; they all expect the operands to be number values. If either or both operands are non-numbers, the non-number operand(s) is/are coerced to numbers to perform the operation. We'll cover coercion in detail in a later chapter.</p>
+<p>Consider:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-45-1" id="__codelineno-45-1" name="__codelineno-45-1"></a><span class="mf">40</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span><span class="w">                 </span><span class="c1">// 42</span>
+<a href="#__codelineno-45-2" id="__codelineno-45-2" name="__codelineno-45-2"></a><span class="mf">44</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span><span class="w">                 </span><span class="c1">// 42</span>
+<a href="#__codelineno-45-3" id="__codelineno-45-3" name="__codelineno-45-3"></a><span class="mf">21</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span><span class="w">                 </span><span class="c1">// 42</span>
+<a href="#__codelineno-45-4" id="__codelineno-45-4" name="__codelineno-45-4"></a><span class="mf">84</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span><span class="w">                 </span><span class="c1">// 42</span>
+<a href="#__codelineno-45-5" id="__codelineno-45-5" name="__codelineno-45-5"></a><span class="mf">7</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span><span class="w">                 </span><span class="c1">// 49</span>
+<a href="#__codelineno-45-6" id="__codelineno-45-6" name="__codelineno-45-6"></a><span class="mf">49</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span><span class="w">                 </span><span class="c1">// 1</span>
+<a href="#__codelineno-45-7" id="__codelineno-45-7" name="__codelineno-45-7"></a>
+<a href="#__codelineno-45-8" id="__codelineno-45-8" name="__codelineno-45-8"></a><span class="mf">40</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"2"</span><span class="p">;</span><span class="w">               </span><span class="c1">// "402" (string concatenation)</span>
+<a href="#__codelineno-45-9" id="__codelineno-45-9" name="__codelineno-45-9"></a><span class="mf">44</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="s2">"2"</span><span class="p">;</span><span class="w">               </span><span class="c1">// 42 (because "2" is coerced to 2)</span>
+<a href="#__codelineno-45-10" id="__codelineno-45-10" name="__codelineno-45-10"></a><span class="mf">21</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="s2">"2"</span><span class="p">;</span><span class="w">               </span><span class="c1">// 42 (..ditto..)</span>
+<a href="#__codelineno-45-11" id="__codelineno-45-11" name="__codelineno-45-11"></a><span class="mf">84</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s2">"2"</span><span class="p">;</span><span class="w">               </span><span class="c1">// 42 (..ditto..)</span>
+<a href="#__codelineno-45-12" id="__codelineno-45-12" name="__codelineno-45-12"></a><span class="s2">"7"</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="s2">"2"</span><span class="p">;</span><span class="w">             </span><span class="c1">// 49 (both operands are coerced to numbers)</span>
+<a href="#__codelineno-45-13" id="__codelineno-45-13" name="__codelineno-45-13"></a><span class="s2">"49"</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="s2">"2"</span><span class="p">;</span><span class="w">             </span><span class="c1">// 1 (..ditto..)</span>
+</code></pre></div>
+<p>The <code>+</code> and <code>-</code> operators also come in a <em>unary</em> form, meaning they only have one operand; again, the operand is expected to be a number, and coerced to a number if not:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-46-1" id="__codelineno-46-1" name="__codelineno-46-1"></a><span class="o">+</span><span class="mf">42</span><span class="p">;</span><span class="w">                    </span><span class="c1">// 42</span>
+<a href="#__codelineno-46-2" id="__codelineno-46-2" name="__codelineno-46-2"></a><span class="o">-</span><span class="mf">42</span><span class="p">;</span><span class="w">                    </span><span class="c1">// -42</span>
+<a href="#__codelineno-46-3" id="__codelineno-46-3" name="__codelineno-46-3"></a>
+<a href="#__codelineno-46-4" id="__codelineno-46-4" name="__codelineno-46-4"></a><span class="o">+</span><span class="s2">"42"</span><span class="p">;</span><span class="w">                  </span><span class="c1">// 42</span>
+<a href="#__codelineno-46-5" id="__codelineno-46-5" name="__codelineno-46-5"></a><span class="o">-</span><span class="s2">"42"</span><span class="p">;</span><span class="w">                  </span><span class="c1">// -42</span>
+</code></pre></div>
+<p>You might have noticed that <code>-42</code> looks like it's just a "negative forty-two" numeric literal. That's not quite right. A nuance of JS syntax is that it doesn't recognize negative numeric literals. Instead, JS treats this as a positive numeric literal <code>42</code> that's preceded, and negated, by the unary <code>-</code> operator in front of it.</p>
+<p>Somewhat surprisingly, then:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-47-1" id="__codelineno-47-1" name="__codelineno-47-1"></a><span class="o">-</span><span class="mf">42</span><span class="p">;</span><span class="w">                    </span><span class="c1">// -42</span>
+<a href="#__codelineno-47-2" id="__codelineno-47-2" name="__codelineno-47-2"></a><span class="o">-</span><span class="w"> </span><span class="mf">42</span><span class="p">;</span><span class="w">                   </span><span class="c1">// -42</span>
+<a href="#__codelineno-47-3" id="__codelineno-47-3" name="__codelineno-47-3"></a><span class="o">-</span>
+<a href="#__codelineno-47-4" id="__codelineno-47-4" name="__codelineno-47-4"></a><span class="w">    </span><span class="mf">42</span><span class="p">;</span><span class="w">                 </span><span class="c1">// -42</span>
+</code></pre></div>
+<p>As you can see, whitespace (and even new lines) are allowed between the <code>-</code> unary operator and its operand; actually, this is true of all operators and operands.</p>
+<h4 id="increment-and-decrement">Increment and Decrement<a class="headerlink" href="#increment-and-decrement" title="Permanent link">¶</a></h4>
+<p>There are two other unary numeric operators: <code>++</code> (increment) and <code>--</code> decrement. They both perform their respective operation and then reassign the result to the operand -- must be a valid assignment target like a variable or property.</p>
+<p>You may sort of think of <code>++</code> as equivalent to <code>+= 1</code>, and <code>--</code> as equivalent to <code>-= 1</code>:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-48-1" id="__codelineno-48-1" name="__codelineno-48-1"></a><span class="nx">myAge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">42</span><span class="p">;</span>
+<a href="#__codelineno-48-2" id="__codelineno-48-2" name="__codelineno-48-2"></a>
+<a href="#__codelineno-48-3" id="__codelineno-48-3" name="__codelineno-48-3"></a><span class="nx">myAge</span><span class="o">++</span><span class="p">;</span>
+<a href="#__codelineno-48-4" id="__codelineno-48-4" name="__codelineno-48-4"></a><span class="nx">myAge</span><span class="p">;</span><span class="w">                  </span><span class="c1">// 43</span>
+<a href="#__codelineno-48-5" id="__codelineno-48-5" name="__codelineno-48-5"></a>
+<a href="#__codelineno-48-6" id="__codelineno-48-6" name="__codelineno-48-6"></a><span class="nx">numberOfHeadHairs</span><span class="o">--</span><span class="p">;</span>
+</code></pre></div>
+<p>However, these are special operators in that they can appear in a postfix (after the operand) position, as above, or in a prefix (before the operand) position:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-49-1" id="__codelineno-49-1" name="__codelineno-49-1"></a><span class="nx">myAge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">42</span><span class="p">;</span>
+<a href="#__codelineno-49-2" id="__codelineno-49-2" name="__codelineno-49-2"></a>
+<a href="#__codelineno-49-3" id="__codelineno-49-3" name="__codelineno-49-3"></a><span class="o">++</span><span class="nx">myAge</span><span class="p">;</span>
+<a href="#__codelineno-49-4" id="__codelineno-49-4" name="__codelineno-49-4"></a><span class="nx">myAge</span><span class="p">;</span><span class="w">                  </span><span class="c1">// 43</span>
+<a href="#__codelineno-49-5" id="__codelineno-49-5" name="__codelineno-49-5"></a>
+<a href="#__codelineno-49-6" id="__codelineno-49-6" name="__codelineno-49-6"></a><span class="o">--</span><span class="nx">numberofHeadHairs</span><span class="p">;</span>
+</code></pre></div>
+<p>It may seem peculiar that prefix and postfix positions seem to give the same result (incrementing or decrementing) in such examples. The difference is subtle, and isn't related to the final reassigned result. We'll revisit these particular operators in a later chapter to dig into the positional differences.</p>
+<h3 id="bitwise-operators">Bitwise Operators<a class="headerlink" href="#bitwise-operators" title="Permanent link">¶</a></h3>
+<p>JS provides several bitwise operators to perform bit-level operations on number values.</p>
+<p>However, these bit operations are not performed against the packed bit-pattern of IEEE-754 numbers (see Chapter 1). Instead, the operand number is first converted to a 32-bit signed <em>integer</em>, the bit operation is performed, and then the result is converted back into an IEEE-754 number.</p>
+<p>Keep in mind, just like any other primitive operators, these just compute new values, not actually modifying a value in place.</p>
+<ul>
+<li>
+<p><code>&amp;</code> (bitwise AND): Performs an AND operation with each corresponding bit from the two operands; <code>42 &amp; 36 === 32</code> (i.e., <code>0b00...101010 &amp; 0b00...100100 === 0b00..100000</code>)</p>
+</li>
+<li>
+<p><code>|</code> (bitwise OR): Performs an OR operation with each corresponding bit from the two operands; <code>42 | 36 === 46</code> (i.e., <code>0b00...101010 | 0b00...100100 === 0b00...101110</code>)</p>
+</li>
+<li>
+<p><code>^</code> (bitwise XOR): Performs an XOR (eXclusive-OR) operation with each corresponding bit from the two operands; <code>42 ^ 36 === 14</code> (i.e., <code>0b00...101010 ^ 0b00...100100 === 0b00...001110</code>)</p>
+</li>
+<li>
+<p><code>~</code> (bitwise NOT): Performs a NOT operation against the bits of a single operand; <code>~42 === -43</code> (i.e., <code>~0b00...101010 === 0b11...010101</code>); using 2's complement, the signed integer has the first bit set to <code>1</code> meaning negative, and the rest of the bits (when flipped back, according to 2's complement, which is 1's complement bit flipping and then adding <code>1</code>) would be <code>43</code> (<code>0b10...101011</code>); the equivalent of <code>~</code> in decimal number arithmetic is <code>~x === -(x + 1)</code>, so <code>~42 === -43</code></p>
+</li>
+<li>
+<p><code>&lt;&lt;</code> (left shift): Performs a left-shift of the bits of the left operand by the count of bits specified by the right operand; <code>42 &lt;&lt; 3 == 336</code> (i.e., <code>0b00...101010 &lt;&lt; 3 === 0b00...101010000</code>)</p>
+</li>
+<li>
+<p><code>&gt;&gt;</code> (right shift): Performs a sign-propagating right-shift of the bits of the left operand by the count of bits specified by the right operand, discarding the bits that fall off the right side; whatever the leftmost bit is (<code>0</code>, or <code>1</code> is negative) is copied in as bits on the left (thereby preserving the sign of the original value in the result); <code>42 &gt;&gt; 3 === 5</code> (i.e., <code>0b00..101010 &gt;&gt; 3 === 0b00...000101</code>)</p>
+</li>
+<li>
+<p><code>&gt;&gt;&gt;</code> (zero-fill right shift, aka unsigned right shift): Performs the same right-shift as <code>&gt;&gt;</code>, but <code>0</code> fills on the bits shifted in from the left side instead of copying the leftmost bit (thereby ignoring the sign of the original value in the result); <code>42 &gt;&gt;&gt; 3 === 5</code> but <code>-43 &gt;&gt;&gt; 3 === 536870906</code> (i.e., <code>0b11...010101 &gt;&gt;&gt; 3 === 0b0001...111010</code>)</p>
+</li>
+<li>
+<p><code>&amp;=</code>, <code>|=</code>, <code>&lt;&lt;=</code>, <code>&gt;&gt;=</code>, and <code>&gt;&gt;&gt;=</code> (bitwise operators with assignment): Performs the corresponding bitwise operation, but then assigns the result to the left operand (which must be a valid assignment target, like a variable or property, not just a literal value); note that <code>~=</code> is missing from the list, because there is no such "binary negate with assignment" operator</p>
+</li>
+</ul>
+<p>In all honesty, bitwise operations are not very common in JS. But you may sometimes see a statement like:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-50-1" id="__codelineno-50-1" name="__codelineno-50-1"></a><span class="nx">myGPA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.54</span><span class="p">;</span>
+<a href="#__codelineno-50-2" id="__codelineno-50-2" name="__codelineno-50-2"></a>
+<a href="#__codelineno-50-3" id="__codelineno-50-3" name="__codelineno-50-3"></a><span class="nx">myGPA</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w">              </span><span class="c1">// 3</span>
+</code></pre></div>
+<p>Since the bitwise operators act only on 32-bit integers, the <code>| 0</code> operation truncates (i.e., <code>Math.trunc(..)</code>) any decimal value, leaving only the integer.</p>
+<table>
+<thead>
+<tr>
+<th align="left">WARNING:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">A common misconception is that <code>| 0</code> is like <em>floor</em> (i.e., <code>Math.floor(..)</code>). The result of <code>| 0</code> agrees with <code>Math.floor(..)</code> on positive numbers, but differs on negative numbers, because by standard definition, <em>floor</em> is an operation that rounds-down towards <code>-Infinity</code>. <code>| 0</code> merely discards the decimal bits, which is in fact truncation.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="number-value-methods">Number Value Methods<a class="headerlink" href="#number-value-methods" title="Permanent link">¶</a></h3>
+<p>Number values provide the following methods (as properties) for number-specific operations:</p>
+<ul>
+<li>
+<p><code>toExponential(..)</code>: produces a string representation of the number using scientific notation (e.g., <code>"4.2e+1"</code>)</p>
+</li>
+<li>
+<p><code>toFixed(..)</code>: produces a non-scientific-notation string representation of the number with the specified number of decimal places (rounding or zero-padding as necessary)</p>
+</li>
+<li>
+<p><code>toPrecision(..)</code>: like <code>toFixed(..)</code>, except it applies the numeric argument as the number of significant digits (i.e., precision) including both the whole number and decimal places if any</p>
+</li>
+<li>
+<p><code>toLocaleString(..)</code>: produces a string representation of the number according to the current locale</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-51-1" id="__codelineno-51-1" name="__codelineno-51-1"></a><span class="nx">myAge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">42</span><span class="p">;</span>
+<a href="#__codelineno-51-2" id="__codelineno-51-2" name="__codelineno-51-2"></a>
+<a href="#__codelineno-51-3" id="__codelineno-51-3" name="__codelineno-51-3"></a><span class="nx">myAge</span><span class="p">.</span><span class="nx">toExponential</span><span class="p">(</span><span class="mf">3</span><span class="p">);</span><span class="w">         </span><span class="c1">// "4.200e+1"</span>
+</code></pre></div>
+<p>One particular nuance of JS syntax is that <code>.</code> can be ambiguous when dealing with number literals and property/method access.</p>
+<p>If a <code>.</code> comes immediately (no whitespace) after a numeric literal digit, and there's not already a <code>.</code> decimal in the number value, the <code>.</code> is assumed to be a starting the decimal portion of the number. But if the position of the <code>.</code> is unambiguously <em>not</em> part of the numeric literal, then it's always treated as a property access.</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-52-1" id="__codelineno-52-1" name="__codelineno-52-1"></a><span class="mf">42</span><span class="w"> </span><span class="p">.</span><span class="nx">toExponential</span><span class="p">(</span><span class="mf">3</span><span class="p">);</span><span class="w">           </span><span class="c1">// "4.200e+1"</span>
+</code></pre></div>
+<p>Here, the whitespace disambiguates the <code>.</code>, designating it as a property/method access. It's perhaps more common/preferred to use <code>(..)</code> instead of whitespace for such disambiguation:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-53-1" id="__codelineno-53-1" name="__codelineno-53-1"></a><span class="p">(</span><span class="mf">42</span><span class="p">).</span><span class="nx">toExponential</span><span class="p">(</span><span class="mf">3</span><span class="p">);</span><span class="w">          </span><span class="c1">// "4.200e+1"</span>
+</code></pre></div>
+<p>An unusual-looking effect of this JS parsing grammar rule:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-54-1" id="__codelineno-54-1" name="__codelineno-54-1"></a><span class="mf">42.</span><span class="p">.</span><span class="nx">toExponential</span><span class="p">(</span><span class="mf">3</span><span class="p">);</span><span class="w">           </span><span class="c1">// "4.200e+1"</span>
+</code></pre></div>
+<p>So called the "double-dot" idiom, the first <code>.</code> in this expression is a decimal, and thus the second <code>.</code> is unambiguously <em>not</em> a decimal, but rather a property/method access.</p>
+<p>Also, notice there's no digits after the first <code>.</code>; it's perfectly legal syntax to leave a trailing <code>.</code> on a numeric literal:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-55-1" id="__codelineno-55-1" name="__codelineno-55-1"></a><span class="nx">myAge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">41.</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1.</span><span class="p">;</span>
+<a href="#__codelineno-55-2" id="__codelineno-55-2" name="__codelineno-55-2"></a>
+<a href="#__codelineno-55-3" id="__codelineno-55-3" name="__codelineno-55-3"></a><span class="nx">myAge</span><span class="p">;</span><span class="w">                          </span><span class="c1">// 42</span>
+</code></pre></div>
+<p>Values of <code>bigint</code> type cannot have decimals, so the parsing is unambiguous that a <code>.</code> after a literal (with the trailing <code>n</code>) is always a property access:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-56-1" id="__codelineno-56-1" name="__codelineno-56-1"></a><span class="mi">42n</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span><span class="w">                 </span><span class="c1">// 42</span>
+</code></pre></div>
+<h3 id="static-number-properties">Static <code>Number</code> Properties<a class="headerlink" href="#static-number-properties" title="Permanent link">¶</a></h3>
+<ul>
+<li>
+<p><code>Number.EPSILON</code>: The smallest value possible between <code>1</code> and the next highest number</p>
+</li>
+<li>
+<p><code>Number.NaN</code>: The same as the global <code>NaN</code> symbol, the special invalid number</p>
+</li>
+<li>
+<p><code>Number.MIN_SAFE_INTEGER</code> / <code>Number.MAX_SAFE_INTEGER</code>: The positive and negative integers with the largest absolute value (furthest from <code>0</code>)</p>
+</li>
+<li>
+<p><code>Number.MIN_VALUE</code> / <code>Number.MAX_VALUE</code>: The minimum (positive value closest to <code>0</code>) and the maximum (positive value furthest from <code>0</code>) representable by the <code>number</code> type</p>
+</li>
+<li>
+<p><code>Number.NEGATIVE_INFINITY</code> / <code>Number.POSITIVE_INFINITY</code>: Same as global <code>-Infinity</code> and <code>Infinity</code>, the values that represent the largest (non-finite) values furthest from <code>0</code></p>
+</li>
+</ul>
+<h3 id="static-number-helpers">Static <code>Number</code> Helpers<a class="headerlink" href="#static-number-helpers" title="Permanent link">¶</a></h3>
+<ul>
+<li>
+<p><code>Number.isFinite(..)</code>: returns a boolean indicating if the value is finite -- a <code>number</code> that's not <code>NaN</code>, nor one of the two infinities</p>
+</li>
+<li>
+<p><code>Number.isInteger(..)</code> / <code>Number.isSafeInteger(..)</code>: both return booleans indicating if the value is a whole <code>number</code> with no decimal places, and if it's within the <em>safe</em> range for integers (<code>-2^53 + 1</code> - <code>2^53 - 1</code>)</p>
+</li>
+<li>
+<p><code>Number.isNaN(..)</code>: The bug-fixed version of the global <code>isNaN(..)</code> utility, which identifies if the argument provided is the special <code>NaN</code> value</p>
+</li>
+<li>
+<p><code>Number.parseFloat(..)</code> / <code>Number.parseInt(..)</code>: utilties to parse string values for numeric digits, left-to-right, until the end of the string or the first non-float (or non-integer) character is encountered</p>
+</li>
+</ul>
+<h3 id="static-math-namespace">Static <code>Math</code> Namespace<a class="headerlink" href="#static-math-namespace" title="Permanent link">¶</a></h3>
+<p>Since the main usage of <code>number</code> values is for performing mathematical operations, JS includes many standard mathematical constants and operation utilities on the <code>Math</code> namespace.</p>
+<p>There's a bunch of these, so I'll omit listing every single one. But here's a few for illustration purposes:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-57-1" id="__codelineno-57-1" name="__codelineno-57-1"></a><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">;</span><span class="w">                        </span><span class="c1">// 3.141592653589793</span>
+<a href="#__codelineno-57-2" id="__codelineno-57-2" name="__codelineno-57-2"></a>
+<a href="#__codelineno-57-3" id="__codelineno-57-3" name="__codelineno-57-3"></a><span class="c1">// absolute value</span>
+<a href="#__codelineno-57-4" id="__codelineno-57-4" name="__codelineno-57-4"></a><span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="o">-</span><span class="mf">32.6</span><span class="p">);</span><span class="w">                </span><span class="c1">// 32.6</span>
+<a href="#__codelineno-57-5" id="__codelineno-57-5" name="__codelineno-57-5"></a>
+<a href="#__codelineno-57-6" id="__codelineno-57-6" name="__codelineno-57-6"></a><span class="c1">// rounding</span>
+<a href="#__codelineno-57-7" id="__codelineno-57-7" name="__codelineno-57-7"></a><span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="o">-</span><span class="mf">32.6</span><span class="p">);</span><span class="w">              </span><span class="c1">// -33</span>
+<a href="#__codelineno-57-8" id="__codelineno-57-8" name="__codelineno-57-8"></a>
+<a href="#__codelineno-57-9" id="__codelineno-57-9" name="__codelineno-57-9"></a><span class="c1">// min/max selection</span>
+<a href="#__codelineno-57-10" id="__codelineno-57-10" name="__codelineno-57-10"></a><span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="mf">100</span><span class="p">,</span><span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="mf">42</span><span class="p">));</span><span class="w">   </span><span class="c1">// 42</span>
+</code></pre></div>
+<p>Unlike <code>Number</code>, which is also the <code>Number(..)</code> function (for number coercion), <code>Math</code> is just an object that holds these properties and static function utilities; it cannot be called as a function.</p>
+<table>
+<thead>
+<tr>
+<th align="left">WARNING:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">One peculiar member of the <code>Math</code> namespace is <code>Math.random()</code>, for producing a random floating point value between <code>0</code> and <code>1.0</code>. It's unusual to consider random number generation -- a task that's inherently stateful/side-effect'ing -- as a mathematical operation. It's also long been a footgun security-wise, as the pseudo-random number generator (PRNG) that JS uses is <em>not</em> secure (can be predicted) from a cryptography perspective. The web platform stepped in several years ago with the safer <code>crypto.getRandomValues(..)</code> API (based on a better PRNG), which fills a typed-array with random bits that can be interpreted as one or more integers (of type-specified maximum magnitude). Using <code>Math.random()</code> is universally discouraged now.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="bigints-and-numbers-dont-mix">BigInts and Numbers Don't Mix<a class="headerlink" href="#bigints-and-numbers-dont-mix" title="Permanent link">¶</a></h3>
+<p>As we covered in Chapter 1, values of <code>number</code> type and <code>bigint</code> type cannot mix in the same operations. That can trip you up even if you're doing a simple increment of the value (like in a loop):</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-58-1" id="__codelineno-58-1" name="__codelineno-58-1"></a><span class="nx">myAge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42n</span><span class="p">;</span>
+<a href="#__codelineno-58-2" id="__codelineno-58-2" name="__codelineno-58-2"></a>
+<a href="#__codelineno-58-3" id="__codelineno-58-3" name="__codelineno-58-3"></a><span class="nx">myAge</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w">                  </span><span class="c1">// TypeError thrown!</span>
+<a href="#__codelineno-58-4" id="__codelineno-58-4" name="__codelineno-58-4"></a><span class="nx">myAge</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w">                 </span><span class="c1">// TypeError thrown!</span>
+<a href="#__codelineno-58-5" id="__codelineno-58-5" name="__codelineno-58-5"></a>
+<a href="#__codelineno-58-6" id="__codelineno-58-6" name="__codelineno-58-6"></a><span class="nx">myAge</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1n</span><span class="p">;</span><span class="w">                 </span><span class="c1">// 43n</span>
+<a href="#__codelineno-58-7" id="__codelineno-58-7" name="__codelineno-58-7"></a><span class="nx">myAge</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1n</span><span class="p">;</span><span class="w">                </span><span class="c1">// 43n</span>
+<a href="#__codelineno-58-8" id="__codelineno-58-8" name="__codelineno-58-8"></a>
+<a href="#__codelineno-58-9" id="__codelineno-58-9" name="__codelineno-58-9"></a><span class="nx">myAge</span><span class="o">++</span><span class="p">;</span>
+<a href="#__codelineno-58-10" id="__codelineno-58-10" name="__codelineno-58-10"></a><span class="nx">myAge</span><span class="p">;</span><span class="w">                      </span><span class="c1">// 44n</span>
+</code></pre></div>
+<p>As such, if you're using both <code>number</code> and <code>bigint</code> values in your programs, you'll need to manually coerce one value-type to the other somewhat regularly. The <code>BigInt(..)</code> function (no <code>new</code> keyword) can coerce a <code>number</code> value to <code>bigint</code>. Vice versa, to go the other direction from <code>bigint</code> to <code>number</code>, use the <code>Number(..)</code> function (again, no <code>new</code> keyword):</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-59-1" id="__codelineno-59-1" name="__codelineno-59-1"></a><span class="nb">BigInt</span><span class="p">(</span><span class="mf">42</span><span class="p">);</span><span class="w">                 </span><span class="c1">// 42n</span>
+<a href="#__codelineno-59-2" id="__codelineno-59-2" name="__codelineno-59-2"></a>
+<a href="#__codelineno-59-3" id="__codelineno-59-3" name="__codelineno-59-3"></a><span class="nb">Number</span><span class="p">(</span><span class="mi">42n</span><span class="p">);</span><span class="w">                </span><span class="c1">// 42</span>
+</code></pre></div>
+<p>Keep in mind though: coercing between these types has some risk:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-60-1" id="__codelineno-60-1" name="__codelineno-60-1"></a><span class="nb">BigInt</span><span class="p">(</span><span class="mf">4.2</span><span class="p">);</span><span class="w">                </span><span class="c1">// RangeError thrown!</span>
+<a href="#__codelineno-60-2" id="__codelineno-60-2" name="__codelineno-60-2"></a><span class="nb">BigInt</span><span class="p">(</span><span class="kc">NaN</span><span class="p">);</span><span class="w">                </span><span class="c1">// RangeError thrown!</span>
+<a href="#__codelineno-60-3" id="__codelineno-60-3" name="__codelineno-60-3"></a><span class="nb">BigInt</span><span class="p">(</span><span class="kc">Infinity</span><span class="p">);</span><span class="w">           </span><span class="c1">// RangeError thrown!</span>
+<a href="#__codelineno-60-4" id="__codelineno-60-4" name="__codelineno-60-4"></a>
+<a href="#__codelineno-60-5" id="__codelineno-60-5" name="__codelineno-60-5"></a><span class="nb">Number</span><span class="p">(</span><span class="mi">2n</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="mi">1024n</span><span class="p">);</span><span class="w">        </span><span class="c1">// Infinity</span>
+</code></pre></div>
+<h2 id="primitives-are-foundational">Primitives Are Foundational<a class="headerlink" href="#primitives-are-foundational" title="Permanent link">¶</a></h2>
+<p>Over the last two chapters, we've dug deep into how primitive values behave in JS. I bet more than a few readers were, like me, ready to skip over these topics. But now, hopefully, you see the importance of understanding these concepts.</p>
+<p>The story doesn't end here, though. Far from it! In the next chapter, we'll turn our attention to understanding JS's object types (objects, arrays, etc).</p>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="fn:TwitterUnicode">
+<p>"New update to the Twitter-Text library: Emoji character count"; Andy Piper; Oct 2018; https://twittercommunity.com/t/new-update-to-the-twitter-text-library-emoji-character-count/114607 ; Accessed July 2022 <a class="footnote-backref" href="#fnref:TwitterUnicode" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn:INTLAPI">
+<p>ECMAScript 2022 Internationalization API Specification; https://402.ecma-international.org/9.0/ ; Accessed August 2022 <a class="footnote-backref" href="#fnref:INTLAPI" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+<li id="fn:INTLCollator">
+<p>"Intl.Collator", MDN; https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator ; Accessed August 2022 <a class="footnote-backref" href="#fnref:INTLCollator" title="Jump back to footnote 3 in the text">↩</a></p>
+</li>
+<li id="fn:INTLSegmenter">
+<p>"Intl.Segmenter", MDN; https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Segmenter ; Accessed August 2022 <a class="footnote-backref" href="#fnref:INTLSegmenter" title="Jump back to footnote 4 in the text">↩</a></p>
+</li>
+<li id="fn:StrictEquality">
+<p>"7.2.16 IsStrictlyEqual(x,y)", ECMAScript 2022 Language Specification; https://262.ecma-international.org/13.0/#sec-isstrictlyequal ; Accessed August 2022 <a class="footnote-backref" href="#fnref:StrictEquality" title="Jump back to footnote 5 in the text">↩</a></p>
+</li>
+<li id="fn:LooseEquality">
+<p>"7.2.15 IsLooselyEqual(x,y)", ECMAScript 2022 Language Specification; https://262.ecma-international.org/13.0/#sec-islooselyequal ; Accessed August 2022 <a class="footnote-backref" href="#fnref:LooseEquality" title="Jump back to footnote 6 in the text">↩</a></p>
+</li>
+<li id="fn:EpsilonBad">
+<p>"PLEASE don't follow the code recipe in the accepted answer", Stack Overflow; Daniel Scott; July 2019; https://stackoverflow.com/a/56967003/228852 ; Accessed August 2022 <a class="footnote-backref" href="#fnref:EpsilonBad" title="Jump back to footnote 7 in the text">↩</a></p>
+</li>
+</ol>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<nav aria-label="Footer" class="md-footer__inner md-grid">
+<a aria-label="Previous: Chapter 1: Primitive Values" class="md-footer__link md-footer__link--prev" href="../ch1/" rel="prev">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</div>
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                  Previous
+                </span>
+                Chapter 1: Primitive Values
+              </div>
+</div>
+</a>
+<a aria-label="Next: Chapter 3: Object Values" class="md-footer__link md-footer__link--next" href="../ch3/" rel="next">
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                  Next
+                </span>
+                Chapter 3: Object Values
+              </div>
+</div>
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"></path></svg>
+</div>
+</a>
+</nav>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+<div class="md-social">
+<a class="md-social__link" href="https://shanenull.com/" rel="noopener" target="_blank" title="shanenull.com">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M256 8C119.3 8 8 119.2 8 256c0 136.7 111.3 248 248 248s248-111.3 248-248C504 119.2 392.7 8 256 8zM33 256c0-32.3 6.9-63 19.3-90.7l106.4 291.4C84.3 420.5 33 344.2 33 256zm223 223c-21.9 0-43-3.2-63-9.1l66.9-194.4 68.5 187.8c.5 1.1 1 2.1 1.6 3.1-23.1 8.1-48 12.6-74 12.6zm30.7-327.5c13.4-.7 25.5-2.1 25.5-2.1 12-1.4 10.6-19.1-1.4-18.4 0 0-36.1 2.8-59.4 2.8-21.9 0-58.7-2.8-58.7-2.8-12-.7-13.4 17.7-1.4 18.4 0 0 11.4 1.4 23.4 2.1l34.7 95.2L200.6 393l-81.2-241.5c13.4-.7 25.5-2.1 25.5-2.1 12-1.4 10.6-19.1-1.4-18.4 0 0-36.1 2.8-59.4 2.8-4.2 0-9.1-.1-14.4-.3C109.6 73 178.1 33 256 33c58 0 110.9 22.2 150.6 58.5-1-.1-1.9-.2-2.9-.2-21.9 0-37.4 19.1-37.4 39.6 0 18.4 10.6 33.9 21.9 52.3 8.5 14.8 18.4 33.9 18.4 61.5 0 19.1-7.3 41.2-17 72.1l-22.2 74.3-80.7-239.6zm81.4 297.2 68.1-196.9c12.7-31.8 17-57.2 17-79.9 0-8.2-.5-15.8-1.5-22.9 17.4 31.8 27.3 68.2 27.3 107 0 82.3-44.6 154.1-110.9 192.7z"></path></svg>
+</a>
+<a class="md-social__link" href="https://shane0.pythonanywhere.com/" rel="noopener" target="_blank" title="shane0.pythonanywhere.com">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z"></path></svg>
+</a>
+<a class="md-social__link" href="http://www.youtube.com/c/ShaneNull" rel="noopener" target="_blank" title="www.youtube.com">
+<svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path></svg>
+</a>
+<a class="md-social__link" href="https://www.instagram.com/nullshane/" rel="noopener" target="_blank" title="www.instagram.com">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path></svg>
+</a>
+<a class="md-social__link" href="https://earmassagetherapist.bandcamp.com/releases" rel="noopener" target="_blank" title="earmassagetherapist.bandcamp.com">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8Zm48.2 326.1h-181L207.9 178h181Z"></path></svg>
+</a>
+<a class="md-social__link" href="https://github.com/shane0" rel="noopener" target="_blank" title="github.com">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+</a>
+<a class="md-social__link" href="https://gitlab.com/shane0" rel="noopener" target="_blank" title="gitlab.com">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="m503.5 204.6-.7-1.8-69.7-181.78c-1.4-3.57-3.9-6.59-7.2-8.64-2.4-1.55-5.1-2.515-8-2.81-2.9-.295-5.7.083-8.4 1.11-2.7 1.02-5.1 2.66-7.1 4.78-1.9 2.12-3.3 4.67-4.1 7.44l-47 144H160.8l-47.1-144c-.8-2.77-2.2-5.31-4.1-7.43-2-2.12-4.4-3.75-7.1-4.77a18.1 18.1 0 0 0-8.38-1.113 18.4 18.4 0 0 0-8.04 2.793 18.09 18.09 0 0 0-7.16 8.64L9.267 202.8l-.724 1.8a129.57 129.57 0 0 0-3.52 82c7.747 26.9 24.047 50.7 46.447 67.6l.27.2.59.4 105.97 79.5 52.6 39.7 32 24.2c3.7 1.9 8.3 4.3 13 4.3 4.7 0 9.3-2.4 13-4.3l32-24.2 52.6-39.7 106.7-79.9.3-.3c22.4-16.9 38.7-40.6 45.6-67.5 8.6-27 7.4-55.8-2.6-82z"></path></svg>
+</a>
+<a class="md-social__link" href="https://twitter.com/shane_null" rel="noopener" target="_blank" title="twitter.com">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
+</a>
+<a class="md-social__link" href="https://www.linkedin.com/in/shanenull" rel="noopener" target="_blank" title="www.linkedin.com">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "content.action.edit", "content.action.view", "navigation.footer"], "search": "../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": 2023, "provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.51d95adb.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js?tex"></script>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>
