@@ -1,14 +1,13 @@
 site_name: shane0 learning_js 
 dev_addr: "127.0.0.1:3000"
-# repo_url: https://github.com/shane0/workflow
-# github
-# edit_uri: edit/main/docs/ 
+repo_url: https://github.com/shane0/learning_js
+edit_uri: edit/main/docs/ 
 # gitlab 
 # edit_uri: /-/blob/master/
 
 theme:
   name: material
-  # custom_dir: overrides
+  custom_dir: overrides
   icon:
     repo: fontawesome/brands/git-alt
   features:
