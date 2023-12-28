@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Checkbox Example</title>
+</head>
+<body>
+
+<h1>Checkbox Test</h1>
+
+<label for="checkbox1">Checkbox 1:</label>
+<input type="checkbox" id="checkbox1" value="1">
+
+<br>
+
+<label for="checkbox2">Checkbox 2:</label>
+<input type="checkbox" id="checkbox2" value="2">
+
+<br>
+
+<button onclick="chooseRandom()">Choose Random</button>
+
+<p id="result">The chosen number will appear here.</p>
+
+<script>
+function chooseRandom() {
+  const randomNumber = Math.floor(Math.random() * 2) + 1; // Generate a random number between 1 and 2
+  document.getElementById("result").textContent = `The chosen number is: ${randomNumber}`; // Display the result
+}
+</script>
+
+</body>
+</html>

@@ -1,7 +1,7 @@
 
-- this repo is mainly for my notes on js
-- in 2022 I completed nucamp courses on:
-- full stack bookcamp js mongo
-- back end devops boot camps on python & postgres but those notes will be elsewhere
+- some notes on js which I use occasionally
+- in 2022 I completed all nucamp courses on js, mongo, python, postgres & a little devops
+- [random island adventure retro game](https://shane0.github.io/adventure/)
+- [random person](bujo/pick_someone.html)
 
 [TAGS]
